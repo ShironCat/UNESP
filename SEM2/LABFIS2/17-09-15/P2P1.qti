@@ -1,0 +1,159 @@
+QtiPlot 0.9.8 project file
+<scripting-lang>	muParser
+<windows>	2
+<table>
+Tabela1	30	2	15/09/17 08:17
+geometry	0	0	445	220	
+header	1[X]	2[Y]
+ColWidth	100	100	
+<com>
+</com>
+ColType	0;0/13	0;0/13
+ReadOnlyColumn	0	0
+HiddenColumn	0	0
+Comments			
+WindowLabel		2
+<data>
+0	0.32	1
+1	0.63	2
+2	0.9	2.97
+3	1.24	3.67
+4	1.57	5.02
+5	1.89	6.01
+6	2.19	7
+7	2.51	7.99
+8	2.85	9.06
+9	3.17	10.09
+10	3.47	11.07
+11	3.76	11.99
+12	4.08	13
+13	4.4	14
+14	4.72	15
+</data>
+</table>
+<multiLayer>
+Gráfico1	1	1	15/09/17 08:26
+geometry	446	2	479	414	active
+WindowLabel		2
+Margins	5	5	5	5
+Spacing	5	5
+LayerCanvasSize	400	300
+Alignement	0	0
+<AlignPolicy>0</AlignPolicy>
+<CommonAxes>0</CommonAxes>
+<graph>
+ggeometry	5	6	462	348
+<PageGeometry>0.0106157	0.0163934	0.980892	0.95082</PageGeometry>
+PlotTitle	Prática II - Parte I	#000000	4228
+<Antialiasing>0</Antialiasing>
+<Autoscaling>1</Autoscaling>
+<ScaleFonts>1</ScaleFonts>
+<GridOnTop>0</GridOnTop>
+<MissingDataGap>1</MissingDataGap>
+Background	#ffffff	0
+Margin	0
+Border	0	#000000
+grid	0	0	0	0	#0000ff	0	0.5	#a0a0a4	2	0.4	#0000ff	0	0.5	#a0a0a4	2	0.4	0	0	2	0	0
+EnabledAxes	1	1	1	1	
+AxesTitles	mA	V		V	
+AxesTitleColors	#000000	#000000	#000000	#000000	
+AxesTitleAlignment	5124	5124	5124	5124
+AxesTitleDistance	2	2	2	2
+InvertedTitle	0	0	0	0
+TitleFont	Ubuntu	17	75	0	0	0
+ScaleFont0	Ubuntu	14	75	0	0	0
+ScaleFont1	Ubuntu	14	75	0	0	0
+ScaleFont2	Ubuntu	14	75	0	0	0
+ScaleFont3	Ubuntu	14	75	0	0	0
+AxisFont0	Ubuntu	14	50	0	0	0
+AxisFont1	Ubuntu	14	50	0	0	0
+AxisFont2	Ubuntu	14	50	0	0	0
+AxisFont3	Ubuntu	14	50	0	0	0
+AxesColors	#000000	#000000	#000000	#000000
+AxesNumberColors	#3c3c3c	#3c3c3c	#3c3c3c	#3c3c3c
+AxesBaseline	0	0	0	0	
+CanvasBackground	#ffffff	0
+curve	Tabela1_1	Tabela1_2	1	0	#000000	0	1	7	1	#000000	#000000	0	#000000	14	1	2	0	0	29	1
+<Function>
+<Type>0</Type>
+<Title>LinearAjuste1</Title>
+<Expression>A*x+B</Expression>
+<Variable>x</Variable>
+<Range>0.32	4.72</Range>
+<Points>2</Points>
+<Constant>A	3.19061474115406</Constant>
+<Constant>B	-0.0277450494338805</Constant>
+<Style>0</Style>
+<LineStyle>1</LineStyle>
+<Pen>
+	<Color>#ff0000</Color>
+	<Style>0</Style>
+	<Width>1</Width>
+</Pen>
+<xAxis>2</xAxis>
+<yAxis>0</yAxis>
+<CurveType>0</CurveType>
+<Visible>1</Visible>
+</Function>
+scale	0	0	16	0	9	5	0	0
+scale	1	0	16	0	9	5	0	0
+scale	2	0	5	0	6	5	0	0
+scale	3	0	5	0	6	5	0	0
+LabelsFormat	0	6	0	6	0	6	0	6
+AxisType	0	0	0	0	
+MajorTicks	1	1	1	1
+MinorTicks	1	1	1	1
+TicksLength	5	9
+DrawAxesBackbone	1	1	1	1	1
+AxesLineWidth	1
+LabelsRotation	0	0	0	0
+LabelsPrefix				
+LabelsSuffix				
+TickLabelsSpace	4	4	4	4
+ShowTicksPolicy	0	0	0	0
+EnabledTickLabels	1	1	1	1
+<Legend>
+<Frame>1</Frame>
+<Color>#000000</Color>
+<FrameWidth>1</FrameWidth>
+<LineStyle>0</LineStyle>
+<x>0.12531328320802</x>
+<y>15.464882943144</y>
+<right>0.473090277777778</right>
+<bottom>13.7391304347826</bottom>
+<attachTo>1</attachTo>
+<onTop>1</onTop>
+<visible>1</visible>
+<Text>
+\l(1)%(1)
+\l(2)%(2)
+</Text>
+<Font>Ubuntu	14	50	0	0	0</Font>
+<TextColor>#000000</TextColor>
+<Background>#ffffff</Background>
+<Alpha>0</Alpha>
+<Angle>0</Angle>
+<AutoUpdate>1</AutoUpdate>
+<TeXOutput>0</TeXOutput>
+</Legend>
+</graph>
+<LinkXAxes>0</LinkXAxes>
+<ScaleLayers>1</ScaleLayers>
+</multiLayer>
+<open>1</open>
+<log>
+[15/09/17 08:26	Gráfico: ''Gráfico1'']
+Regressão linear of dataset: Tabela1_2, usando função: A*x+B
+Método de ponderação: Sem ponderação
+De x = 3,200000000000000e-01 a x = 4,720000000000000e+00
+B (y-intercept) = -2,774504943388045e-02 +/- 4,477438221149239e-02
+A (slope) = 3,190614741154064e+00 +/- 1,566043368182347e-02
+--------------------------------------------------------------------------------------
+Chi^2/doF = 6,833165439501040e-03
+R^2 = 0,999686912165038
+Adjusted R^2 = 0,999634730859211
+RMSE (Root Mean Squared Error) = 0,0826629629247646
+RSS (Residual Sum of Squares) = 0,088831150713513
+---------------------------------------------------------------------------------------
+
+</log>

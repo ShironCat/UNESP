@@ -1,0 +1,1 @@
+//duas listas pra armazenar um valor decimal infinito

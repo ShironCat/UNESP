@@ -1,0 +1,28 @@
+		Ementa
+-Ambiente de desenvolvimento interativo de programa orientado a objeto
+-Conceitos básicos de linguagem orientada a objetos:
+	*Variáveis
+	*Tipos, operadores e expressões
+	*Conversões padrão
+	*Estruturas de controle
+	*Entrada/saída de dados
+-Classes e objetos
+	*Atributos e comportamentos
+	*Construtores e destrutores
+	*Sobrecarga
+-Controle de acesso
+	*Especificadores: Público, privado, protegido
+-Relacionamentos entre objetos
+-Herança e polimorfismo
+	*Classes derivadas e abstratas
+	*Herança simples
+	*Polimorfismo
+-Biblioteca de classes
+	*Contêineres
+	*Iteradores
+		Avaliação
+	Prova prática + projeto
+		Bibliografia
+-SINTES, A. "Aprenda Programação Orientada a Objetos em 21 Dias". Pearson, 2002.
+-DEITEL & DEITEL. "Java: Como Programar". Pearson, 2003.
+-VAREJÃO, F.M. "Linguagens de Programação: Java, C e C++ e Outras: Conceitos e Técnicas". Campus, 2004.

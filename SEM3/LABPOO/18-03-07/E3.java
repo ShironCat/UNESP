@@ -1,0 +1,1 @@
+//Faca um programa q receba um numero positivo e maior q zero, calcule e mostre o numero digitado ao quadrado, o numero digitado ao cubo, a raiz quadrado do numero digitado e a raiz cubica do numero digitado.

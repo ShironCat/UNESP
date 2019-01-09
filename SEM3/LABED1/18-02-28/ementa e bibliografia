@@ -1,0 +1,33 @@
+        Ementa
+-Tipos abstratos de dados
+    *Conceito
+    *Construções
+-Estruturas de dados lineares
+    *Pilhas
+        *Operações e tipos abstratos de dados
+        *Implementação
+    *Filas
+        *Operações e tipos abstratos de dados
+        *Implementação
+        *Filas circulares
+        *Listas ligadas
+        *Operações em listas ligadas
+-Estruturas de dados não-lineares
+    *Árvores binárias
+    *Árvores de busca
+    *Árvores balanceadas
+    *Implementações de algoritmos
+-Grafos
+    *Conceitos
+    *Grafos e estruturas de dados
+    *Implementação de algoritmos
+-Filas de prioridade
+    *Operações
+    *Implementações de algoritmos
+        Bibliografia
+-THOMAS, H. Cormen. "Algoritmos - Teoria e Prática". Campus, 3ª Ed. 2012.
+-ASCENCIO, A. F. G. "Fundamentos da Programação de Computadores: Algoritmos, Pascal, C/C++ e Java". Pearson, 2012.
+-SCHILDT, H. "C Completo e Total". 3ª Ed. Pearson, 1996.
+*ASCENCIO, A. F. G. "Estruturas de Dados". Pearson.
+        Avaliação
+    Prova prática + trabalhos
