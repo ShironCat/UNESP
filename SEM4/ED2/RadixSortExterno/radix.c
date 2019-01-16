@@ -15,6 +15,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void WriteInFile ( FILE *archieve ) {
+
+}
+
 void main () {
     char file[50];
     int memory;
@@ -28,7 +32,15 @@ void main () {
 
     FILE *archieve = fopen( file, "r");
     if ( archieve != NULL ) {
+        
+        FILE *tape01 = fopen("tape01.txt", "w");
+        FILE *tape02 = fopen("tape02.txt", "w");
+        FILE *tape03 = fopen("tape03.txt", "w");
 
+        while ( feof(archieve) == 0 ) {
+
+        }
+        fclose(archieve);
     } else 
         printf("\nFalha na Abertura do Arquivo!");    
 }
