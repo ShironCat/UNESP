@@ -15,41 +15,65 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void WriteInFile ( FILE *archieve, FILE *tape ) {
-    int aux;
-    for ( int i = 0; i < 3; i++ ) {
-        if ( feof(archieve) == 0 ) {
-            fscanf( archieve," %d ", &aux );
-            fprintf(tape, " %d ", aux);
+//Passa o conteúdo do arquivo para uma fita magnética
+void WriteInFile ( FILE *archive, FILE *tape, int internalMemorySize ) {
+    char aux;
+    //Lê o arquivo até o fim da memória interna
+    for ( int i = 0; i < internalMemorySize; i++ ) {
+        if ( feof(archive) == 0 ) {
+            fscanf( archive," %c ", &aux );
+            fprintf(tape, " %c ", aux);
         } else
             break;
     }
 }
+//Imprime o conteúdo das fitas magnéticas
+void PrintTapes( FILE *tape, char tapeName[50] ) {
+    char aux;
+    tape = fopen(tapeName, "r");
+    if ( tape != NULL ) {
+        printf("\n%s: ", tapeName );
+        while ( feof(tape) == 0 ) {
+            fscanf( tape," %c ", &aux );
+            printf(" %c ", aux);
+        }
+    } else 
+        printf("\nFalha na abertura do arquivo!");
+}
 
 void main () {
     char file[50];
-    int memory;
-
+    int internalMemorySize;
+    //Leitura do tamanho da memória interna
     printf("\n\n\t\t***Ordenação por Intercalação Balanceada de vários Caminhos***");
     printf("\nMemória interna Disponível: ");
-    scanf("%d",&memory);
-
+    scanf("%d",&internalMemorySize);
+    //Leitura do nome do arquivo
     printf("\nArquivo a ser Ordenado: ");
     scanf("%s",file);
 
-    FILE *archieve = fopen( file, "r");
-    if ( archieve != NULL ) {
-        
+    FILE *archive = fopen( file, "r");
+    //Se a abertura do arquivo foi realizada com sucesso
+    if ( archive != NULL ) {
+        //Declaração das fitas magnéticas
         FILE *tape01 = fopen("tape01.txt", "w");
         FILE *tape02 = fopen("tape02.txt", "w");
         FILE *tape03 = fopen("tape03.txt", "w");
-
-        while ( feof(archieve) == 0 ) {
-            WriteInFile( archieve, tape01 );
-            WriteInFile( archieve, tape02 );
-            WriteInFile( archieve, tape03 );
+        //Enquanto o conteúdo do arquivo não acabar
+        while ( feof(archive) == 0 ) {
+            //Passa o conteúdo do arquivo para as fitas
+            WriteInFile( archive, tape01, internalMemorySize );
+            WriteInFile( archive, tape02, internalMemorySize );
+            WriteInFile( archive, tape03, internalMemorySize );
         }
-        fclose(archieve);
+        //Fecha os arquivos
+        fclose(tape01); fclose(tape02); fclose(tape03); fclose(archive);
+        //Imprime as fitas
+        PrintTapes( tape01, "tape01.txt" );
+        PrintTapes( tape01, "tape01.txt" );
+        PrintTapes( tape01, "tape01.txt" );
+
+    //A abertura do arquivo não foi realizada com sucesso
     } else 
         printf("\nFalha na Abertura do Arquivo!");    
 }
