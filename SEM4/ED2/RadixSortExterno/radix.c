@@ -20,7 +20,7 @@ void WriteInFile ( FILE *archieve, FILE *tape ) {
     for ( int i = 0; i < 3; i++ ) {
         if ( feof(archieve) == 0 ) {
             fscanf( archieve," %d ", &aux );
-            fprintf(tape, aux);
+            fprintf(tape, " %d ", aux);
         } else
             break;
     }
