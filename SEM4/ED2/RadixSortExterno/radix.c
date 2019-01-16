@@ -15,8 +15,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void WriteInFile ( FILE *archieve ) {
-
+void WriteInFile ( FILE *archieve, FILE *tape ) {
+    int aux;
+    for ( int i = 0; i < 3; i++ ) {
+        if ( feof(archieve) == 0 ) {
+            fscanf( archieve," %d ", &aux );
+            fprintf(tape, aux);
+        } else
+            break;
+    }
 }
 
 void main () {
@@ -38,7 +45,9 @@ void main () {
         FILE *tape03 = fopen("tape03.txt", "w");
 
         while ( feof(archieve) == 0 ) {
-
+            WriteInFile( archieve, tape01 );
+            WriteInFile( archieve, tape02 );
+            WriteInFile( archieve, tape03 );
         }
         fclose(archieve);
     } else 
