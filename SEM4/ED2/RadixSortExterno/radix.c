@@ -41,6 +41,15 @@ void PrintTapes( FILE *tape, char tapeName[50] ) {
         printf("\nFalha na abertura do arquivo!");
 }
 
+void RadixSort(int internalMemorySize, FILE *tape1, FILE *tape2, FILE *tape3, FILE *tape4) {
+    int indexTape1 = 0, indexTape2 = 0, indexTape3 = 0, i;
+    char internalMemory[internalMemorySize];
+    for(i = 0; i < internalMemorySize, i++)
+        internalMemory[i] = '\0';
+    while(feof(tape1) == 0 || feof(tape2) == 0 || feof(tape3) == 0) {
+    }
+}
+
 void main () {
     char file[50];
     int internalMemorySize;
