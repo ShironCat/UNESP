@@ -37,6 +37,7 @@ void PrintTapes( FILE *tape, char tapeName[50] ) {
             fscanf( tape," %c ", &aux );
             printf(" %c ", aux);
         }
+        fclose(tape);
     } else 
         printf("\nFalha na abertura do arquivo!");
 }
