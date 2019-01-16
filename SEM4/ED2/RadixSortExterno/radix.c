@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void WriteInFile ( FILE *archieve ) {
+void WriteInFile ( FILE *archive ) {
 
 }
 
@@ -30,17 +30,17 @@ void main () {
     printf("\nArquivo a ser Ordenado: ");
     scanf("%s",file);
 
-    FILE *archieve = fopen( file, "r");
-    if ( archieve != NULL ) {
+    FILE *archive = fopen( file, "r");
+    if ( archive != NULL ) {
         
         FILE *tape01 = fopen("tape01.txt", "w");
         FILE *tape02 = fopen("tape02.txt", "w");
         FILE *tape03 = fopen("tape03.txt", "w");
 
-        while ( feof(archieve) == 0 ) {
+        while ( feof(archive) == 0 ) {
 
         }
-        fclose(archieve);
+        fclose(archive);
     } else 
         printf("\nFalha na Abertura do Arquivo!");    
 }
