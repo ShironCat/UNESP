@@ -42,56 +42,6 @@ void PrintTapes( FILE *tape, char tapeName[10] ) {
         printf("\nFalha na abertura do arquivo!");
 }
 
-void merge(int arr[], int l, int m, int r) { 
-    int i, j, k; 
-    int n1 = m - l + 1; 
-    int n2 =  r - m; 
-    int L[n1], R[n2]; 
-
-    for (i = 0; i < n1; i++) 
-        L[i] = arr[l + i]; 
-    for (j = 0; j < n2; j++) 
-        R[j] = arr[m + 1+ j]; 
-  
-    i = 0;
-    j = 0;
-    k = l;
-    while (i < n1 && j < n2) { 
-        if (L[i] <= R[j]) 
-        { 
-            arr[k] = L[i]; 
-            i++; 
-        } 
-        else
-        { 
-            arr[k] = R[j]; 
-            j++; 
-        } 
-        k++; 
-    } 
-    while (i < n1) { 
-        arr[k] = L[i]; 
-        i++; 
-        k++; 
-    } 
-    while (j < n2) { 
-        arr[k] = R[j]; 
-        j++; 
-        k++; 
-    } 
-} 
-  
-void mergeSort( int arr[], int l, int r ) { 
-    if ( l < r ) {
-        int m = l+(r-l)/2; 
-
-        mergeSort( arr, l, m ); 
-        mergeSort( arr, m+1, r ); 
-
-        merge( arr, l, m, r ); 
-    } 
-}
-
 int LowestIndex ( int index1, int index2, int index3 ) {
     if ( index1 <= index2 && index1 <= index3 ) 
         return 1;
@@ -108,25 +58,32 @@ void RadixSort(int internalMemorySize, FILE *tape1, FILE *tape2, FILE *tape3, FI
     for(i = 0; i < internalMemorySize; i++)
         internalMemory[i] = '\0';
     while(feof(tape1) == 0 || feof(tape2) == 0 || feof(tape3) == 0) {
-        for ( i = 0; i < internalMemorySize; i++ ) {
-            switch ( LowestIndex( indexTape1, indexTape2, indexTape3 ) ){
-                case 1: 
-                    auxTape = tape1; 
+        fscanf( tape1, "%c", internalMemory[0] );
+        fscanf( tape2, "%c", internalMemory[1] );
+        fscanf( tape3, "%c", internalMemory[2] );        
+        while ( indexTape1 < internalMemorySize || indexTape2 < internalMemorySize || indexTape3 < internalMemorySize ) {
+            switch ( LowestIndex(internalMemory[0], internalMemory[1], internalMemory[2]) ) {
+                case 1:
+                    fprintf(tape4, "%c", internalMemory[0]);
+                    fscanf(tape1, "%c", internalMemory[0]);
                     indexTape1++;
                 break;
-                case 2: 
-                    auxTape = tape2;
+                case 2:
+                    fprintf(tape4, "%c", internalMemory[1]);
+                    fscanf(tape2, "%c", internalMemory[1]);
                     indexTape2++;
                 break;
-                case 3:
-                    auxTape = tape3;
+                default:
+                    fprintf(tape4, "%c", internalMemory[2]);
+                    fscanf(tape3, "%c", internalMemory[2]);
                     indexTape3++;
-                break;
             }
-            fscanf( auxTape, "%c", internalMemory[i] );
-        }
-        while ( indexTape1 < internalMemorySize || indexTape2 < internalMemorySize || indexTape3 < internalMemorySize ) {
-        
+            if ( indexTape1 > internalMemorySize )
+                internalMemory[0] = (char)255;
+            if ( indexTape2 > internalMemorySize )
+                internalMemory[1] = (char)255;
+            if ( indexTape3 > internalMemorySize )
+                internalMemory[2] = (char)255;
         }
     }
 }
