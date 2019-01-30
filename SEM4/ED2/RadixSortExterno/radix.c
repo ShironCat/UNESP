@@ -42,12 +42,12 @@ void PrintTapes( FILE *tape, char tapeName[50] ) {
         printf("\nFalha na abertura do arquivo!");
 }
 
-void RadixSort(int internalMemorySize, FILE *arquive, FILE *tape1, FILE *tape2, FILE *tape3, FILE *tape4, FILE *tape5, FILE *tape6) {
+void IBVC(int internalMemorySize, FILE *arquive, FILE *tape1, FILE *tape2, FILE *tape3, FILE *tape4, FILE *tape5, FILE *tape6) {
     int indexTape1 = 0, indexTape2 = 0, indexTape3 = 0, i;
     char internalMemory[internalMemorySize];
     for(i = 0; i < internalMemorySize; i++)
         internalMemory[i] = '\0';
-    while(feof(tape1) == 0 || feof(tape2) == 0 || feof(tape3) == 0) {
+    while(!feof(tape1) || !feof(tape2) || !feof(tape3)) {
     }
 }
 
