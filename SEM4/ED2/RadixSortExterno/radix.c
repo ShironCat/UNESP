@@ -165,5 +165,5 @@ void main () {
 
     //A abertura do arquivo não foi realizada com sucesso
     } else 
-        printf("\nFalha na Abertura do Arquivo!");    
+        printf("\nFalha na Abertura do Arquivo!");
 }
