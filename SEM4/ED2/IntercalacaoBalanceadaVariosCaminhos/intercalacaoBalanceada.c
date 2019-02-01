@@ -51,7 +51,7 @@ int LowestIndex ( int index1, int index2, int index3 ) {
         return 3;    
 }
 
-void RadixSort(int internalMemorySize, FILE *tape1, FILE *tape2, FILE *tape3, FILE *tape4) {
+void IBVC(int internalMemorySize, FILE *tape1, FILE *tape2, FILE *tape3, FILE *tape4) {
     int indexTape1 = 0, indexTape2 = 0, indexTape3 = 0, i;
     char internalMemory[internalMemorySize];
     FILE *auxTape;
