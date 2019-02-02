@@ -15,20 +15,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//Passa o conteúdo do arquivo para uma fita magnética
-/* void WriteInFile(FILE *archive, FILE *tape, int internalMemorySize) {
-    int index;
-    char letter;
-    //Lê o arquivo até o fim da memória interna
-    for(index = 0; index < internalMemorySize; index++) {
-        if(!feof(archive)) {
-            fscanf(archive,"%c", &letter);
-            fprintf(tape, "%c", letter);
-        } else
-            break;
-    }
-} */
-
 void swapInt(int *number1, int *number2) {
     int auxNumber;
     auxNumber = *number1;
@@ -36,10 +22,12 @@ void swapInt(int *number1, int *number2) {
     *number2 = auxNumber;
 }
 
-void IBVC_Part1(int *internalMemory, int internalMemorySize, FILE *archive, FILE *tape1, FILE *tape2, FILE *tape3) {
-    int index, indexOrdering, indexBlock = 0;
+void IBVC_Part1(int internalMemorySize, FILE *archive, FILE *tape1, FILE *tape2, FILE *tape3) {
+    int internalMemory[internalMemorySize], index, indexOrdering, indexBlock = 0;
     FILE *outTape;
-    do {
+    for(index = 0; index < internalMemorySize; index++)
+        internalMemory[index] = 1000;
+    while(!feof(archive)) {
         switch(indexBlock) {
             case 1:
                 outTape = tape2;
@@ -53,9 +41,9 @@ void IBVC_Part1(int *internalMemory, int internalMemorySize, FILE *archive, FILE
         }
         for(index = 0; index < internalMemorySize; index++) {
             if(!feof(archive))
-                fscanf(archive, "%c ", internalMemory[index]);
+                fscanf(archive, "%d ", internalMemory[index]);
             else
-                internalMemory[index] = 255;
+                internalMemory[index] = 1000;
             for(indexOrdering = index; indexOrdering > 0; indexOrdering--) {
                 if(indexOrdering > 0)
                     if(internalMemory[indexOrdering] < internalMemory[(indexOrdering - 1)])
@@ -63,19 +51,21 @@ void IBVC_Part1(int *internalMemory, int internalMemorySize, FILE *archive, FILE
             }
         }
         for(index = 0; index < internalMemorySize; index++) {
-            if(internalMemory[index] < 255)
-                fprintf(outTape, "%c", internalMemory[index]);
+            if(internalMemory[index] < 1000)
+                fprintf(outTape, "%d", internalMemory[index]);
         }
         indexBlock++;
-    } while(!feof(archive));
+    }
 }
 
 void IBVC_Part2(int internalMemorySize, FILE *tape1, FILE *tape2, FILE *tape3, FILE *tape4, FILE *tape5, FILE *tape6) {
-    int index, indexTape1, indexTape2, indexTape3, indexTape4 = 0, indexTape5 = 0, indexTape6 = 0, indexBlock = 0;
-    char internalMemory[internalMemorySize];
-    FILE *auxTape, *outTape;
+    int internalMemory[internalMemorySize], index, indexTape1, indexTape2, indexTape3, indexTape4 = 0, indexTape5 = 0, indexTape6 = 0, indexBlock = 0;
+    FILE *outTape;
+    fseek(tape1, 0, SEEK_SET);
+    fseek(tape2, 0, SEEK_SET);
+    fseek(tape3, 0, SEEK_SET);
     for(index = 0; index < internalMemorySize; index++)
-        internalMemory[index] = '\0';
+        internalMemory[index] = 1000;
     while(!feof(tape1) || !feof(tape2) || !feof(tape3)) {
         indexTape1 = indexTape2 = indexTape3 = 0;
         indexBlock++;
@@ -93,69 +83,117 @@ void IBVC_Part2(int internalMemorySize, FILE *tape1, FILE *tape2, FILE *tape3, F
                 printf("Limite de fitas atingido\n");
         }
         if(!feof(tape1))
-            fscanf(tape1, "%c", internalMemory[0]);
+            fscanf(tape1, "%d", internalMemory[0]);
         else
-            internalMemory[0] = 255;
+            internalMemory[0] = 1000;
         if(!feof(tape2))
-            fscanf(tape2, "%c", internalMemory[1]);
+            fscanf(tape2, "%d", internalMemory[1]);
         else
-            internalMemory[1] = 255;
+            internalMemory[1] = 1000;
         if(!feof(tape3))
-            fscanf(tape3, "%c", internalMemory[2]);
+            fscanf(tape3, "%d", internalMemory[2]);
         else
-            internalMemory[2] = 255;
+            internalMemory[2] = 1000;
         do {
             if(internalMemory[0] <= internalMemory[1]) {
                 if(internalMemory[0] <= internalMemory[2]) {
-                    fprintf(outTape, "%c", internalMemory[0]);
+                    fprintf(outTape, "%d", internalMemory[0]);
                     if(indexTape1 < (internalMemorySize * indexBlock - 1)) {
-                        fscanf(tape1, "%c", internalMemory[0]);
+                        fscanf(tape1, "%d", internalMemory[0]);
                         indexTape1++;
                     } else
-                        internalMemory[0] = 255;
+                        internalMemory[0] = 1000;
                     
                 } else {
-                    fprintf(outTape, "%c", internalMemory[2]);
+                    fprintf(outTape, "%d", internalMemory[2]);
                     if(indexTape3 < (internalMemorySize * indexBlock - 1)) {
-                        fscanf(tape3, "%c", internalMemory[2]);
+                        fscanf(tape3, "%d", internalMemory[2]);
                         indexTape3++;
                     } else
-                        internalMemory[2] = 255;
+                        internalMemory[2] = 1000;
                 }
             } else {
                 if(internalMemory[1] <= internalMemory[2]) {
-                    fprintf(outTape, "%c", internalMemory[1]);
+                    fprintf(outTape, "%d", internalMemory[1]);
                     if(indexTape2 < (internalMemorySize * indexBlock - 1)) {
-                        fscanf(tape2, "%c", internalMemory[1]);
+                        fscanf(tape2, "%d", internalMemory[1]);
                         indexTape2++;
                     } else
-                        internalMemory[1] = 255;
+                        internalMemory[1] = 1000;
                 } else {
-                    fprintf(outTape, "%c", internalMemory[2]);
+                    fprintf(outTape, "%d", internalMemory[2]);
                     if(indexTape3 < (internalMemorySize * indexBlock - 1)) {
-                        fscanf(tape3, "%c", internalMemory[2]);
+                        fscanf(tape3, "%d", internalMemory[2]);
                         indexTape3++;
                     } else
-                        internalMemory[2] = 255;
+                        internalMemory[2] = 1000;
                 }
             }
         } while(indexTape1 < (internalMemorySize * indexBlock) || indexTape2 < (internalMemorySize * indexBlock) || indexTape3 < (internalMemorySize * indexBlock));
     }
 }
 
-//Imprime o conteúdo das fitas magnéticas
-void PrintTapes( FILE *tape, char tapeName[10] ) {
-    char aux;
-    tape = fopen(tapeName, "r");
-    if ( tape != NULL ) {
-        printf("\n%s: ", tapeName );
-        while ( feof(tape) == 0 ) {
-            fscanf( tape," %c ", &aux );
-            printf(" %c ", aux);
+void IBVC_Part3(int internalMemorySize, FILE *tape1, FILE *tape4, FILE *tape5, FILE *tape6) {
+    int internalMemory[internalMemorySize], index;
+    fseek(tape1, 0, SEEK_SET);
+    fseek(tape4, 0, SEEK_SET);
+    fseek(tape5, 0, SEEK_SET);
+    fseek(tape6, 0, SEEK_SET);
+    for(index = 0; index < internalMemorySize; index++)
+        internalMemory[index] = 1000;
+    while(!feof(tape4) || !feof(tape5) || !feof(tape6)) {
+        if(!feof(tape4))
+            fscanf(tape4, "%d", internalMemory[0]);
+        else
+            internalMemory[0] = 1000;
+        if(!feof(tape5))
+            fscanf(tape5, "%d", internalMemory[1]);
+        else
+            internalMemory[1] = 1000;
+        if(!feof(tape6))
+            fscanf(tape6, "%d", internalMemory[2]);
+        else
+            internalMemory[2] = 1000;
+        if(internalMemory[0] <= internalMemory[1]) {
+            if(internalMemory[0] <= internalMemory[2]) {
+                fprintf(tape1, "%d", internalMemory[0]);
+                if(!feof(tape4))
+                    fscanf(tape4, "%d", internalMemory[0]);
+                else
+                    internalMemory[0] = 1000;
+            } else {
+                fprintf(tape1, "%d", internalMemory[2]);
+                if(!feof(tape6))
+                    fscanf(tape6, "%d", internalMemory[2]);
+                else
+                    internalMemory[2] = 1000;
+            }
+        } else {
+            if(internalMemory[1] <= internalMemory[2]) {
+                fprintf(tape1, "%d", internalMemory[1]);
+                if(!feof(tape5))
+                    fscanf(tape5, "%d", internalMemory[1]);
+                else
+                    internalMemory[1] = 1000;
+            } else {
+                fprintf(tape1, "%d", internalMemory[2]);
+                if(!feof(tape6))
+                    fscanf(tape6, "%d", internalMemory[2]);
+                else
+                    internalMemory[2] = 1000;
+            }
         }
-        fclose(tape);
-    } else 
-        printf("\nFalha na abertura do arquivo!");
+    }
+}
+
+//Imprime o conteúdo das fitas magnéticas
+void PrintTape(FILE *tape) {
+    int auxNumber;
+    fseek(tape, 0, SEEK_SET);
+    while(!feof(tape)) {
+        fscanf(tape, "%d", &auxNumber);
+        printf("%d ", auxNumber);
+    }
 }
 
 void main () {
