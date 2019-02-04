@@ -40,8 +40,9 @@ void IBVC_Part1(int internalMemorySize, FILE *archive, FILE *tape1, FILE *tape2,
                 indexBlock = 0;
         }
         for(index = 0; index < internalMemorySize; index++) {
-            if(!feof(archive))
-                fscanf(archive, "%d ", internalMemory[index]);
+            if(!feof(archive)){
+                fscanf(archive, "%d ", &internalMemory[index]);
+            }
             else
                 internalMemory[index] = 1000;
             for(indexOrdering = index; indexOrdering > 0; indexOrdering--) {
@@ -52,7 +53,7 @@ void IBVC_Part1(int internalMemorySize, FILE *archive, FILE *tape1, FILE *tape2,
         }
         for(index = 0; index < internalMemorySize; index++) {
             if(internalMemory[index] < 1000)
-                fprintf(outTape, "%d", internalMemory[index]);
+                fprintf(outTape, "%d ", internalMemory[index]);
         }
         indexBlock++;
     }
@@ -191,9 +192,10 @@ void PrintTape(FILE *tape) {
     int auxNumber;
     fseek(tape, 0, SEEK_SET);
     while(!feof(tape)) {
-        fscanf(tape, "%d", &auxNumber);
+        fscanf(tape, "%d ", &auxNumber);
         printf("%d ", auxNumber);
     }
+    printf("/");
 }
 
 void main () {
@@ -211,22 +213,46 @@ void main () {
     //Se a abertura do arquivo foi realizada com sucesso
     if(archive != NULL) {
         //DeclaraÃ§Ã£o das fitas magnÃ©ticas
-        FILE *tape01 = fopen("tape01.txt", "w");
-        FILE *tape02 = fopen("tape02.txt", "w");
-        FILE *tape03 = fopen("tape03.txt", "w");
-        //Enquanto o conteÃºdo do arquivo nÃ£o acabar
-        while(!feof(archive)) {
-            //Passa o conteÃºdo do arquivo para as fitas
-            WriteInFile(archive, tape01, internalMemorySize);
-            WriteInFile(archive, tape02, internalMemorySize);
-            WriteInFile(archive, tape03, internalMemorySize);
-        }
-        //Fecha os arquivos
-        fclose(tape01); fclose(tape02); fclose(tape03); fclose(archive);
+        FILE *tape01 = fopen("tape01.txt", "w+");
+        FILE *tape02 = fopen("tape02.txt", "w+");
+        FILE *tape03 = fopen("tape03.txt", "w+");
+        FILE *tape04 = fopen("tape04.txt", "w+");
+        FILE *tape05 = fopen("tape05.txt", "w+");
+        FILE *tape06 = fopen("tape06.txt", "w+");
+        
+        //Primeira parte da ordenação externa
+        IBVC_Part1(internalMemorySize, archive, tape01, tape02, tape03);
+
         //Imprime as fitas
-        PrintTapes( tape01, "tape01.txt" );
-        PrintTapes( tape02, "tape02.txt" );
-        PrintTapes( tape03, "tape03.txt" );
+        PrintTape( tape01);
+        PrintTape( tape02);
+        PrintTape( tape03);
+        
+        //Segunda parte da ordenação externa
+        IBVC_Part2(internalMemorySize, tape01, tape02, tape03, tape04, tape05, tape06);
+
+        //Imprime as fitas
+        PrintTape( tape01);
+        PrintTape( tape02);
+        PrintTape( tape03);
+        PrintTape( tape04);
+        PrintTape( tape05);
+        PrintTape( tape06);
+        
+        //Terceira e última parte da ordenação externa
+        IBVC_Part3(internalMemorySize, tape01, tape04, tape05, tape06);
+
+        //Imprime as fitas
+        PrintTape( tape01);
+        PrintTape( tape02);
+        PrintTape( tape03);
+        PrintTape( tape04);
+        PrintTape( tape05);
+        PrintTape( tape06);
+        
+        
+        //Fecha os arquivos
+        fclose(tape01); fclose(tape02); fclose(tape03); fclose(tape04); fclose(tape05); fclose(tape06); fclose(archive);
 
     //A abertura do arquivo nÃ£o foi realizada com sucesso
     } else 
