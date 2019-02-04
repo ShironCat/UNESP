@@ -1,4 +1,4 @@
-/*      Luiza Torello Vieira e Victor Azadinho Miranda      ||      ED2
+/*      Luiza Torello Vieira, Victor Azadinho Miranda e Victor Cipolato     ||      ED2
 
         Implemente o algoritmo de intercala√ß√£o balanceada de v√°rios caminhos. O programa deve ordenar 
     valores inteiros entre 0 e 999 presentes em um arquivo texto. Existem 6 fitas magn√©ticas dispon√≠-
@@ -84,47 +84,47 @@ void IBVC_Part2(int internalMemorySize, FILE *tape1, FILE *tape2, FILE *tape3, F
                 printf("Limite de fitas atingido\n");
         }
         if(!feof(tape1))
-            fscanf(tape1, "%d", internalMemory[0]);
+            fscanf(tape1, "%d ", &internalMemory[0]);
         else
             internalMemory[0] = 1000;
         if(!feof(tape2))
-            fscanf(tape2, "%d", internalMemory[1]);
+            fscanf(tape2, "%d ", &internalMemory[1]);
         else
             internalMemory[1] = 1000;
         if(!feof(tape3))
-            fscanf(tape3, "%d", internalMemory[2]);
+            fscanf(tape3, "%d ", &internalMemory[2]);
         else
             internalMemory[2] = 1000;
         do {
             if(internalMemory[0] <= internalMemory[1]) {
                 if(internalMemory[0] <= internalMemory[2]) {
-                    fprintf(outTape, "%d", internalMemory[0]);
+                    fprintf(outTape, "%d ", internalMemory[0]);
                     if(indexTape1 < (internalMemorySize * indexBlock - 1)) {
-                        fscanf(tape1, "%d", internalMemory[0]);
+                        fscanf(tape1, "%d ", &internalMemory[0]);
                         indexTape1++;
                     } else
                         internalMemory[0] = 1000;
                     
                 } else {
-                    fprintf(outTape, "%d", internalMemory[2]);
+                    fprintf(outTape, "%d ", internalMemory[2]);
                     if(indexTape3 < (internalMemorySize * indexBlock - 1)) {
-                        fscanf(tape3, "%d", internalMemory[2]);
+                        fscanf(tape3, "%d ", &internalMemory[2]);
                         indexTape3++;
                     } else
                         internalMemory[2] = 1000;
                 }
             } else {
                 if(internalMemory[1] <= internalMemory[2]) {
-                    fprintf(outTape, "%d", internalMemory[1]);
+                    fprintf(outTape, "%d ", internalMemory[1]);
                     if(indexTape2 < (internalMemorySize * indexBlock - 1)) {
-                        fscanf(tape2, "%d", internalMemory[1]);
+                        fscanf(tape2, "%d ", &internalMemory[1]);
                         indexTape2++;
                     } else
                         internalMemory[1] = 1000;
                 } else {
-                    fprintf(outTape, "%d", internalMemory[2]);
+                    fprintf(outTape, "%d ", internalMemory[2]);
                     if(indexTape3 < (internalMemorySize * indexBlock - 1)) {
-                        fscanf(tape3, "%d", internalMemory[2]);
+                        fscanf(tape3, "%d ", &internalMemory[2]);
                         indexTape3++;
                     } else
                         internalMemory[2] = 1000;
@@ -144,42 +144,42 @@ void IBVC_Part3(int internalMemorySize, FILE *tape1, FILE *tape4, FILE *tape5, F
         internalMemory[index] = 1000;
     while(!feof(tape4) || !feof(tape5) || !feof(tape6)) {
         if(!feof(tape4))
-            fscanf(tape4, "%d", internalMemory[0]);
+            fscanf(tape4, "%d ", &internalMemory[0]);
         else
             internalMemory[0] = 1000;
         if(!feof(tape5))
-            fscanf(tape5, "%d", internalMemory[1]);
+            fscanf(tape5, "%d ", &internalMemory[1]);
         else
             internalMemory[1] = 1000;
         if(!feof(tape6))
-            fscanf(tape6, "%d", internalMemory[2]);
+            fscanf(tape6, "%d ", &internalMemory[2]);
         else
             internalMemory[2] = 1000;
         if(internalMemory[0] <= internalMemory[1]) {
             if(internalMemory[0] <= internalMemory[2]) {
-                fprintf(tape1, "%d", internalMemory[0]);
+                fprintf(tape1, "%d ", internalMemory[0]);
                 if(!feof(tape4))
-                    fscanf(tape4, "%d", internalMemory[0]);
+                    fscanf(tape4, "%d ", &internalMemory[0]);
                 else
                     internalMemory[0] = 1000;
             } else {
-                fprintf(tape1, "%d", internalMemory[2]);
+                fprintf(tape1, "%d ", internalMemory[2]);
                 if(!feof(tape6))
-                    fscanf(tape6, "%d", internalMemory[2]);
+                    fscanf(tape6, "%d ", &internalMemory[2]);
                 else
                     internalMemory[2] = 1000;
             }
         } else {
             if(internalMemory[1] <= internalMemory[2]) {
-                fprintf(tape1, "%d", internalMemory[1]);
+                fprintf(tape1, "%d ", internalMemory[1]);
                 if(!feof(tape5))
-                    fscanf(tape5, "%d", internalMemory[1]);
+                    fscanf(tape5, "%d ", &internalMemory[1]);
                 else
                     internalMemory[1] = 1000;
             } else {
-                fprintf(tape1, "%d", internalMemory[2]);
+                fprintf(tape1, "%d ", internalMemory[2]);
                 if(!feof(tape6))
-                    fscanf(tape6, "%d", internalMemory[2]);
+                    fscanf(tape6, "%d ", &internalMemory[2]);
                 else
                     internalMemory[2] = 1000;
             }
@@ -188,9 +188,10 @@ void IBVC_Part3(int internalMemorySize, FILE *tape1, FILE *tape4, FILE *tape5, F
 }
 
 //Imprime o conte√∫do das fitas magn√©ticas
-void PrintTape(FILE *tape) {
+void PrintTape(FILE *tape, int tapenumber) {
     int auxNumber;
     fseek(tape, 0, SEEK_SET);
+    printf("Fita numero %d: ", tapenumber);
     while(!feof(tape)) {
         fscanf(tape, "%d ", &auxNumber);
         printf("%d ", auxNumber);
@@ -223,32 +224,35 @@ void main () {
         //Primeira parte da ordenaÁ„o externa
         IBVC_Part1(internalMemorySize, archive, tape01, tape02, tape03);
 
-        //Imprime as fitas
-        PrintTape( tape01);
-        PrintTape( tape02);
-        PrintTape( tape03);
+        //Imprime as fitas apos a primeira parte da ordenacao
+        PrintTape( tape01, 1);
+        PrintTape( tape02, 2);
+        PrintTape( tape03, 3);
+        printf("\n");
         
         //Segunda parte da ordenaÁ„o externa
         IBVC_Part2(internalMemorySize, tape01, tape02, tape03, tape04, tape05, tape06);
 
-        //Imprime as fitas
-        PrintTape( tape01);
-        PrintTape( tape02);
-        PrintTape( tape03);
-        PrintTape( tape04);
-        PrintTape( tape05);
-        PrintTape( tape06);
+        //Imprime as fitas apos a segunda parte
+        PrintTape( tape01, 1);
+        PrintTape( tape02, 2);
+        PrintTape( tape03, 3);
+        PrintTape( tape04, 4);
+        PrintTape( tape05, 5);
+        PrintTape( tape06, 6);
+        printf("\n");
         
-        //Terceira e ˙ltima parte da ordenaÁ„o externa
+        //Terceira e ˙ltima parte da ordenaÁ„o externa, o arquivo estara ordenado na tape01
         IBVC_Part3(internalMemorySize, tape01, tape04, tape05, tape06);
 
-        //Imprime as fitas
-        PrintTape( tape01);
-        PrintTape( tape02);
-        PrintTape( tape03);
-        PrintTape( tape04);
-        PrintTape( tape05);
-        PrintTape( tape06);
+        //Imprime as fitas apos o fim da ordencacao, como dito anteriormente, a fita estara com o conteudo ordenado
+        PrintTape( tape01, 1);
+        PrintTape( tape02, 2);
+        PrintTape( tape03, 3);
+        PrintTape( tape04, 4);
+        PrintTape( tape05, 5);
+        PrintTape( tape06, 6);
+        printf("\n");
         
         
         //Fecha os arquivos
