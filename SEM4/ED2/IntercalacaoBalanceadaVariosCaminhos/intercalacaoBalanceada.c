@@ -132,14 +132,14 @@ void IBVC_Part2(int internalMemorySize, FILE *tape1, FILE *tape2, FILE *tape3, F
                 indexTape[originalTape[0]]++;//Incrementa a qtd de vezes que a fita foi 'escolhida'
                 index = originalTape[0];
                 //Caso a fita tenha escrito até o seu 'limite', pega uma outra fita para completar
-                if ( indexTape[originalTape[0]] >= internalMemorySize ) {
-                    if ( !feof(tape1) && indexTape[0] < internalMemorySize ) {
+                if ( indexTape[originalTape[0]] == internalMemorySize ) {
+                    if ( indexTape[0] < internalMemorySize ) {
                         inTape = tape1;
                         index = 0;
-                    } else if ( !feof(tape2) && indexTape[1] < internalMemorySize ){
+                    } else if ( indexTape[1] < internalMemorySize ){
                         inTape = tape2;
                         index = 1;
-                    } else if ( !feof(tape3) && indexTape[2] < internalMemorySize ){
+                    } else if ( indexTape[2] < internalMemorySize  ){
                         inTape = tape3;
                         index = 2;
                     } else 
@@ -156,10 +156,13 @@ void IBVC_Part2(int internalMemorySize, FILE *tape1, FILE *tape2, FILE *tape3, F
                             inTape = tape3;
                         break;
                     }
-                fscanf( inTape, "%d ", &internalMemory[0] );//Armazena na última posição do vetor
+                if ( !feof(inTape) )
+                    fscanf( inTape, "%d ", &internalMemory[0] );//Armazena na última posição do vetor
+                else
+                    internalMemory[0] = 1000;
                 originalTape[0] = index;
             }
-        } while( (indexTape[0] < internalMemorySize && indexTape[1] < internalMemorySize && indexTape[2] < internalMemorySize ) || (!feof(tape1) && !feof(tape2) && !feof(tape3)) );
+        } while( indexTape[0] < internalMemorySize && indexTape[1] < internalMemorySize && indexTape[2] < internalMemorySize );
 
     }
 }
