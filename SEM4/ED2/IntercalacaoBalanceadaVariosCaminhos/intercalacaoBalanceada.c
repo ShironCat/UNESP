@@ -106,7 +106,7 @@ void IBVC_Part2(int internalMemorySize, FILE *tape1, FILE *tape2, FILE *tape3, F
         for ( index = 0; index < internalMemorySize; index++ ) {
             //Preenchimento da memória interna com o conteúdo das fitas (ou 1000 caso a fita esteja vazia)
             //Fita 1
-            if(!feof(tape1)) {
+            if( !feof(tape1) ) {
                 fscanf(tape1, "%d ", &internalMemory[index]);
                 originalTape[index++] = 0;
             } else
@@ -163,7 +163,9 @@ void IBVC_Part2(int internalMemorySize, FILE *tape1, FILE *tape2, FILE *tape3, F
                 originalTape[0] = index;
             }
         } while( indexTape[0] < internalMemorySize && indexTape[1] < internalMemorySize && indexTape[2] < internalMemorySize );
-
+        for ( index = 1; index < internalMemorySize; index++ )
+            if ( internalMemory[index] < 1000 )
+                fprintf( outTape, "%d ", internalMemory[index] );
     }
 }
 
@@ -230,7 +232,6 @@ void PrintTape(FILE *tape, int tapenumber) {
         printf("%d ", auxNumber);
     }
     printf("\n");
-    getchar();
 }
 
 void main () {
@@ -243,6 +244,7 @@ void main () {
     //Leitura do nome do arquivo
     printf("\nArquivo a ser Ordenado: ");
     scanf("%s", fileName);
+    getchar();
 
     FILE *archive = fopen(fileName, "r");
     //Se a abertura do arquivo foi realizada com sucesso
@@ -262,7 +264,8 @@ void main () {
         PrintTape( tape01, 1);
         PrintTape( tape02, 2);
         PrintTape( tape03, 3);
-        printf("\n");
+        printf("\nPressione ENTER para continuar");
+        getchar();
         
         //Segunda parte da ordena��o externa
         IBVC_Part2(internalMemorySize, tape01, tape02, tape03, tape04, tape05, tape06);
@@ -271,7 +274,8 @@ void main () {
         PrintTape( tape04, 4);
         PrintTape( tape05, 5);
         PrintTape( tape06, 6);
-        printf("\n");
+        printf("\nPressione ENTER para continuar");
+        getchar();
         
         //Terceira e �ltima parte da ordena��o externa, o arquivo estara ordenado na tape01
         IBVC_Part3(internalMemorySize, tape01, tape04, tape05, tape06);
@@ -283,8 +287,8 @@ void main () {
         PrintTape( tape04, 4);
         PrintTape( tape05, 5);
         PrintTape( tape06, 6);
-        printf("\n");
-        
+        printf("\nPressione ENTER para continuar");
+        getchar();
         //Fecha os arquivos
         fclose(tape01); fclose(tape02); fclose(tape03); fclose(tape04); fclose(tape05); fclose(tape06); fclose(archive);
 
