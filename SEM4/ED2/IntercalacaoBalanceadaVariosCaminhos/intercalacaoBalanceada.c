@@ -78,15 +78,15 @@ int NormalizeIndex(int index) {
 int IndexLowestNumber(int *internalMemory, int internalMemorySize) {
     int index, indexLowestNumber = 0;
     for(index = 1; index < internalMemorySize; index++)
-        if(internalMemory[index] < internalMemory[index--])
+        if(internalMemory[index] < internalMemory[indexLowestNumber])
             indexLowestNumber = index;
     return indexLowestNumber;
 }
 
 int EmptyMemory(int *internalMemory, int internalMemorySize) {
-    int index = 0, isEmpty = 1;
-    while(index < internalMemorySize && isEmpty)
-        if(internalMemory[index++] < 1000)
+    int index = -1, isEmpty = 1;
+    while(++index < internalMemorySize && isEmpty)
+        if(internalMemory[index] < 1000)
             isEmpty = 0;
     return isEmpty;
 }
@@ -113,9 +113,9 @@ void IBVC_Part2( int internalMemorySize, FILE *tape[6] ) {
             outTape = tape[ (indexBlock + 2) ];
         else
             printf("Limite de fitas atingido\n");
-        index = 0;
-        while(index < internalMemorySize)
-            fscanf(tape[NormalizeIndex(index)], "%d ", &internalMemory[index++]);
+        index = -1;
+        while(++index < internalMemorySize)
+            fscanf(tape[NormalizeIndex(index)], "%d ", &internalMemory[index]);
         do {
             indexLowestNumber = IndexLowestNumber(internalMemory, internalMemorySize);
             normalizedIndex = NormalizeIndex(indexLowestNumber);
@@ -125,7 +125,7 @@ void IBVC_Part2( int internalMemorySize, FILE *tape[6] ) {
                 indexTape[normalizedIndex]++;
             } else
                 internalMemory[indexLowestNumber] = 1000;
-        } while(EmptyMemory(internalMemory, internalMemorySize));
+        } while(!EmptyMemory(internalMemory, internalMemorySize));
     }
 }
 
