@@ -87,13 +87,13 @@ void IBVC_Part2( int internalMemorySize, FILE *tape[], int time ) {
     //Volta ao início dos arquivos
     for ( index = 0; index < 6; index++ )
         fseek(tape[ index ], 0, SEEK_SET);
-    //Preenchimento da memória interna com valor 'impossivel'
-    for(index = 0; index < internalMemorySize; index++) {
-        internalMemory[index] = 1000;
-        originalTape[index]   = 3;
-    }
     //Enquanto alguma fita ainda tiver conteúdo, realiza o laço
     while(!feof(tape[0]) || !feof(tape[1]) || !feof(tape[2])) {
+        //Preenchimento da memória interna com valor 'impossivel'
+        for(index = 0; index < internalMemorySize; index++) {
+            internalMemory[index] = 1000;
+            originalTape[index]   = 3;
+        }
         // Zera os indices das fitas
         for ( index = 0; index < 3; index++ ) 
             indexTape[index] = 0;
@@ -103,7 +103,7 @@ void IBVC_Part2( int internalMemorySize, FILE *tape[], int time ) {
         else
             printf("Limite de fitas atingido\n");
         //Preenchimento da memória interna com o conteúdo das fitas (ou 1000 caso a fita esteja vazia)
-        for ( index = 0; index < internalMemorySize; index++ ) {
+        for ( index = 0; index <= internalMemorySize; ) {
             //Fita 1
             if( !feof(tape[0]) ) {
                 fscanf(tape[0], "%d ", &internalMemory[index]);
@@ -111,13 +111,13 @@ void IBVC_Part2( int internalMemorySize, FILE *tape[], int time ) {
             } else
                 internalMemory[index++] = 1000;
             //Fita 2
-            if(!feof(tape[1]) && index < internalMemorySize ) {
+            if(!feof(tape[1]) && index <= internalMemorySize ) {
                 fscanf(tape[1], "%d ", &internalMemory[index]);
                 originalTape[index++] = 1;
             }else
                 internalMemory[index++] = 1000;
             //Fita 3
-            if(!feof(tape[2]) && index < internalMemorySize ) {
+            if(!feof(tape[2]) && index <= internalMemorySize ) {
                 fscanf(tape[2], "%d ", &internalMemory[index]);
                 originalTape[index++] = 2;
             } else
@@ -139,8 +139,6 @@ void IBVC_Part2( int internalMemorySize, FILE *tape[], int time ) {
                             inTape = tape[index];
                             index = index;
                         }
-                    if ( index == 3 && internalMemory[0] == 1000 )
-                        time = 0;
                 //Se não, preenche a memória interna com a fita da qual foi retirado o valor
                 } else 
                     inTape = tape[ originalTape[0] ];
@@ -150,7 +148,7 @@ void IBVC_Part2( int internalMemorySize, FILE *tape[], int time ) {
                     internalMemory[0] = 1000;//Caso o arquivo da fita já tenha acabado
                 originalTape[0] = index;
             }
-        } while( ( indexTape[0] < internalMemorySize && indexTape[1] < internalMemorySize && indexTape[2] < internalMemorySize ) || time );
+        } while( indexTape[0] < internalMemorySize && indexTape[1] < internalMemorySize && indexTape[2] < internalMemorySize  );
         //Termina preenchendo as n-1 posições da fita (valores que 'sobraram' na memória interna)
         for ( index = 1; index < internalMemorySize; index++ )
             if ( internalMemory[index] < 1000 )
@@ -160,12 +158,13 @@ void IBVC_Part2( int internalMemorySize, FILE *tape[], int time ) {
 
 //Imprime o conteúdo das fitas magnéticas
 void PrintTape(FILE *tape, int tapenumber) {
-    int auxNumber;
+    int auxNumber = 1000;
     fseek(tape, 0, SEEK_SET);
     printf("Fita numero %d: ", tapenumber);
-    while(!feof(tape)) {
+    while( !feof(tape) ) {
         fscanf(tape, "%d ", &auxNumber);
-        printf("%d ", auxNumber);
+        if ( auxNumber != 1000 )
+            printf("%d ", auxNumber);
     }
     printf("\n");
 }
