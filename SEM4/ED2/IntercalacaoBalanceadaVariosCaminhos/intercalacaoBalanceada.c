@@ -69,92 +69,63 @@ void IBVC_Part1( int internalMemorySize, FILE *archive, FILE *tape[] ) {
     }
 }
 
-void IBVC_Part2( int internalMemorySize, FILE *tape[], int time ) {
-    //Primeira vez -> time = 0; Segunda vez -> time = 1
-    if ( time ) {
-        //Troca as fitas
-        swapFile( tape[0], tape[3] );//Troca a fita 1 com a 4
-        swapFile( tape[1], tape[4] );//Troca a fita 2 com a 5
-        swapFile( tape[2], tape[5] );//Troca a fita 3 com a 6
-        //Substitui as fitas 5 e 6 ( antigas 2 e 3 ) pela 3 ( ou seja, pela fita 1 )
-        //--> Só escreve na fita 1
-        tape[4] = tape[3];
-        tape[5] = tape[3];
-    }
+int NormalizeIndex(int index) {
+    while(index >= 3)
+        index -= 3;
+    return index;
+}
+
+int IndexLowestNumber(int *internalMemory, int internalMemorySize) {
+    int index, indexLowestNumber = 0;
+    for(index = 1; index < internalMemorySize; index++)
+        if(internalMemory[index] < internalMemory[index--])
+            indexLowestNumber = index;
+    return indexLowestNumber;
+}
+
+int EmptyMemory(int *internalMemory, int internalMemorySize) {
+    int index = 0, isEmpty = 1;
+    while(index < internalMemorySize && isEmpty)
+        if(internalMemory[index++] < 1000)
+            isEmpty = 0;
+    return isEmpty;
+}
+
+void IBVC_Part2( int internalMemorySize, FILE *tape[6] ) {
     int internalMemory[internalMemorySize], originalTape[internalMemorySize];
-    int indexTape[3] = { 0, 0, 0 }, indexBlock = 3, index;
+    int indexTape[3], indexBlock = 0, index, indexLowestNumber, normalizedIndex;
     FILE *outTape, *inTape;
     //Volta ao início dos arquivos
-    for ( index = 0; index < 6; index++ )
+    for ( index = 0; index < 3; index++ )
         fseek(tape[ index ], 0, SEEK_SET);
     //Preenchimento da memória interna com valor 'impossivel'
-    for(index = 0; index < internalMemorySize; index++) {
+    for(index = 0; index < internalMemorySize; index++)
         internalMemory[index] = 1000;
-        originalTape[index]   = 3;
-    }
+    indexTape[0] = indexTape[1] = indexTape[2] = -1;
     //Enquanto alguma fita ainda tiver conteúdo, realiza o laço
     while(!feof(tape[0]) || !feof(tape[1]) || !feof(tape[2])) {
-        // Zera os indices das fitas
-        for ( index = 0; index < 3; index++ ) 
-            indexTape[index] = 0;
+        indexTape[0]++;
+        indexTape[1]++;
+        indexTape[2]++;
+        indexBlock++;
         //Seleção da fita a ser escrita na 'passada'
-        if ( indexBlock < 6 ) 
-            outTape = tape[ indexBlock++ ];
+        if ( indexBlock < 4 ) 
+            outTape = tape[ (indexBlock + 2) ];
         else
             printf("Limite de fitas atingido\n");
-        //Preenchimento da memória interna com o conteúdo das fitas (ou 1000 caso a fita esteja vazia)
-        for ( index = 0; index < internalMemorySize; index++ ) {
-            //Fita 1
-            if( !feof(tape[0]) ) {
-                fscanf(tape[0], "%d ", &internalMemory[index]);
-                originalTape[index++] = 0;
-            } else
-                internalMemory[index++] = 1000;
-            //Fita 2
-            if(!feof(tape[1]) && index < internalMemorySize ) {
-                fscanf(tape[1], "%d ", &internalMemory[index]);
-                originalTape[index++] = 1;
-            }else
-                internalMemory[index++] = 1000;
-            //Fita 3
-            if(!feof(tape[2]) && index < internalMemorySize ) {
-                fscanf(tape[2], "%d ", &internalMemory[index]);
-                originalTape[index++] = 2;
-            } else
-                internalMemory[index++] = 1000;
-        }
+        index = 0;
+        while(index < internalMemorySize)
+            fscanf(tape[NormalizeIndex(index)], "%d ", &internalMemory[index++]);
         do {
-            //Ordenação da memória interna
-            bubble_sort( internalMemory, originalTape, internalMemorySize );
-            if ( internalMemory[0] < 1000 ) {
-                fprintf( outTape, "%d ", internalMemory[0] ); //Escreve no arquivo o menor valor
-                indexTape[originalTape[0]]++;//Incrementa a qtd de vezes que a fita foi 'escolhida'
-                index = originalTape[0];
-                //Caso a fita tenha escrito até o seu 'limite', pega uma outra fita para completar
-                if ( indexTape[originalTape[0]] == internalMemorySize && !feof(tape[originalTape[0]]) ) {
-                    internalMemory[0] = 1000;//Caso nenhuma fita seja adequada, a posição é preenchida por 1000
-                    //Varre o vetor de fitas procurando a fita adequada
-                    for ( index = 0; index < 3; index++ )
-                        if ( indexTape[index] < internalMemorySize ) {
-                            inTape = tape[index];
-                            index = index;
-                        }
-                    if ( index == 3 && internalMemory[0] == 1000 )
-                        time = 0;
-                //Se não, preenche a memória interna com a fita da qual foi retirado o valor
-                } else 
-                    inTape = tape[ originalTape[0] ];
-                if ( !feof(inTape) )
-                    fscanf( inTape, "%d ", &internalMemory[0] );//Armazena na última posição do vetor
-                else
-                    internalMemory[0] = 1000;//Caso o arquivo da fita já tenha acabado
-                originalTape[0] = index;
-            }
-        } while( ( indexTape[0] < internalMemorySize && indexTape[1] < internalMemorySize && indexTape[2] < internalMemorySize ) || time );
-        //Termina preenchendo as n-1 posições da fita (valores que 'sobraram' na memória interna)
-        for ( index = 1; index < internalMemorySize; index++ )
-            if ( internalMemory[index] < 1000 )
-                fprintf( outTape, "%d ", internalMemory[index] );
+            indexLowestNumber = IndexLowestNumber(internalMemory, internalMemorySize);
+            normalizedIndex = NormalizeIndex(indexLowestNumber);
+            fprintf(outTape, "%d ", internalMemory[indexLowestNumber]);
+            if(!feof(tape[normalizedIndex]) && indexTape[normalizedIndex] < (internalMemorySize * indexBlock - 1)) {
+                fscanf(tape[normalizedIndex], "%d ", &internalMemory[indexLowestNumber]);
+                indexTape[normalizedIndex]++;
+            } else
+                internalMemory[indexLowestNumber] = 1000;
+        } while(EmptyMemory(internalMemory, internalMemorySize));
     }
 }
 
@@ -205,7 +176,7 @@ void main () {
         getchar();
         
         //Segunda parte da ordenação externa
-        IBVC_Part2(internalMemorySize, tape, 0 );
+        IBVC_Part2(internalMemorySize, tape );
         printf("\nRealizada a passagem das fitas 1, 2 e 3 para as fitas 4, 5 e 6: \n");
         //Imprime as fitas apos a segunda parte
         PrintTape( tape[3], 4);
@@ -215,7 +186,7 @@ void main () {
         getchar();
         
         //Terceira e última parte da ordenação externa, o arquivo estara ordenado na tape01
-        IBVC_Part2(internalMemorySize, tape, 1 );
+        IBVC_Part2(internalMemorySize, tape );
         printf("\nOrdenação finalizada: \n");
         //Imprime as fitas apos o fim da ordencacao, como dito anteriormente, a fita estara com o conteudo ordenado
         PrintTape( tape[3], 1);
