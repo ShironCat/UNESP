@@ -23,7 +23,7 @@ void swapInt(int *number1, int *number2) {
 }
 
 int HasContent ( FILE *archieve ) {
-    int auxContent = 0;
+    int auxContent = 1000;
     if ( !feof(archieve) )
         fscanf( archieve, "%d ", &auxContent );
     return auxContent;
@@ -99,8 +99,10 @@ void IBVC_Part2( int internalMemorySize, FILE *tape[6] ) {
         //Seleção da fita a ser escrita na 'passada'
         if ( indexBlock < 4 ) 
             outTape = tape[ (indexBlock + 2) ];
-        else
-            printf("Limite de fitas atingido\n");
+        else {
+            printf("\nLimite de fitas atingido!!!\nA ordenação não pode ser completa, encerrando o programa...\n");
+            exit(0);
+        }
         index = -1;
         while(++index < internalMemorySize)
             fscanf(tape[NormalizeIndex(index)], "%d ", &internalMemory[index]);
@@ -119,7 +121,7 @@ void IBVC_Part2( int internalMemorySize, FILE *tape[6] ) {
 
 void IBVC_Part3( int internalMemorySize, FILE *tape[] ) {
     int internalMemory[internalMemorySize];
-    int indexTape[3], tapeIndex, index, indexLowestNumber, normalizedIndex, tapeCount;
+    int indexTape[3], tapeIndex, index, indexLowestNumber, normalizedIndex, tapeCount = 0;
     FILE *outTape, *inTape;
     //Volta ao início dos arquivos
     for ( index = 0; index < 6; index++ )
@@ -136,7 +138,7 @@ void IBVC_Part3( int internalMemorySize, FILE *tape[] ) {
         //Preenche a memória interna
         for ( index = 0, tapeIndex = 0; index < internalMemorySize && tapeCount < 3; tapeIndex++, index++ ) {
             internalMemory[index] = HasContent( tape[ NormalizeIndex(tapeIndex) + 3 ] );
-            if ( !internalMemory[index] ) { //Se o conteudo é = 0, refaz a leitura para a próxima leitura
+            if ( internalMemory[index] == 1000 ) { //Se o conteudo é = 0, refaz a leitura para a próxima leitura
                 index--;
                 tapeCount++;
             } else
@@ -217,11 +219,6 @@ void main () {
         printf("\nOrdenação finalizada: \n");
         //Imprime as fitas apos o fim da ordencacao, como dito anteriormente, a fita estara com o conteudo ordenado
         PrintTape( tape[0], 1);
-        /*PrintTape( tape[1], 2);
-        PrintTape( tape[2], 3);
-        PrintTape( tape[3], 4);
-        PrintTape( tape[4], 5);
-        PrintTape( tape[5], 6);*/
         printf("\nPressione ENTER para continuar");
         getchar();
         //Fecha os arquivos
