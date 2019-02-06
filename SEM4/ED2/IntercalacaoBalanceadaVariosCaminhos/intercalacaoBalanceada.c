@@ -92,9 +92,6 @@ void IBVC_Part2( int internalMemorySize, FILE *tape[6] ) {
     indexTape[0] = indexTape[1] = indexTape[2] = -1;
     //Enquanto alguma fita ainda tiver conteúdo, realiza o laço
     while(!feof(tape[0]) || !feof(tape[1]) || !feof(tape[2])) {
-        indexTape[0]++;
-        indexTape[1]++;
-        indexTape[2]++;
         indexBlock++;
         //Seleção da fita a ser escrita na 'passada'
         if ( indexBlock < 4 ) 
@@ -104,8 +101,10 @@ void IBVC_Part2( int internalMemorySize, FILE *tape[6] ) {
             exit(0);
         }
         index = -1;
-        while(++index < internalMemorySize)
+        while(++index < internalMemorySize) {
             fscanf(tape[NormalizeIndex(index)], "%d ", &internalMemory[index]);
+            indexTape[NormalizeIndex(index)]++;
+        }
         do {
             indexLowestNumber = IndexLowestNumber(internalMemory, internalMemorySize);
             normalizedIndex = NormalizeIndex(indexLowestNumber);
