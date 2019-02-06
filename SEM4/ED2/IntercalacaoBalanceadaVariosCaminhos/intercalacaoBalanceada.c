@@ -81,9 +81,8 @@ int EmptyMemory(int *internalMemory, int internalMemorySize) {
 }
 
 void IBVC_Part2( int internalMemorySize, FILE *tape[6] ) {
-    int internalMemory[internalMemorySize], originalTape[internalMemorySize];
-    int indexTape[3], indexBlock = 0, index, indexLowestNumber, normalizedIndex;
-    FILE *outTape, *inTape;
+    int index, internalMemory[internalMemorySize], indexTape[3], indexBlock = 0, indexLowestNumber, normalizedIndex;
+    FILE *outTape;
     //Volta ao início dos arquivos
     for ( index = 0; index < 3; index++ )
         fseek(tape[ index ], 0, SEEK_SET);
