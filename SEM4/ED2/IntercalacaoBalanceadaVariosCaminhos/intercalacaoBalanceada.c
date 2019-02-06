@@ -35,7 +35,7 @@ void IBVC_Part1( int internalMemorySize, FILE *archive, FILE *tape[] ) {
     for(index = 0; index < internalMemorySize; index++)
         internalMemory[index] = 1000;
     while(!feof(archive)) {
-        if ( indexBlock > 2 )
+        if ( indexBlock > 2 || (internalMemorySize == 2 && indexBlock > 1))
             indexBlock = 0;
         outTape = tape[ indexBlock ];
         for(index = 0; index < internalMemorySize; index++) {
@@ -81,7 +81,7 @@ int EmptyMemory(int *internalMemory, int internalMemorySize) {
 }
 
 void IBVC_Part2( int internalMemorySize, FILE *tape[6] ) {
-    int index, internalMemory[internalMemorySize], indexTape[3], indexBlock = 0, indexLowestNumber, normalizedIndex;
+    int index, internalMemory[internalMemorySize], indexTape[3], indexBlock = 0, indexLowestNumber, normalizedIndex, stop = 1;
     FILE *outTape;
     //Volta ao início dos arquivos
     for ( index = 0; index < 3; index++ )
@@ -91,7 +91,7 @@ void IBVC_Part2( int internalMemorySize, FILE *tape[6] ) {
         internalMemory[index] = 1000;
     indexTape[0] = indexTape[1] = indexTape[2] = -1;
     //Enquanto alguma fita ainda tiver conteúdo, realiza o laço
-    while(!feof(tape[0]) || !feof(tape[1]) || !feof(tape[2])) {
+    while(!feof(tape[0]) || !feof(tape[1]) || stop) {
         indexBlock++;
         //Seleção da fita a ser escrita na 'passada'
         if ( indexBlock < 4 ) 
@@ -115,6 +115,10 @@ void IBVC_Part2( int internalMemorySize, FILE *tape[6] ) {
             } else
                 internalMemory[indexLowestNumber] = 1000;
         } while(!EmptyMemory(internalMemory, internalMemorySize));
+        if(internalMemorySize < 3)
+            stop = 0;
+        else
+            stop = !feof(tape[2]);
     }
 }
 
