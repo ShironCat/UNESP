@@ -94,12 +94,7 @@ void IBVC_Part2( int internalMemorySize, FILE *tape[6] ) {
     while(!feof(tape[0]) || !feof(tape[1]) || stop) {
         indexBlock++;
         //Seleção da fita a ser escrita na 'passada'
-        if ( indexBlock < 4 ) 
-            outTape = tape[ (indexBlock + 2) ];
-        else {
-            printf("\nLimite de fitas atingido!!!\nA ordenação não pode ser completa, encerrando o programa...\n");
-            exit(0);
-        }
+        outTape = tape[ NormalizeIndex(indexBlock - 1) + 3 ];
         index = -1;
         while(++index < internalMemorySize) {
             fscanf(tape[NormalizeIndex(index)], "%d ", &internalMemory[index]);
