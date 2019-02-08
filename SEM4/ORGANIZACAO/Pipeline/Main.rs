@@ -34,6 +34,8 @@ fn FI( String instruction ) {
 		labels[ index ] = instruction;
 		let mut instruction   = contents.next();
 		let mut instructionId = DI( instruction );
+	} else {
+		print!(" FI -->");
 	}
 }
 
@@ -41,26 +43,27 @@ fn FI( String instruction ) {
 fn DI() {
 	//Definir todos os comandos do assembly em um arquivo separado
 	let commandList : [String, 11] = ["pushl", "movl", "subl","cmpl","jne","jmp","decl","call","imull","leave","ret"];
+	print!(" DI -->");
 }
 
 //Operand Calculus --> calcula o endereço do operando
 fn CO() {
-
+	print(" CO -->");
 }
 
 //Fetch Operand --> pega o conteúdo do operando
 fn FO() {
-
+	print!(" FO -->");
 }
 
 //Execute Instruction --> realiza a instrução com o operando desejado
 fn EI() {
-
+	print!(" EI --");
 }
 
 //Write Operand --> grava o resultado
 fn WO() {
-
+	print!(" WO ");
 }
 
 fn Main() {
@@ -82,6 +85,7 @@ fn Main() {
 
 	//Enquanto o próximo pedaço da String for diferente de nulo
 	while { assert_ne!( None, instruction ) } {
+		print!("\nInstrução ")
 		FI( instruction );
 
 		//Leitura da próxima instrução
