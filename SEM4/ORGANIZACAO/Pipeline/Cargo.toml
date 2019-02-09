@@ -1,0 +1,6 @@
+[package]
+name = "Pipeline"
+version = "0.1.0"
+authors = ["Victor Azadinho Miranda <victorazadinho@gmail.com>"]
+
+[dependencies]
