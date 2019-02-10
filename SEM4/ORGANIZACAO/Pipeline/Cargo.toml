@@ -1,6 +1,10 @@
 [package]
 name = "Pipeline"
 version = "0.1.0"
-authors = ["Victor Azadinho Miranda <victorazadinho@gmail.com>"]
+authors = [
+    "Luiza Torello Vieira <luiza.torello@unesp.br>",
+    "Victor Azadinho Miranda <victor.azadinho@unesp.br>"
+    ]
 
 [dependencies]
+serde_json = "1.0.38"

@@ -21,22 +21,22 @@ Victor Azadinho Miranda
         6. Escrever operando (WO).
 Entrega: 17/02/2019
 */
-use std::env;
-use std::fs::File;
-use std::io::prelude::*;
+use std::io;
+use std::fs;
 
 //Fetch instruction --> pega a próxima instrução
-fn FI( String instruction ) {
-	let instructionId = DI( instruction );
-	//Caso o valor lido corresponda a uma label
-	if  instructionId == -1 {
-		let mut index   = index + 1; 
-		labels[ index ] = instruction;
-		let mut instruction   = contents.next();
-		let mut instructionId = DI( instruction );
-	} else {
-		print!(" FI -->");
+fn FI(program: Vec<String>, program_counter: u32) -> String {
+	let mut index = 1;
+	let instruction: String = String::from("ZZZ");
+	for i in program {
+		if index == program_counter {
+			let instruction = i;
+			break;
+		} else {
+			index = index + 1;
+		}
 	}
+	instruction
 }
 
 //Decode instruction --> decodifica a instrução (define o que ela vai fazer)
@@ -66,20 +66,25 @@ fn WO() {
 	print!(" WO ");
 }
 
+fn ReadFile<'a>(file_name: String) -> Vec<&'a str> {
+	//Abertura do arquivo
+	let content = fs::read_to_string(file_name).expect("Falha na leitura do arquivo!");
+	let content = content.split_whitespace()
+		.collect::<Vec<_>>();
+	content
+}
+
 fn Main() {
-	let labels;
-	let index = -1;
+	let mut program_counter = 1;
 	//Leitura do nome do arquivo
 	println!("Arquivo: ");
-	let fileName = String::new();
-	io::stdin().read_line( &mut fileName )?;
+	let file_name = String::new();
+	io::stdin().read_line( &mut file_name )
+		.expect("Falha na leitura");
+	file_name.pop();
+	let program = ReadFile(file_name);
 
-	//Abertura do arquivo
-	let file = File::open( fileName ).expect( "Arquivo não encontrado!" );
-	let contents = String::new();
-	file.read_to_string( &mut contents ).expect( "Erro na leitura do arquivo" );
-
-	//.split_whitespace() divide a string em várias, separando-as pelos espaços em branco
+	/* //.split_whitespace() divide a string em várias, separando-as pelos espaços em branco
 	let mut contents = contents.split_whitespace();
 	let instruction = contents.next();
 
@@ -90,5 +95,5 @@ fn Main() {
 
 		//Leitura da próxima instrução
 		let mut instruction = contents.next();
-	}
+	} */
 }
