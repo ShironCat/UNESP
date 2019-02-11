@@ -105,6 +105,8 @@ fn main() {
 		println!("     FI   DI   CO   FO   EI   WO");
 		print!(  "{} -", program_counter );
 		FI( &program, program_counter);
+		program_counter = EI( program, jump_label, op_code, program_counter );
+		WO();
 		/*if None == program[program_counter] {
 			break;
 		}*/
