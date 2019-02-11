@@ -21,8 +21,8 @@ Victor Azadinho Miranda
         6. Escrever operando (WO).
 Entrega: 17/02/2019
 */
-//extern crate rand;
-//use rand::Rng;
+extern crate rand;
+use rand::*;
 use std::io;
 use std::fs;
 
@@ -58,20 +58,22 @@ fn FO( program: Vec<String>, program_counter: u32 ) {
 }
 
 //Execute Instruction --> realiza a instrução com o operando desejado
-fn EI( program: Vec<String>, jump_label: String, op_code: u32, program_counter: u32 ) -> u32 {
+fn EI( program: Vec<String>, jump_label: String, op_code: u32, program_counter: u32 ) -> i32 {
 	if op_code == 1 { // Jump normal(A ser redefinido o número)
+		let index : i32 = -1;
 		for i in program {
-			//if jump_label == program { //Perguntar pro shiro como fazer essa comparação não to achando 
-			//	i //retorna o i?
-			//}
+			let index = index + 1;
+			if jump_label == i {
+				return index
+			}
 		}
 	} else if op_code == 2 {//Jump condicional
-		//let mut rng = rand::thread_rng();
-		//print!("{}",rng);
-
+		let rng = rand::thread_rng();
+		print!("{:?}",rng);
+		return 0
 	}
 	print!( "I{}  ", program_counter );
-	program_counter
+	return 0
 }
 
 //Write Operand --> grava o resultado
