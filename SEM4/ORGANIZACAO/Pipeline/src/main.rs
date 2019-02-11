@@ -21,11 +21,13 @@ Victor Azadinho Miranda
         6. Escrever operando (WO).
 Entrega: 17/02/2019
 */
+//extern crate rand;
+//use rand::Rng;
 use std::io;
 use std::fs;
 
 //Fetch instruction --> pega a próxima instrução
-fn FI(program: Vec<String>, program_counter: u32) -> String {
+fn FI( program: &Vec<&str>, program_counter: u32 ) -> String {
 	let mut index = 1;
 	let instruction: String = String::from("ZZZ");
 	for i in program {
@@ -36,64 +38,73 @@ fn FI(program: Vec<String>, program_counter: u32) -> String {
 			index = index + 1;
 		}
 	}
+	print!( "I{}  ", program_counter );
 	instruction
 }
 
 //Decode instruction --> decodifica a instrução (define o que ela vai fazer)
-fn DI() {
-	//Definir todos os comandos do assembly em um arquivo separado
-	let commandList : [String, 11] = ["pushl", "movl", "subl","cmpl","jne","jmp","decl","call","imull","leave","ret"];
-	print!(" DI -->");
+fn DI( program: Vec<String>, program_counter: u32 ) {
+	print!( "I{}  ", program_counter );
 }
 
 //Operand Calculus --> calcula o endereço do operando
-fn CO() {
-	print(" CO -->");
+fn CO( program: Vec<String>, program_counter: u32 ) {
+	print!( "I{}  ", program_counter );
 }
 
 //Fetch Operand --> pega o conteúdo do operando
-fn FO() {
-	print!(" FO -->");
+fn FO( program: Vec<String>, program_counter: u32 ) {
+	print!( "I{}  ", program_counter );
 }
 
 //Execute Instruction --> realiza a instrução com o operando desejado
-fn EI() {
-	print!(" EI --");
+fn EI( program: Vec<String>, jump_label: String, op_code: u32, program_counter: u32 ) -> u32 {
+	if op_code == 1 { // Jump normal(A ser redefinido o número)
+		for i in program {
+			//if jump_label == program { //Perguntar pro shiro como fazer essa comparação não to achando 
+			//	i //retorna o i?
+			//}
+		}
+	} else if op_code == 2 {//Jump condicional
+		//let mut rng = rand::thread_rng();
+		//print!("{}",rng);
+
+	}
+	print!( "I{}  ", program_counter );
+	program_counter
 }
 
 //Write Operand --> grava o resultado
-fn WO() {
-	print!(" WO ");
+fn WO( program: Vec<String>, program_counter: u32 ) {
+	//Neste caso, o WO não faz nada
+	print!( "I{}  ", program_counter );
 }
 
 fn ReadFile<'a>(file_name: String) -> Vec<&'a str> {
 	//Abertura do arquivo
-	let content = fs::read_to_string(file_name).expect("Falha na leitura do arquivo!");
+	let content = fs::read_to_string(file_name)
+		.expect("Falha na leitura do arquivo!");
 	let content = content.split_whitespace()
-		.collect::<Vec<_>>();
+		.collect::<Vec<&str>>();
 	content
 }
 
-fn Main() {
-	let mut program_counter = 1;
+fn main() {
 	//Leitura do nome do arquivo
 	println!("Arquivo: ");
-	let file_name = String::new();
+	let mut file_name = String::new();
 	io::stdin().read_line( &mut file_name )
 		.expect("Falha na leitura");
-	file_name.pop();
+	file_name.pop();//tira a quebra de linha
 	let program = ReadFile(file_name);
 
-	/* //.split_whitespace() divide a string em várias, separando-as pelos espaços em branco
-	let mut contents = contents.split_whitespace();
-	let instruction = contents.next();
-
-	//Enquanto o próximo pedaço da String for diferente de nulo
-	while { assert_ne!( None, instruction ) } {
-		print!("\nInstrução ")
-		FI( instruction );
-
-		//Leitura da próxima instrução
-		let mut instruction = contents.next();
-	} */
+	loop {
+		let program_counter : u32 = 0;
+		println!("     FI   DI   CO   FO   EI   WO");
+		print!(  "{} -", program_counter );
+		FI( &program, program_counter);
+		/*if None == program[program_counter] {
+			break;
+		}*/
+	}
 }
