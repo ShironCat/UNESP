@@ -106,9 +106,10 @@ fn execute_instruction( program: &Vec<Vec<String>>, jump_label: Vec<String>, op_
 	if op_code == 1 { // Jump normal
 		return jump( &program, jump_label );
 	} else if op_code == 2 {//Jump condicional
-		let rng = rand::thread_rng();
+		let mut rng = rand::thread_rng();
+		let condition: bool = rng.gen();
 		//Condição do pulo é válida -> pula linha
-		if rng {
+		if condition {
 			return jump( &program, jump_label );
 		}
 	}
@@ -154,16 +155,10 @@ fn main() {
 	file_name.pop();//tira a quebra de linha
 	let program = read_file(file_name);
 	let mut program_counter = 0;
-	let mut buffer: Vec<String> = Vec::new();
-	let mut index = 0;
-	while index < 6 {
-		buffer.push(String::from("-1"));
-		index = index + 1;
-	}
+	let mut buffer = vec![String::from(""); 6];
+	let mut vec_print = vec![String::from(""); 6];
 	println!("     FI   DI   CO   FO   EI   WO");
 	loop {
-		print!("{} -", program_counter );
-		let mut vec_print: Vec<String> = Vec::new();
 		let result_fi = instruction_fetch(&program, program_counter);
 		if result_fi != String::from("ZZZ") {
 			vec_print[0]  = result_fi.to_string();
