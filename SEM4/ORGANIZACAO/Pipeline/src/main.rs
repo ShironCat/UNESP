@@ -159,13 +159,21 @@ fn main() {
 	let mut vec_print = vec![String::from(""); 6];
 	println!("     FI   DI   CO   FO   EI   WO");
 	loop {
-		let result_fi = instruction_fetch(&program, program_counter);
-		if result_fi != String::from("ZZZ") {
-			vec_print[0]  = result_fi.to_string();
-			let op_code = decode_instruction(&result_fi);
-			let operand_number = operand_calculation( op_code );
-			let operands  = operand_fetch( &program, operand_number, program_counter );
-			program_counter = execute_instruction( &program, operands, op_code, program_counter );
+		print!("{} -", program_counter );
+		let mut vec_print: Vec<String> = Vec::new();
+		buffer[0] = instruction_fetch(&program, program_counter);
+		if buffer[0] != String::from("ZZZ") {
+			vec_print[0]  = buffer[1].to_string();
+			buffer[1] = decode_instruction(&buffer[1]).to_string();
+
+			buffer[2] = match buffer[2].parse::<i32>() {
+				Ok(-1)  => continue,
+				Ok(num) => operand_calculation( num as u32 ).to_string(),
+				Err(_)  => panic!("Retorno não é numérico")
+			};
+			
+			buffer[3]  = operand_fetch( &program, buffer[3], program_counter );
+			buffer[4] = execute_instruction( &program, buffer[3], buffer[], program_counter );
 			write_operand( &program, program_counter );
 		} else {
 			continue;
