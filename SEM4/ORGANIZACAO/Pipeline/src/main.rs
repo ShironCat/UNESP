@@ -52,6 +52,8 @@ fn decode_instruction(instruction: &String) -> u32 {
 		decoded_instruction = 3;
 	} else if instruction.to_string() == String::from("ret") {
 		decoded_instruction = 4;
+	} else if instruction.to_string() == String::from("incl") {
+		decoded_instruction = 5;
 	}
 	decoded_instruction
 }
@@ -63,6 +65,7 @@ fn operand_calculation(decoded_instruction: u32) -> u32 {
 		2 => 1,
 		3 => 0,
 		4 => 0,
+		5 => 1,
 		_ => 2
 	};
 	result_oc
