@@ -69,8 +69,17 @@ fn operand_calculation(decoded_instruction: u32) -> u32 {
 }
 
 //Fetch Operand --> pega o conteúdo do operando
-fn operand_fetch( program: Vec<String>, program_counter: u32 ) {
-	print!( "I{}  ", program_counter );
+fn operand_fetch( program: Vec<String>, operand_number: u32 ) -> Vec<String> {
+	let mut operands: Vec<String> = Vec::new();
+	match operand_number {
+		2 => {	operands[0] = program[1].to_string();
+				operands[1] = program[2].to_string()
+			}
+		1 =>	operands[0] = program[1].to_string(),
+		0 => 	operands[0] = "".to_string(),
+		_ => 	panic!()
+	}
+	operands
 }
 
 //Execute Instruction --> realiza a instrução com o operando desejado
@@ -105,11 +114,12 @@ fn read_file(file_name: String) -> Vec<Vec<String>> {
 	let content_lines = content.split("\n")
 		.collect::<Vec<&str>>();
 	let mut content_2d_vec: Vec<Vec<&str>> = Vec::new();
-	let mut index = 0;
+	let index = 0;
 	for i in content_lines {
 		content_2d_vec[index] = i.split_whitespace()
 			.collect::<Vec<&str>>();
-		index = index + 1;
+	panic!("cu");
+		let index = index + 1;
 	}
 	let mut content_string: Vec<Vec<String>> = Vec::new();
 	let mut index_x = 0;
@@ -133,7 +143,7 @@ fn main() {
 	file_name.pop();//tira a quebra de linha
 	let program = read_file(file_name);
 
-	loop {
+	/*loop {
 		let program_counter = 0;
 		println!("     FI   DI   CO   FO   EI   WO");
 		print!("{} -", program_counter );
@@ -145,10 +155,5 @@ fn main() {
 		} else {
 			continue;
 		}
-		//program_counter = EI( program, jump_label, op_code, program_counter );
-		//WO();
-		/*if None == program[program_counter] {
-			break;
-		}*/
-	}
+	}*/
 }
