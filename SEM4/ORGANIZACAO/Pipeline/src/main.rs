@@ -72,14 +72,14 @@ fn operand_calculation(decoded_instruction: u32) -> u32 {
 }
 
 //Fetch Operand --> pega o conteúdo do operando
-fn operand_fetch( program: &Vec<Vec<String>>, operand_number: u32, program_counter: u32) -> Vec<String> {
-	let mut operands: Vec<String> = Vec::new();
+fn operand_fetch( program: &Vec<Vec<String>>, operand_number: u32, program_counter: u32) -> String {
+	let mut operands: String;
 	match operand_number {
-		2 => {	operands[0] = program[program_counter as usize][1].to_string();
-				operands[1] = program[program_counter as usize][2].to_string()
+		2 => {	operands = program[program_counter as usize][1].to_string();
+				//operands[1] = program[program_counter as usize][2].to_string()
 			}
-		1 =>	operands[0] = program[program_counter as usize][1].to_string(),
-		0 => 	operands[0] = "".to_string(),
+		1 =>	operands = program[program_counter as usize][1].to_string(),
+		0 => 	operands = "".to_string(),
 		_ => 	panic!()
 	}
 	operands
@@ -165,7 +165,7 @@ fn main() {
 		if buffer[0] != String::from("ZZZ") {
 			vec_print[0]  = buffer[1].to_string();
 			buffer[1] = decode_instruction(&buffer[1]).to_string();
-
+			//OLHA ESSE CODEGO BONITO Q EU FIZ
 			buffer[2] = match buffer[2].parse::<i32>() {
 				Ok(-1)  => continue,
 				Ok(num) => operand_calculation( num as u32 ).to_string(),
@@ -173,7 +173,7 @@ fn main() {
 			};
 			
 			buffer[3]  = operand_fetch( &program, buffer[3], program_counter );
-			buffer[4] = execute_instruction( &program, buffer[3], buffer[], program_counter );
+			buffer[4] = execute_instruction( &program, buffer[3], buffer[1], program_counter );
 			write_operand( &program, program_counter );
 		} else {
 			continue;
