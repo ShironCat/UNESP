@@ -117,22 +117,19 @@ fn read_file(file_name: String) -> Vec<Vec<String>> {
 	let content_lines = content.split("\n")
 		.collect::<Vec<&str>>();
 	let mut content_2d_vec: Vec<Vec<&str>> = Vec::new();
-	let index = 0;
 	for i in content_lines {
-		content_2d_vec[index] = i.split_whitespace()
+		let line = i.split_whitespace()
 			.collect::<Vec<&str>>();
-	panic!("cu");
-		let index = index + 1;
+		content_2d_vec.push(line);
 	}
 	let mut content_string: Vec<Vec<String>> = Vec::new();
-	let mut index_x = 0;
-	let mut index_y = 0;
+	let mut index = 0;
 	for i in content_2d_vec {
+		content_string.push(Vec::new());
 		for j in i {
-			content_string[index_x][index_y] = j.to_string();
-			index_y = index_y + 1;
+			content_string[index].push(j.to_string());
 		}
-		index_x = index_x + 1;
+		index = index + 1;
 	}
 	content_string
 }
