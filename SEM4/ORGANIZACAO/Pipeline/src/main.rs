@@ -82,27 +82,38 @@ fn operand_fetch( program: &Vec<Vec<String>>, operand_number: u32, program_count
 	operands
 }
 
-//Execute Instruction --> realiza a instrução com o operando desejado
-fn execute_instruction( program: Vec<String>, jump_label: String, op_code: u32, program_counter: u32 ) -> i32 {
-	if op_code == 1 { // Jump normal(A ser redefinido o número)
-		let index : i32 = -1;
-		for i in program {
-			let index = index + 1;
-			if jump_label == i {
-				return index
-			}
+fn jump ( program: &Vec<Vec<String>>, jump_label: Vec<String> ) -> u32 {
+	let mut index : u32 = 0;
+	//Varre as linhas do programa
+	for i in program {
+		let aux = i[0].to_string();
+		aux.pop();
+		index = index + 1;
+		//Quando a label para a qual se deve pular for igual a label do programa
+		if jump_label[0].to_string() == aux.to_string() {
+		//Retorna a diferença ( novo número da linha )
+			return index;
 		}
+	}
+	return index;
+}
+
+//Execute Instruction --> realiza a instrução com o operando desejado
+fn execute_instruction( program: &Vec<Vec<String>>, jump_label: Vec<String>, op_code: u32, program_counter: u32 ) -> u32 {
+	if op_code == 1 { // Jump normal
+		return jump( &program, jump_label );
 	} else if op_code == 2 {//Jump condicional
 		let rng = rand::thread_rng();
-		print!("{:?}",rng);
-		return 0
+		//Condição do pulo é válida -> pula linha
+		if rng {
+			return jump( &program, jump_label );
+		}
 	}
-	print!( "I{}  ", program_counter );
-	return 0
+	return program_counter + 1
 }
 
 //Write Operand --> grava o resultado
-fn write_operand( program: Vec<String>, program_counter: u32 ) {
+fn write_operand( program: &Vec<Vec<String>>, program_counter: u32 ) {
 	//Neste caso, o WO não faz nada
 	print!( "I{}  ", program_counter );
 }
@@ -142,10 +153,15 @@ fn main() {
 		.expect("Falha na leitura");
 	file_name.pop();//tira a quebra de linha
 	let program = read_file(file_name);
-
-	let program_counter = 0;
+	let mut program_counter = 0;
+	let mut buffer: Vec<String> = Vec::new();
+	let mut index = 0;
+	while index < 6 {
+		buffer.push(String::from("-1"));
+		index = index + 1;
+	}
+	println!("     FI   DI   CO   FO   EI   WO");
 	loop {
-		println!("     FI   DI   CO   FO   EI   WO");
 		print!("{} -", program_counter );
 		let mut vec_print: Vec<String> = Vec::new();
 		let result_fi = instruction_fetch(&program, program_counter);
@@ -154,8 +170,8 @@ fn main() {
 			let op_code = decode_instruction(&result_fi);
 			let operand_number = operand_calculation( op_code );
 			let operands  = operand_fetch( &program, operand_number, program_counter );
-			let jump = execute_instruction( program, jump_label, op_code, program_counter );
-			program_counter = write_operand( program, program_counter );
+			program_counter = execute_instruction( &program, operands, op_code, program_counter );
+			write_operand( &program, program_counter );
 		} else {
 			continue;
 		}
