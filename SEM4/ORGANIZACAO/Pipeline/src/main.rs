@@ -69,13 +69,13 @@ fn operand_calculation(decoded_instruction: u32) -> u32 {
 }
 
 //Fetch Operand --> pega o conteúdo do operando
-fn operand_fetch( program: &Vec<Vec<String>>, operand_number: u32, program_counter: usize) -> Vec<String> {
+fn operand_fetch( program: &Vec<Vec<String>>, operand_number: u32, program_counter: u32) -> Vec<String> {
 	let mut operands: Vec<String> = Vec::new();
 	match operand_number {
-		2 => {	operands[0] = program[program_counter][1].to_string();
-				operands[1] = program[program_counter][2].to_string()
+		2 => {	operands[0] = program[program_counter as usize][1].to_string();
+				operands[1] = program[program_counter as usize][2].to_string()
 			}
-		1 =>	operands[0] = program[program_counter][1].to_string(),
+		1 =>	operands[0] = program[program_counter as usize][1].to_string(),
 		0 => 	operands[0] = "".to_string(),
 		_ => 	panic!()
 	}
