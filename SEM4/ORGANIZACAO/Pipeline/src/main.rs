@@ -156,7 +156,7 @@ fn main() {
 	let program = read_file(file_name);
 	let mut program_counter = 0;
 	let mut buffer = vec![String::from(""); 6];
-	let mut vec_print = vec![String::from(""); 6];
+	let mut vec_print = vec![String::from("   "); 6];
 	println!("     FI   DI   CO   FO   EI   WO");
 	loop {
 		print!("{} -", program_counter );
