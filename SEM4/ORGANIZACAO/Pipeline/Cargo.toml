@@ -7,5 +7,4 @@ authors = [
     ]
 
 [dependencies]
-serde_json = "1.0.38"
 rand = "0.6.5"

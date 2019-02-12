@@ -27,38 +27,54 @@ use std::io;
 use std::fs;
 
 //Fetch instruction --> pega a próxima instrução
-fn FI( program: &Vec<&str>, program_counter: u32 ) -> String {
+fn instruction_fetch(program: &Vec<Vec<String>>, program_counter: u32) -> String {
 	let mut index = 1;
-	let instruction: String = String::from("ZZZ");
+	let mut instruction: String = String::from("ZZZ");
 	for i in program {
 		if index == program_counter {
-			let instruction = i;
+			instruction = i[0].to_string();
 			break;
 		} else {
 			index = index + 1;
 		}
 	}
-	print!( "I{}  ", program_counter );
 	instruction
 }
 
 //Decode instruction --> decodifica a instrução (define o que ela vai fazer)
-fn DI( program: Vec<String>, program_counter: u32 ) {
-	print!( "I{}  ", program_counter );
+fn decode_instruction(instruction: &String) -> u32 {
+	let mut decoded_instruction = 0;
+	if instruction.to_string() == String::from("jmp") {
+		decoded_instruction = 1;
+	} else if instruction.to_string() == String::from("jle") {
+		decoded_instruction = 2;
+	} else if instruction.to_string() == String::from("leave") {
+		decoded_instruction = 3;
+	} else if instruction.to_string() == String::from("ret") {
+		decoded_instruction = 4;
+	}
+	decoded_instruction
 }
 
 //Operand Calculus --> calcula o endereço do operando
-fn CO( program: Vec<String>, program_counter: u32 ) {
-	print!( "I{}  ", program_counter );
+fn operand_calculation(decoded_instruction: u32) -> u32 {
+	let result_oc = match decoded_instruction {
+		1 => 1,
+		2 => 1,
+		3 => 0,
+		4 => 0,
+		_ => 2
+	};
+	result_oc
 }
 
 //Fetch Operand --> pega o conteúdo do operando
-fn FO( program: Vec<String>, program_counter: u32 ) {
+fn operand_fetch( program: Vec<String>, program_counter: u32 ) {
 	print!( "I{}  ", program_counter );
 }
 
 //Execute Instruction --> realiza a instrução com o operando desejado
-fn EI( program: Vec<String>, jump_label: String, op_code: u32, program_counter: u32 ) -> i32 {
+fn execute_instruction( program: Vec<String>, jump_label: String, op_code: u32, program_counter: u32 ) -> i32 {
 	if op_code == 1 { // Jump normal(A ser redefinido o número)
 		let index : i32 = -1;
 		for i in program {
@@ -77,18 +93,35 @@ fn EI( program: Vec<String>, jump_label: String, op_code: u32, program_counter: 
 }
 
 //Write Operand --> grava o resultado
-fn WO( program: Vec<String>, program_counter: u32 ) {
+fn write_operand( program: Vec<String>, program_counter: u32 ) {
 	//Neste caso, o WO não faz nada
 	print!( "I{}  ", program_counter );
 }
 
-fn ReadFile<'a>(file_name: String) -> Vec<&'a str> {
+fn read_file(file_name: String) -> Vec<Vec<String>> {
 	//Abertura do arquivo
 	let content = fs::read_to_string(file_name)
 		.expect("Falha na leitura do arquivo!");
-	let content = content.split_whitespace()
+	let content_lines = content.split("\n")
 		.collect::<Vec<&str>>();
-	content
+	let mut content_2d_vec: Vec<Vec<&str>> = Vec::new();
+	let mut index = 0;
+	for i in content_lines {
+		content_2d_vec[index] = i.split_whitespace()
+			.collect::<Vec<&str>>();
+		index = index + 1;
+	}
+	let mut content_string: Vec<Vec<String>> = Vec::new();
+	let mut index_x = 0;
+	let mut index_y = 0;
+	for i in content_2d_vec {
+		for j in i {
+			content_string[index_x][index_y] = j.to_string();
+			index_y = index_y + 1;
+		}
+		index_x = index_x + 1;
+	}
+	content_string
 }
 
 fn main() {
@@ -98,15 +131,22 @@ fn main() {
 	io::stdin().read_line( &mut file_name )
 		.expect("Falha na leitura");
 	file_name.pop();//tira a quebra de linha
-	let program = ReadFile(file_name);
+	let program = read_file(file_name);
 
 	loop {
-		let program_counter : u32 = 0;
+		let program_counter = 0;
 		println!("     FI   DI   CO   FO   EI   WO");
-		print!(  "{} -", program_counter );
-		FI( &program, program_counter);
-		program_counter = EI( program, jump_label, op_code, program_counter );
-		WO();
+		print!("{} -", program_counter );
+		let mut vec_print: Vec<String> = Vec::new();
+		let result_fi = instruction_fetch(&program, program_counter);
+		if result_fi != String::from("ZZZ") {
+			vec_print[0] = result_fi.to_string();
+			let result_di = decode_instruction(&result_fi);
+		} else {
+			continue;
+		}
+		//program_counter = EI( program, jump_label, op_code, program_counter );
+		//WO();
 		/*if None == program[program_counter] {
 			break;
 		}*/
