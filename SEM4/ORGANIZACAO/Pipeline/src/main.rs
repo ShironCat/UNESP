@@ -22,23 +22,32 @@ Victor Azadinho Miranda
 Entrega: 17/02/2019
 */
 extern crate rand;
-use rand::*;
+use rand::{thread_rng, Rng};
 use std::io;
 use std::fs;
 
+struct Instruction {
+	program_counter: i32,
+	buffer: String,
+	op_code: i32,
+	operand: String
+}
+
 //Fetch instruction --> pega a próxima instrução
-fn instruction_fetch(program: &Vec<Vec<String>>, program_counter: u32) -> String {
-	let mut index = 1;
-	let mut instruction: String = String::from("ZZZ");
+fn instruction_fetch(program: &Vec<Vec<String>>, program_counter: u32) -> Result<String, String> {
+	let mut index = 0;
 	for i in program {
 		if index == program_counter {
-			instruction = i[0].to_string();
-			break;
+			let string_aux = i[0].to_string();
+			if string_aux.chars().last().unwrap() == ":".chars().next().unwrap() {
+				return Err("label".to_string());
+			}
+			return Ok(i[0].to_string());
 		} else {
 			index = index + 1;
 		}
 	}
-	instruction
+	Err("program_counter excedeu o limite do programa!".to_string())
 }
 
 //Decode instruction --> decodifica a instrução (define o que ela vai fazer)
@@ -72,54 +81,59 @@ fn operand_calculation(decoded_instruction: u32) -> u32 {
 }
 
 //Fetch Operand --> pega o conteúdo do operando
-fn operand_fetch( program: &Vec<Vec<String>>, operand_number: u32, program_counter: u32) -> String {
-	let mut operands: String;
-	match operand_number {
-		2 => {	operands = program[program_counter as usize][1].to_string();
-				//operands[1] = program[program_counter as usize][2].to_string()
-			}
-		1 =>	operands = program[program_counter as usize][1].to_string(),
-		0 => 	operands = "".to_string(),
-		_ => 	panic!()
-	}
+fn operand_fetch(program: &Vec<Vec<String>>, operand_number: u32, program_counter: u32) -> String {
+	let operands = match operand_number {
+		2 => program[program_counter as usize][1].to_string(),
+		1 => program[program_counter as usize][1].to_string(),
+		0 => "".to_string(),
+		_ => panic!("Falha na busca por operandos!")
+	};
 	operands
 }
 
-fn jump ( program: &Vec<Vec<String>>, jump_label: Vec<String> ) -> u32 {
-	let mut index : u32 = 0;
+fn jump(program: &Vec<Vec<String>>, jump_label: String) -> Result<i32, i32> {
+	let mut index = 0;
 	//Varre as linhas do programa
 	for i in program {
-		let aux = i[0].to_string();
+		let mut aux = i[0].to_string();
 		aux.pop();
 		index = index + 1;
 		//Quando a label para a qual se deve pular for igual a label do programa
-		if jump_label[0].to_string() == aux.to_string() {
+		if jump_label == aux {
 		//Retorna a diferença ( novo número da linha )
-			return index;
+			return Ok(index);
 		}
 	}
-	return index;
+	Err(index)
 }
 
 //Execute Instruction --> realiza a instrução com o operando desejado
-fn execute_instruction( program: &Vec<Vec<String>>, jump_label: Vec<String>, op_code: u32, program_counter: u32 ) -> u32 {
+fn execute_instruction( program: &Vec<Vec<String>>, jump_label: String, op_code: u32, program_counter: u32 ) -> Result<i32, i32> {
 	if op_code == 1 { // Jump normal
-		return jump( &program, jump_label );
+		return jump(&program, jump_label);
 	} else if op_code == 2 {//Jump condicional
-		let mut rng = rand::thread_rng();
-		let condition: bool = rng.gen();
+		let rng = thread_rng().gen::<bool>();
 		//Condição do pulo é válida -> pula linha
-		if condition {
-			return jump( &program, jump_label );
+		if rng {
+			return jump(&program, jump_label);
 		}
+	} else if op_code == 4 {
+		return Ok(-1);
 	}
-	return program_counter + 1
+	Ok((program_counter + 1) as i32)
 }
 
 //Write Operand --> grava o resultado
-fn write_operand( program: &Vec<Vec<String>>, program_counter: u32 ) {
+fn write_operand(program_counter: i32) {
 	//Neste caso, o WO não faz nada
-	print!( "I{}  ", program_counter );
+	print!("I{}  ", program_counter);
+}
+
+fn end_program(op_code1: i32, op_code2: i32, op_code3: i32, op_code4: i32, op_code5: i32, op_code6: i32) -> bool {
+	if op_code1 != -1 || op_code2 != -1 || op_code3 != -1 || op_code4 != -1 || op_code5 != -1 || op_code6 != -1 {
+		return false;
+	}
+	true
 }
 
 fn read_file(file_name: String) -> Vec<Vec<String>> {
@@ -155,28 +169,50 @@ fn main() {
 	file_name.pop();//tira a quebra de linha
 	let program = read_file(file_name);
 	let mut program_counter = 0;
-	let mut buffer = vec![String::from(""); 6];
-	let mut vec_print = vec![String::from("   "); 6];
-	println!("     FI   DI   CO   FO   EI   WO");
-	loop {
-		print!("{} -", program_counter );
-		let mut vec_print: Vec<String> = Vec::new();
-		buffer[0] = instruction_fetch(&program, program_counter);
-		if buffer[0] != String::from("ZZZ") {
-			vec_print[0]  = buffer[1].to_string();
-			buffer[1] = decode_instruction(&buffer[1]).to_string();
-			//OLHA ESSE CODEGO BONITO Q EU FIZ
-			buffer[2] = match buffer[2].parse::<i32>() {
-				Ok(-1)  => continue,
-				Ok(num) => operand_calculation( num as u32 ).to_string(),
-				Err(_)  => panic!("Retorno não é numérico")
+	let mut buffer: Vec<Instruction> = Vec::new();
+	let mut index = 6;
+	while index > 0 {
+		buffer.push(Instruction {program_counter: -1, buffer: "".to_string(), op_code: -1, operand: "".to_string()});
+		index = index - 1;
+	}
+	buffer[0].program_counter = program_counter;
+	println!("FI\tDI\tCO\tFO\tEI\tWO");
+	while !end_program(buffer[0].op_code, buffer[1].op_code, buffer[2].op_code, buffer[3].op_code, buffer[4].op_code, buffer[5].op_code) {
+		if buffer[0].program_counter != -1{
+			buffer[0].buffer = match instruction_fetch(&program, buffer[0].program_counter as u32) {
+				Ok(value) => value,
+				Err(value) => {
+					if value == "label".to_string() {
+						buffer[0].program_counter = buffer[0].program_counter + 1;
+						continue;
+					} else {
+						panic!(value);
+					}
+				}
 			};
-			
-			buffer[3]  = operand_fetch( &program, buffer[3], program_counter );
-			buffer[4] = execute_instruction( &program, buffer[3], buffer[1], program_counter );
-			write_operand( &program, program_counter );
+		}
+		if buffer[1].program_counter != -1 {
+			buffer[1].op_code = decode_instruction(&buffer[1].buffer) as i32;
+		}
+		if buffer[2].program_counter != -1 {
+			buffer[2].buffer = operand_calculation(buffer[2].op_code as u32).to_string();
+		}
+		if buffer[3].program_counter != -1 {
+			match buffer[3].buffer.parse::<u32>() {
+				Ok(num) => buffer[3].operand = operand_fetch(&program, num, buffer[3].program_counter as u32),
+				Err(_) => panic!("Falha na leitura do buffer no espaco 3")
+			}
+		}
+		if buffer[4].program_counter != -1 {
+			program_counter = match execute_instruction(&program, buffer[4].operand.to_string(), buffer[4].op_code as u32, program_counter as u32) {
+				Ok(value) => value,
+				Err(_) => panic!("Falha na execucao do programa")
+			}
 		} else {
-			continue;
+			program_counter = program_counter + 1;
+		}
+		for i in &buffer {
+			write_operand(i.op_code);
 		}
 	}
 }
