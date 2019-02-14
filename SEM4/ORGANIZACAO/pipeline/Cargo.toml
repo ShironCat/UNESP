@@ -1,5 +1,5 @@
 [package]
-name = "Pipeline"
+name = "pipeline"
 version = "0.1.0"
 authors = [
     "Luiza Torello Vieira <luiza.torello@unesp.br>",

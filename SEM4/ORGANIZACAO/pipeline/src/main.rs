@@ -129,8 +129,8 @@ fn write_operand(program_counter: i32) {
 	print!("I{}  ", program_counter);
 }
 
-fn end_program(op_code1: i32, op_code2: i32, op_code3: i32, op_code4: i32, op_code5: i32, op_code6: i32) -> bool {
-	if op_code1 != -1 || op_code2 != -1 || op_code3 != -1 || op_code4 != -1 || op_code5 != -1 || op_code6 != -1 {
+fn end_program(program_counter1: i32, program_counter2: i32, program_counter3: i32, program_counter4: i32, program_counter5: i32, program_counter6: i32) -> bool {
+	if program_counter1 != -1 || program_counter2 != -1 || program_counter3 != -1 || program_counter4 != -1 || program_counter5 != -1 || program_counter6 != -1 {
 		return false;
 	}
 	true
@@ -170,20 +170,23 @@ fn main() {
 	let program = read_file(file_name);
 	let mut program_counter = 0;
 	let mut buffer: Vec<Instruction> = Vec::new();
-	let mut index = 6;
-	while index > 0 {
-		buffer.push(Instruction {program_counter: -1, buffer: "".to_string(), op_code: -1, operand: "".to_string()});
-		index = index - 1;
+	for _index in 0..6 {
+		buffer.push(
+			Instruction {
+				program_counter: -1,
+				buffer: "".to_string(),
+				op_code: -1,
+				operand: "".to_string()});
 	}
-	buffer[0].program_counter = program_counter;
 	println!("FI\tDI\tCO\tFO\tEI\tWO");
-	while !end_program(buffer[0].op_code, buffer[1].op_code, buffer[2].op_code, buffer[3].op_code, buffer[4].op_code, buffer[5].op_code) {
+	loop {
+		buffer[0].program_counter = program_counter;
 		if buffer[0].program_counter != -1{
 			buffer[0].buffer = match instruction_fetch(&program, buffer[0].program_counter as u32) {
 				Ok(value) => value,
 				Err(value) => {
 					if value == "label".to_string() {
-						buffer[0].program_counter = buffer[0].program_counter + 1;
+						program_counter = program_counter + 1;
 						continue;
 					} else {
 						panic!(value);
@@ -212,7 +215,21 @@ fn main() {
 			program_counter = program_counter + 1;
 		}
 		for i in &buffer {
-			write_operand(i.op_code);
+			write_operand(i.program_counter);
 		}
+		println!();
+		for index in 5..0 {
+			buffer[index].program_counter = buffer[index - 1].program_counter;
+			buffer[index].buffer = buffer[index - 1].buffer.to_string();
+			buffer[index].op_code = buffer[index - 1].op_code;
+			buffer[index].operand = buffer[index - 1].operand.to_string();
+		}
+		buffer[0].program_counter = program_counter;
+		if end_program(buffer[0].program_counter, buffer[1].program_counter, buffer[2].program_counter, buffer[3].program_counter, buffer[4].program_counter, buffer[5].program_counter) {
+			break;
+		}
+		let mut _aux: String = String::new();
+		io::stdin().read_line(&mut _aux)
+			.expect("Deu tudo errado!");
 	}
 }
