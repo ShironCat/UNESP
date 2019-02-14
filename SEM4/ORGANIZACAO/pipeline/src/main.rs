@@ -33,6 +33,11 @@ struct Instruction {
 	operand: String
 }
 
+struct Jmp {
+	is_jump: bool,
+	program_counter: i32
+}
+
 //Fetch instruction --> pega a próxima instrução
 fn instruction_fetch(program: &Vec<Vec<String>>, program_counter: u32) -> Result<String, String> {
 	let mut index = 0;
@@ -91,7 +96,7 @@ fn operand_fetch(program: &Vec<Vec<String>>, operand_number: u32, program_counte
 	operands
 }
 
-fn jump(program: &Vec<Vec<String>>, jump_label: String) -> Result<i32, i32> {
+fn jump(program: &Vec<Vec<String>>, jump_label: String) -> Result<Jmp, i32> {
 	let mut index = 0;
 	//Varre as linhas do programa
 	for i in program {
@@ -101,14 +106,17 @@ fn jump(program: &Vec<Vec<String>>, jump_label: String) -> Result<i32, i32> {
 		//Quando a label para a qual se deve pular for igual a label do programa
 		if jump_label == aux {
 		//Retorna a diferença ( novo número da linha )
-			return Ok(index);
+			return Ok(Jmp {
+				is_jump: true,
+				program_counter: index
+			});
 		}
 	}
 	Err(index)
 }
 
 //Execute Instruction --> realiza a instrução com o operando desejado
-fn execute_instruction( program: &Vec<Vec<String>>, jump_label: String, op_code: u32, program_counter: u32 ) -> Result<i32, i32> {
+fn execute_instruction( program: &Vec<Vec<String>>, jump_label: String, op_code: u32, program_counter: u32, program_size: u32) -> Result<Jmp, i32> {
 	if op_code == 1 { // Jump normal
 		return jump(&program, jump_label);
 	} else if op_code == 2 {//Jump condicional
@@ -118,15 +126,32 @@ fn execute_instruction( program: &Vec<Vec<String>>, jump_label: String, op_code:
 			return jump(&program, jump_label);
 		}
 	} else if op_code == 4 {
-		return Ok(-1);
+		return Ok(Jmp {
+			is_jump: false,
+			program_counter: -1
+		});
 	}
-	Ok((program_counter + 1) as i32)
+	if program_counter >= program_size {
+		return Ok(Jmp {
+			is_jump: false,
+			program_counter: -1
+		});
+	} else {
+		return Ok(Jmp {
+			is_jump: false,
+			program_counter: (program_counter + 1) as i32
+		});
+	}
 }
 
 //Write Operand --> grava o resultado
 fn write_operand(program_counter: i32) {
 	//Neste caso, o WO não faz nada
-	print!("I{}  ", program_counter);
+	if program_counter != -1 {
+		print!("I{}\t", program_counter);
+	} else {
+		print!("  \t");
+	}
 }
 
 fn end_program(program_counter1: i32, program_counter2: i32, program_counter3: i32, program_counter4: i32, program_counter5: i32, program_counter6: i32) -> bool {
@@ -168,6 +193,7 @@ fn main() {
 		.expect("Falha na leitura");
 	file_name.pop();//tira a quebra de linha
 	let program = read_file(file_name);
+	let program_size = program.len();
 	let mut program_counter = 0;
 	let mut buffer: Vec<Instruction> = Vec::new();
 	for _index in 0..6 {
@@ -207,22 +233,27 @@ fn main() {
 			}
 		}
 		if buffer[4].program_counter != -1 {
-			program_counter = match execute_instruction(&program, buffer[4].operand.to_string(), buffer[4].op_code as u32, program_counter as u32) {
+			program_counter = match execute_instruction(&program, buffer[4].operand.to_string(), buffer[4].op_code as u32, program_counter as u32, program_size as u32) {
 				Ok(value) => value,
 				Err(_) => panic!("Falha na execucao do programa")
 			}
 		} else {
-			program_counter = program_counter + 1;
+			if program_counter != -1 {
+				program_counter = program_counter + 1;
+			}
+		}
+		if program_counter >= program_size as i32 {
+			program_counter = -1;
 		}
 		for i in &buffer {
 			write_operand(i.program_counter);
 		}
 		println!();
-		for index in 5..0 {
-			buffer[index].program_counter = buffer[index - 1].program_counter;
-			buffer[index].buffer = buffer[index - 1].buffer.to_string();
-			buffer[index].op_code = buffer[index - 1].op_code;
-			buffer[index].operand = buffer[index - 1].operand.to_string();
+		for index in 0..5 {
+			buffer[5 - index].program_counter = buffer[5 - index - 1].program_counter;
+			buffer[5 - index].buffer = buffer[5 - index - 1].buffer.to_string();
+			buffer[5 - index].op_code = buffer[5 - index - 1].op_code;
+			buffer[5 - index].operand = buffer[5 - index - 1].operand.to_string();
 		}
 		buffer[0].program_counter = program_counter;
 		if end_program(buffer[0].program_counter, buffer[1].program_counter, buffer[2].program_counter, buffer[3].program_counter, buffer[4].program_counter, buffer[5].program_counter) {
