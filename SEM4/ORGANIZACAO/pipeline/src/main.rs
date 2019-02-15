@@ -100,43 +100,40 @@ fn operand_calculation(decoded_instruction: u32) -> u32 {
 	result_oc
 }
 
+//Checa se o operando já foi adicionado a lista de todos os operandos, 
 fn operand_check(program: &Vec<Vec<String>>, operand_number: u32, program_counter: u32, all_operands: Vec<Operand>) -> String {
 	let rng = thread_rng().gen_i32(10);
 	let mut op_operands: String;
 	let mut count = 0;
 	//Verifica se o operando já está "cadastrado"
 	for i in all_operands {
-		if i.name == program[program_counter as usize][1] {
-			let op_operands = format!("{} {}",1,i.position);
-			return op_operands;
+		if i.name == program[program_counter as usize][operand_number as usize] {
+			return i.position.to_string();
 		}
 		count = i.position;
 	}
 	//Passar 'reto' o for, significa que o operando ainda não foi registrado
 	all_operands.push( 
 			Operand {
-				name: program[program_counter as usize][1],
+				name: program[program_counter as usize][operand_number as usize],
 				value: rng,
-				position: count
+				position: count+1
 		});
-	return op_operands;
+	return (count+1).to_string();
 }
 
 //Fetch Operand --> pega o conteúdo do operando
 fn operand_fetch(program: &Vec<Vec<String>>, operand_number: u32, program_counter: u32, all_operands: Vec<Operand>) -> String {
-	/*let operands = match operand_number {
-		2 => program[program_counter as usize][1].to_string(),
-		1 => program[program_counter as usize][1].to_string(),
-		0 => "".to_string(),
-		_ => panic!("Falha na busca por operandos!")
-	};
-	operands*/
-	if operand_number == 1 {
-		
-	} else if operand_number == 2 {
-
+	let mut format_aux = "".to_string();
+	if operand_number > 0 {
+		format_aux = operand_check(program, 1,program_counter, all_operands);
+		if operand_number == 1 {
+			return format!("{} {}",1,format_aux);
+		} else if operand_number == 2 {
+			return format!("{} {} {}",2,format_aux,operand_check(program, 2, program_counter, all_operands));
+		}
 	}
-	return "".to_string();
+	return format_aux;
 }
 
 fn jump(program: &Vec<Vec<String>>, jump_label: String) -> Result<Jmp, i32> {
