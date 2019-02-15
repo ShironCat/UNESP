@@ -58,16 +58,18 @@ fn instruction_fetch(program: &Vec<Vec<String>>, program_counter: u32) -> Result
 //Decode instruction --> decodifica a instrução (define o que ela vai fazer)
 fn decode_instruction(instruction: &String) -> u32 {
 	let mut decoded_instruction = 0;
-	if instruction.to_string() == String::from("jmp") {
+	if instruction == "jmp" {
 		decoded_instruction = 1;
-	} else if instruction.to_string() == String::from("jle") {
+	} else if instruction == "call" {
+		decoded_instruction = 1;
+	}else if instruction == "jne" {
 		decoded_instruction = 2;
-	} else if instruction.to_string() == String::from("leave") {
+	} else if instruction == "jle" {
+		decoded_instruction = 2;
+	} else if instruction == "leave" {
 		decoded_instruction = 3;
-	} else if instruction.to_string() == String::from("ret") {
+	} else if instruction == "ret" {
 		decoded_instruction = 4;
-	} else if instruction.to_string() == String::from("incl") {
-		decoded_instruction = 5;
 	}
 	decoded_instruction
 }
@@ -75,12 +77,9 @@ fn decode_instruction(instruction: &String) -> u32 {
 //Operand Calculus --> calcula o endereço do operando
 fn operand_calculation(decoded_instruction: u32) -> u32 {
 	let result_oc = match decoded_instruction {
-		1 => 1,
-		2 => 1,
 		3 => 0,
 		4 => 0,
-		5 => 1,
-		_ => 2
+		_ => 1
 	};
 	result_oc
 }
@@ -120,7 +119,7 @@ fn execute_instruction( program: &Vec<Vec<String>>, jump_label: String, op_code:
 	if op_code == 1 { // Jump normal
 		return jump(&program, jump_label);
 	} else if op_code == 2 {//Jump condicional
-		let rng = thread_rng().gen::<bool>();
+		let rng = thread_rng().gen_bool(0.5);
 		//Condição do pulo é válida -> pula linha
 		if rng {
 			return jump(&program, jump_label);
@@ -150,7 +149,7 @@ fn write_operand(program_counter: i32) {
 	if program_counter != -1 {
 		print!("I{}\t", program_counter);
 	} else {
-		print!("  \t");
+		print!("\t");
 	}
 }
 
@@ -196,6 +195,7 @@ fn main() {
 	let program_size = program.len();
 	let mut program_counter = 0;
 	let mut buffer: Vec<Instruction> = Vec::new();
+	let mut jump_flag = false;
 	for _index in 0..6 {
 		buffer.push(
 			Instruction {
@@ -234,11 +234,19 @@ fn main() {
 		}
 		if buffer[4].program_counter != -1 {
 			program_counter = match execute_instruction(&program, buffer[4].operand.to_string(), buffer[4].op_code as u32, program_counter as u32, program_size as u32) {
-				Ok(value) => value,
+				Ok(value) => {
+					if value.is_jump {
+						jump_flag = true;
+					} else {
+						jump_flag = false;
+					}
+					value.program_counter
+				}
 				Err(_) => panic!("Falha na execucao do programa")
 			}
 		} else {
 			if program_counter != -1 {
+				jump_flag = false;
 				program_counter = program_counter + 1;
 			}
 		}
@@ -255,12 +263,20 @@ fn main() {
 			buffer[5 - index].op_code = buffer[5 - index - 1].op_code;
 			buffer[5 - index].operand = buffer[5 - index - 1].operand.to_string();
 		}
+		if jump_flag {
+			for index in 0..5 {
+				buffer[index].program_counter = -1;
+				buffer[index].buffer = "".to_string();
+				buffer[index].op_code = -1;
+				buffer[index].operand = "".to_string();
+			}
+		}
 		buffer[0].program_counter = program_counter;
 		if end_program(buffer[0].program_counter, buffer[1].program_counter, buffer[2].program_counter, buffer[3].program_counter, buffer[4].program_counter, buffer[5].program_counter) {
 			break;
 		}
 		let mut _aux: String = String::new();
 		io::stdin().read_line(&mut _aux)
-			.expect("Deu tudo errado!");
+			.expect("");
 	}
 }
