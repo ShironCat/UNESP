@@ -26,11 +26,17 @@ use rand::{thread_rng, Rng};
 use std::io;
 use std::fs;
 
+struct Operand {
+	name: String,
+	value: i32,
+	position: u32
+}
+
 struct Instruction {
 	program_counter: i32,
 	buffer: String,
 	op_code: i32,
-	operand: String
+	operand: String //"numero_de_op 	posição_op_1 	posição_op_2"
 }
 
 struct Jmp {
@@ -94,15 +100,43 @@ fn operand_calculation(decoded_instruction: u32) -> u32 {
 	result_oc
 }
 
+fn operand_check(program: &Vec<Vec<String>>, operand_number: u32, program_counter: u32, all_operands: Vec<Operand>) -> String {
+	let rng = thread_rng().gen_i32(10);
+	let mut op_operands: String;
+	let mut count = 0;
+	//Verifica se o operando já está "cadastrado"
+	for i in all_operands {
+		if i.name == program[program_counter as usize][1] {
+			let op_operands = format!("{} {}",1,i.position);
+			return op_operands;
+		}
+		count = i.position;
+	}
+	//Passar 'reto' o for, significa que o operando ainda não foi registrado
+	all_operands.push( 
+			Operand {
+				name: program[program_counter as usize][1],
+				value: rng,
+				position: count
+		});
+	return op_operands;
+}
+
 //Fetch Operand --> pega o conteúdo do operando
-fn operand_fetch(program: &Vec<Vec<String>>, operand_number: u32, program_counter: u32) -> String {
-	let operands = match operand_number {
+fn operand_fetch(program: &Vec<Vec<String>>, operand_number: u32, program_counter: u32, all_operands: Vec<Operand>) -> String {
+	/*let operands = match operand_number {
 		2 => program[program_counter as usize][1].to_string(),
 		1 => program[program_counter as usize][1].to_string(),
 		0 => "".to_string(),
 		_ => panic!("Falha na busca por operandos!")
 	};
-	operands
+	operands*/
+	if operand_number == 1 {
+		
+	} else if operand_number == 2 {
+
+	}
+	return "".to_string();
 }
 
 fn jump(program: &Vec<Vec<String>>, jump_label: String) -> Result<Jmp, i32> {
@@ -205,6 +239,7 @@ fn main() {
 	let program_size = program.len();
 	let mut program_counter = 0;
 	let mut buffer: Vec<Instruction> = Vec::new();
+	let mut all_operands: Vec<Operand> = Vec::new();
 	let mut jump_flag = false;
 	for _index in 0..6 {
 		buffer.push(
