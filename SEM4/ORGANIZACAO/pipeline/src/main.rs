@@ -57,30 +57,40 @@ fn instruction_fetch(program: &Vec<Vec<String>>, program_counter: u32) -> Result
 
 //Decode instruction --> decodifica a instrução (define o que ela vai fazer)
 fn decode_instruction(instruction: &String) -> u32 {
-	let mut decoded_instruction = 0;
-	if instruction == "jmp" {
-		decoded_instruction = 1;
-	} else if instruction == "call" {
-		decoded_instruction = 1;
-	}else if instruction == "jne" {
-		decoded_instruction = 2;
-	} else if instruction == "jle" {
-		decoded_instruction = 2;
-	} else if instruction == "leave" {
-		decoded_instruction = 3;
-	} else if instruction == "ret" {
-		decoded_instruction = 4;
-	}
+	let mut decoded_instruciton = 0;
+	let decoded_instruction = match instruction.to_string() {
+		//Instruções com apenas 2 operandos
+		"addl".to_string()  => 0,
+		"movl".to_string()  => 1,
+		"subl".to_string()  => 2,
+		"cmpl".to_string()  => 3,
+		"imull".to_string() => 4,
+		//Instruções com 1 operando
+		"jmp".to_string()   => 5,
+		"decl".to_string()  => 6,
+		"call".to_string()  => 7,
+		"jne".to_string()   => 8,
+		"pushl".to_string() => 9,
+		"incl".to_string()  => 10,
+		"jl".to_string()    => 11,
+		//Instruções com nenhum operando
+		"leave".to_string() => 12,
+		"ret".to_string()   => 13,
+		_                   => panic!("Comando '" instruction "' não reconhecido!")
+	};
 	decoded_instruction
 }
 
 //Operand Calculus --> calcula o endereço do operando
 fn operand_calculation(decoded_instruction: u32) -> u32 {
-	let result_oc = match decoded_instruction {
-		3 => 0,
-		4 => 0,
-		_ => 1
-	};
+	let result_oc = 0;
+	if decoded_instruction <= 12 {
+		result_oc = 0;
+	} else if decoded_instruction <= 5 {
+		result_oc = 1;
+	} else {
+		result_oc = 2;
+	}
 	result_oc
 }
 
