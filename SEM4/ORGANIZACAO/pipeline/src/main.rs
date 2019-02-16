@@ -41,7 +41,8 @@ struct Instruction {
 
 struct Jmp {
 	is_jump: bool,
-	program_counter: i32
+	program_counter: i32,
+	result: Operand
 }
 
 //Fetch instruction --> pega a próxima instrução
@@ -101,14 +102,14 @@ fn operand_calculation(decoded_instruction: u32) -> u32 {
 }
 
 //Checa se o operando já foi adicionado a lista de todos os operandos, 
-fn operand_check(program: &Vec<Vec<String>>, operand_number: u32, program_counter: u32, all_operands: Vec<Operand>) -> String {
+fn operand_check(program: &Vec<Vec<String>>, operand_number: u32, program_counter: u32, all_operands: Vec<Operand>) -> Vec<Operand> {
 	let rng = thread_rng().gen_i32(10);
 	let mut op_operands: String;
 	let mut count = 0;
 	//Verifica se o operando já está "cadastrado"
 	for i in all_operands {
 		if i.name == program[program_counter as usize][operand_number as usize] {
-			return i.position.to_string();
+			return all_operands;
 		}
 		count = i.position;
 	}
@@ -119,21 +120,33 @@ fn operand_check(program: &Vec<Vec<String>>, operand_number: u32, program_counte
 				value: rng,
 				position: count+1
 		});
-	return (count+1).to_string();
+	return all_operands;
 }
 
 //Fetch Operand --> pega o conteúdo do operando
 fn operand_fetch(program: &Vec<Vec<String>>, operand_number: u32, program_counter: u32, all_operands: Vec<Operand>) -> String {
-	let mut format_aux = "".to_string();
+	let mut count1;
+	let mut count2;
 	if operand_number > 0 {
-		format_aux = operand_check(program, 1,program_counter, all_operands);
+		for i in all_operands {
+			if i.name == program[program_counter as usize][operand_number as usize] {
+				count1 = i.position;
+				break;
+			}
+		}
 		if operand_number == 1 {
-			return format!("{} {}",1,format_aux);
+			return format!("{} {}",1,count1);
 		} else if operand_number == 2 {
-			return format!("{} {} {}",2,format_aux,operand_check(program, 2, program_counter, all_operands));
+			for i in all_operands {
+				if i.name == program[program_counter as usize][operand_number as usize] {
+					count2 = i.position;
+					break;
+				}
+			}
+			return format!("{} {} {}", 2, count1, count2);
 		}
 	}
-	return format_aux;
+	return "".to_string();
 }
 
 fn jump(program: &Vec<Vec<String>>, jump_label: String) -> Result<Jmp, i32> {
@@ -148,7 +161,8 @@ fn jump(program: &Vec<Vec<String>>, jump_label: String) -> Result<Jmp, i32> {
 		//Retorna a diferença ( novo número da linha )
 			return Ok(Jmp {
 				is_jump: true,
-				program_counter: index
+				program_counter: index,
+				result: NULL
 			});
 		}
 	}
@@ -270,7 +284,15 @@ fn main() {
 		}
 		if buffer[3].program_counter != -1 {
 			match buffer[3].buffer.parse::<u32>() {
-				Ok(num) => buffer[3].operand = operand_fetch(&program, num, buffer[3].program_counter as u32),
+				Ok(num) => { 
+							if num >= 1 {
+								all_operands = operand_check(&program, num, buffer[3].program_counter as u32, all_operands);
+							}
+							if num == 2 {
+								all_operands = operand_check(&program, 1, buffer[3].program_counter as u32, all_operands);
+							}
+				 			buffer[3].operand = operand_fetch(&program, num, buffer[3].program_counter as u32, all_operands);
+						}
 				Err(_) => panic!("Falha na leitura do buffer no espaco 3")
 			}
 		}
