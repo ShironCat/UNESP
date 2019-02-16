@@ -42,7 +42,7 @@ struct Instruction {
 struct Jmp {
 	is_jump: bool,
 	program_counter: i32,
-	result: Operand
+	result: String//"se_tem_resultado  valor  posição_op"
 }
 
 //Fetch instruction --> pega a próxima instrução
@@ -64,26 +64,25 @@ fn instruction_fetch(program: &Vec<Vec<String>>, program_counter: u32) -> Result
 
 //Decode instruction --> decodifica a instrução (define o que ela vai fazer)
 fn decode_instruction(instruction: &String) -> u32 {
-	let mut decoded_instruciton = 0;
-	let decoded_instruction = match instruction.to_string() {
+	let decoded_instruction = match instruction.as_ref() {
 		//Instruções com apenas 2 operandos
-		"addl".to_string()  => 0,
-		"movl".to_string()  => 1,
-		"subl".to_string()  => 2,
-		"cmpl".to_string()  => 3,
-		"imull".to_string() => 4,
+		"addl"  => 0,
+		"movl"  => 1,
+		"subl"  => 2,
+		"cmpl"  => 3,
+		"imull" => 4,
 		//Instruções com 1 operando
-		"jmp".to_string()   => 5,
-		"decl".to_string()  => 6,
-		"call".to_string()  => 7,
-		"jne".to_string()   => 8,
-		"pushl".to_string() => 9,
-		"incl".to_string()  => 10,
-		"jl".to_string()    => 11,
+		"jmp"   => 5,
+		"decl"  => 6,
+		"call"  => 7,
+		"jne"   => 8,
+		"pushl" => 9,
+		"incl"  => 10,
+		"jl"    => 11,
 		//Instruções com nenhum operando
-		"leave".to_string() => 12,
-		"ret".to_string()   => 13,
-		_                   => panic!("Comando '" instruction "' não reconhecido!")
+		"leave" => 12,
+		"ret"   => 13,
+		_       => panic!(format!("Comando '{}' não reconhecido!", instruction))
 	};
 	decoded_instruction
 }
@@ -103,7 +102,7 @@ fn operand_calculation(decoded_instruction: u32) -> u32 {
 
 //Checa se o operando já foi adicionado a lista de todos os operandos, 
 fn operand_check(program: &Vec<Vec<String>>, operand_number: u32, program_counter: u32, all_operands: Vec<Operand>) -> Vec<Operand> {
-	let rng = thread_rng().gen_i32(10);
+	let rng = thread_rng().gen::<i32>();
 	let mut op_operands: String;
 	let mut count = 0;
 	//Verifica se o operando já está "cadastrado"
@@ -117,7 +116,7 @@ fn operand_check(program: &Vec<Vec<String>>, operand_number: u32, program_counte
 	all_operands.push( 
 			Operand {
 				name: program[program_counter as usize][operand_number as usize],
-				value: rng,
+				value: rng*10,
 				position: count+1
 		});
 	return all_operands;
@@ -146,7 +145,7 @@ fn operand_fetch(program: &Vec<Vec<String>>, operand_number: u32, program_counte
 			return format!("{} {} {}", 2, count1, count2);
 		}
 	}
-	return "".to_string();
+	return "0".to_string();
 }
 
 fn jump(program: &Vec<Vec<String>>, jump_label: String) -> Result<Jmp, i32> {
@@ -162,7 +161,7 @@ fn jump(program: &Vec<Vec<String>>, jump_label: String) -> Result<Jmp, i32> {
 			return Ok(Jmp {
 				is_jump: true,
 				program_counter: index,
-				result: NULL
+				result: "0".to_string()
 			});
 		}
 	}
@@ -170,8 +169,8 @@ fn jump(program: &Vec<Vec<String>>, jump_label: String) -> Result<Jmp, i32> {
 }
 
 //Execute Instruction --> realiza a instrução com o operando desejado
-fn execute_instruction( program: &Vec<Vec<String>>, jump_label: String, op_code: u32, program_counter: u32, program_size: u32) -> Result<Jmp, i32> {
-	if op_code == 1 { // Jump normal
+fn execute_instruction( program: &Vec<Vec<String>>, operands: String, op_code: u32, program_counter: u32, program_size: u32, all_operands: Vec<Operand> ) -> Result<Jmp, i32> {
+	/*if op_code == 1 { // Jump normal
 		return jump(&program, jump_label);
 	} else if op_code == 2 {//Jump condicional
 		let rng = thread_rng().gen_bool(0.5);
@@ -195,12 +194,97 @@ fn execute_instruction( program: &Vec<Vec<String>>, jump_label: String, op_code:
 			is_jump: false,
 			program_counter: (program_counter + 1) as i32
 		});
+	}*/
+	let operand_aux = operands.split_whitespace().collect::<Vec<&str>>();
+	let operand_number: u32 = operand_aux[0].parse().unwrap();
+	let operand1 = 0;
+	let operand2 = 0;
+	if operand_number >= 1 {
+		let operand1 = operand_aux[1];
+	}
+	if operand_number == 2 {
+		let operand2 = operand_aux[2];
+	}
+	return match op_code {
+		//add
+		0  => Ok(Jmp {
+					is_jump: false,
+					program_counter: program_counter as i32 +1,
+					result: format!("{} {} {}",1,(all_operands[operand1].value + all_operands[operand2].value), operand1)
+				}),
+		//movl
+		1  => Ok(Jmp {
+					is_jump: false,
+					program_counter: program_counter as i32 + 1,
+					result: format!("{} {} {}",1,all_operands[operand2].value, operand1)
+				}),
+		//subl
+		2  => Ok(Jmp {
+					is_jump: false,
+					program_counter: program_counter as i32 + 1,
+					result: format!("{} {} {}",1,(all_operands[operand1].value - all_operands[operand2].value), operand1)
+				}),
+		//cmpl
+		3  => Ok(Jmp {
+					is_jump: false,
+					program_counter: program_counter as i32 + 1
+					result:
+				}),
+		//imull
+		4  => Ok(Jmp {
+					is_jump: false,
+					program_counter: program_counter as i32 + 1,
+					result: format!("{} {} {}",1,(all_operands[operand1].value * all_operands[operand2].value), operand1)
+				}),
+		//jmp
+		5  => jump( program, all_operands[operand1].name ),
+		//decl
+		6  => Ok(Jmp {
+					is_jump: false,
+					program_counter: program_counter as i32 + 1,
+					result: format!("{} {} {}",1,( all_operands[operand1].value - 1), operand1 )
+				}),
+		//call
+		7  => jump( program, all_operands[operand1].name ),
+		//jne
+		8  => jump( program, all_operands[operand1].name ),
+		//pushl
+		9  => Ok(Jmp {
+					is_jump: false,
+					program_counter: program_counter as i32 + 1,
+					result:
+				}),
+		//incl
+		10 => Ok(Jmp {
+					is_jump: false,
+					program_counter: program_counter as i32 + 1,
+					result: format!("{} {} {}",1,( all_operands[operand1].value + 1), operand1 )
+				}),
+		//jl
+		11 => jump( program, all_operands[operand1].name ),
+		//leave
+		12 => Ok(Jmp {
+					is_jump: false,
+					program_counter: program_counter as i32 + 1,
+					result: "0".to_string()
+				}),
+		//ret
+		13 => Ok(Jmp {
+					is_jump: false,
+					program_counter: program_counter as i32 + 1,
+					result: "0".to_string()
+				}),
+		//Comando não reconhecido
+		_  => panic!("Comando não reconhecido")
 	}
 }
 
 //Write Operand --> grava o resultado
-fn write_operand(program_counter: i32) {
-	//Neste caso, o WO não faz nada
+fn write_operand() {
+
+}
+
+fn print_pipe(program_counter: i32) {
 	if program_counter != -1 {
 		print!("I{}\t", program_counter);
 	} else {
@@ -263,6 +347,7 @@ fn main() {
 	println!("FI\tDI\tCO\tFO\tEI\tWO");
 	loop {
 		buffer[0].program_counter = program_counter;
+		//Se o programa não tiver acabado
 		if buffer[0].program_counter != -1{
 			buffer[0].buffer = match instruction_fetch(&program, buffer[0].program_counter as u32) {
 				Ok(value) => value,
@@ -297,7 +382,7 @@ fn main() {
 			}
 		}
 		if buffer[4].program_counter != -1 {
-			program_counter = match execute_instruction(&program, buffer[4].operand.to_string(), buffer[4].op_code as u32, program_counter as u32, program_size as u32) {
+			program_counter = match execute_instruction(&program, buffer[4].operand.to_string(), buffer[4].op_code as u32, program_counter as u32, program_size as u32, all_operands) {
 				Ok(value) => {
 					if value.is_jump {
 						jump_flag = true;
@@ -318,7 +403,7 @@ fn main() {
 			program_counter = -1;
 		}
 		for i in &buffer {
-			write_operand(i.program_counter);
+			print_pipe(i.program_counter);
 		}
 		println!();
 		for index in 0..5 {
