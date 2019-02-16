@@ -349,11 +349,14 @@ fn main() {
 		buffer[0].program_counter = program_counter;
 		//Se o programa não tiver acabado
 		if buffer[0].program_counter != -1{
+			//Pega a instrução
 			buffer[0].buffer = match instruction_fetch(&program, buffer[0].program_counter as u32) {
 				Ok(value) => value,
+				//Caso a instrução seja uma label
 				Err(value) => {
 					if value == "label".to_string() {
 						program_counter = program_counter + 1;
+						//O laço é 'reiniciado'
 						continue;
 					} else {
 						panic!(value);
@@ -362,37 +365,46 @@ fn main() {
 			};
 		}
 		if buffer[1].program_counter != -1 {
+			//Decodifica a instrução
 			buffer[1].op_code = decode_instruction(&buffer[1].buffer) as i32;
 		}
 		if buffer[2].program_counter != -1 {
+			//Calcula o número de operandos
 			buffer[2].buffer = operand_calculation(buffer[2].op_code as u32).to_string();
 		}
 		if buffer[3].program_counter != -1 {
 			match buffer[3].buffer.parse::<u32>() {
 				Ok(num) => { 
+							//Cadastra possíveis operandos novos
 							if num >= 1 {
 								all_operands = operand_check(&program, num, buffer[3].program_counter as u32, all_operands);
 							}
 							if num == 2 {
 								all_operands = operand_check(&program, 1, buffer[3].program_counter as u32, all_operands);
 							}
+							//Retorna os operandos a serem utilizados em formato de string
 				 			buffer[3].operand = operand_fetch(&program, num, buffer[3].program_counter as u32, all_operands);
 						}
 				Err(_) => panic!("Falha na leitura do buffer no espaco 3")
 			}
 		}
+		//Se o programa ainda não tiver acabado
 		if buffer[4].program_counter != -1 {
+			//Execução da instrução
 			program_counter = match execute_instruction(&program, buffer[4].operand.to_string(), buffer[4].op_code as u32, program_counter as u32, program_size as u32, all_operands) {
 				Ok(value) => {
+					//Ativa a flag de jump
 					if value.is_jump {
 						jump_flag = true;
 					} else {
 						jump_flag = false;
 					}
+					//atualiza o program counter
 					value.program_counter
 				}
 				Err(_) => panic!("Falha na execucao do programa")
 			}
+		//Se o programa tiver acabado
 		} else {
 			if program_counter != -1 {
 				jump_flag = false;
@@ -402,16 +414,19 @@ fn main() {
 		if program_counter >= program_size as i32 {
 			program_counter = -1;
 		}
+		//Printa o pipeline
 		for i in &buffer {
 			print_pipe(i.program_counter);
 		}
 		println!();
+		//Atualiza os buffers
 		for index in 0..5 {
 			buffer[5 - index].program_counter = buffer[5 - index - 1].program_counter;
 			buffer[5 - index].buffer = buffer[5 - index - 1].buffer.to_string();
 			buffer[5 - index].op_code = buffer[5 - index - 1].op_code;
 			buffer[5 - index].operand = buffer[5 - index - 1].operand.to_string();
 		}
+		//No caso de jump, 'joga fora' as instruções carregadas
 		if jump_flag {
 			for index in 0..5 {
 				buffer[index].program_counter = -1;
@@ -420,7 +435,9 @@ fn main() {
 				buffer[index].operand = "".to_string();
 			}
 		}
+		//Atualiza o program counter do buffer 0
 		buffer[0].program_counter = program_counter;
+		//Caso o programa termine
 		if end_program(buffer[0].program_counter, buffer[1].program_counter, buffer[2].program_counter, buffer[3].program_counter, buffer[4].program_counter, buffer[5].program_counter) {
 			break;
 		}
