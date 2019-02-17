@@ -78,7 +78,7 @@ fn decode_instruction(instruction: &String) -> u32 {
 		"jne"   => 8,
 		"pushl" => 9,
 		"incl"  => 10,
-		"jl"    => 11,
+		"jle"    => 11,
 		//Instruções com nenhum operando
 		"leave" => 12,
 		"ret"   => 13,
@@ -89,9 +89,9 @@ fn decode_instruction(instruction: &String) -> u32 {
 
 //Operand Calculus --> calcula o endereço do operando
 fn operand_calculation(decoded_instruction: u32) -> u32 {
-	if decoded_instruction <= 12 {
+	if decoded_instruction >= 12 {
 		return 0;
-	} else if decoded_instruction <= 5 {
+	} else if decoded_instruction >= 5 {
 		return 1;
 	} else {
 		return 2;
@@ -100,17 +100,24 @@ fn operand_calculation(decoded_instruction: u32) -> u32 {
 
 //Checa se o operando já foi adicionado a lista de todos os operandos, 
 fn operand_check(program: &Vec<Vec<String>>, operand_number: u32, program_counter: u32, all_operands: &mut Vec<Operand>) {
-	let rng = thread_rng().gen::<i32>();
+	let rng: i32 = thread_rng().gen_range(0, 10);
 	let mut count = 0;
 	let mut flag = true;
 	//Verifica se o operando já está "cadastrado"
 	for i in all_operands.iter() {
-		if i.name == program[program_counter as usize][operand_number as usize].to_string() {
+		//Tira a virgula
+		let mut aux = program[program_counter as usize][operand_number as usize].to_string();
+		if aux.chars().last().unwrap() == ",".chars().next().unwrap() {
+			aux.pop();
+		}
+		//Compara
+		if i.name == aux {
 			flag = false;
 		}
 		count = i.position;
 	}
 	if flag {
+		//Tira a virgula
 		let mut operand = program[program_counter as usize][operand_number as usize].to_string();
 		if operand.chars().last().unwrap() == ",".chars().next().unwrap() {
 			operand.pop();
@@ -118,7 +125,7 @@ fn operand_check(program: &Vec<Vec<String>>, operand_number: u32, program_counte
 		all_operands.push( 
 				Operand {
 					name: operand,
-					value: rng*10,
+					value: rng,
 					position: count+1
 			});
 	}
@@ -150,7 +157,7 @@ fn operand_fetch(program: &Vec<Vec<String>>, operand_number: u32, program_counte
 	return "0".to_string();
 }
 
-fn jump(program: &Vec<Vec<String>>, jump_label: String, flag: u32) -> Result<Jmp, i32> {
+fn jump(program: &Vec<Vec<String>>, jump_label: String, flag: u32, program_counter: u32) -> Result<Jmp, i32> {
 	let mut index = 0;
 	if flag == 1 {
 		//Varre as linhas do programa
@@ -168,8 +175,13 @@ fn jump(program: &Vec<Vec<String>>, jump_label: String, flag: u32) -> Result<Jmp
 				});
 			}
 		}
+		//return Err(index);
 	}
-	Err(index)
+	Ok(Jmp {
+		is_jump: false,
+		program_counter: program_counter as i32 +1,
+		result: "0 0".to_string(),
+	})
 }
 
 //Execute Instruction --> realiza a instrução com o operando desejado
@@ -216,7 +228,7 @@ fn execute_instruction( program: &Vec<Vec<String>>, operands: String, op_code: u
 					result: format!("0 1 {} {}",(all_operands[operand1].value * all_operands[operand2].value), operand1)
 				}),
 		//jmp
-		5  => jump( program, all_operands[operand1].name.to_string(), 1 ),
+		5  => jump( program, all_operands[operand1].name.to_string(), 1, program_counter ),
 		//decl
 		6  => Ok(Jmp {
 					is_jump: false,
@@ -224,14 +236,14 @@ fn execute_instruction( program: &Vec<Vec<String>>, operands: String, op_code: u
 					result: format!("0 1 {} {}",( all_operands[operand1].value - 1), operand1 )
 				}),
 		//call
-		7  => jump( program, all_operands[operand1].name.to_string(), 1 ),
+		7  => jump( program, all_operands[operand1].name.to_string(), 1, program_counter ),
 		//jne
 		8  => {
 				let mut aux_flag = 0;
 				if flag != 0 {
 					aux_flag = 1;
 				}
-				jump( program, all_operands[operand1].name.to_string(), aux_flag )
+				jump( program, all_operands[operand1].name.to_string(), aux_flag, program_counter )
 			}
 		//pushl
 		9  => Ok(Jmp {
@@ -245,13 +257,13 @@ fn execute_instruction( program: &Vec<Vec<String>>, operands: String, op_code: u
 					program_counter: program_counter as i32 + 1,
 					result: format!("0 1 {} {}",( all_operands[operand1].value + 1), operand1 ),
 				}),
-		//jl
+		//jle
 		11 => {
 				let mut aux_flag = 0;
-				if flag < 0 {
+				if flag <= 0 {
 					aux_flag = 1;
 				}
-				jump( program, all_operands[operand1].name.to_string(), aux_flag )
+				jump( program, all_operands[operand1].name.to_string(), aux_flag, program_counter )
 			}
 		//leave
 		12 => Ok(Jmp {
@@ -266,17 +278,18 @@ fn execute_instruction( program: &Vec<Vec<String>>, operands: String, op_code: u
 					result: "0 0".to_string()
 				}),
 		//Comando não reconhecido
-		_  => panic!("Comando não reconhecido")
+		_  => Err(0)
 	}
 }
 
 //Write Operand --> grava o resultado
 fn write_operand( result: String, all_operands: &mut Vec<Operand> ) {
-	let result_aux = result.split_whitespace().collect::<Vec<&str>>();
+	let result_aux = result.split_whitespace()
+		.collect::<Vec<&str>>();
 	let result_arg_num: u32 = result_aux[1].parse().unwrap();
 	if result_arg_num == 1 {
 		let position: usize = result_aux[3].parse().unwrap();
-		all_operands[position].value = result_aux[2].parse().unwrap();
+		all_operands[position-1].value = result_aux[2].parse().unwrap();
 	}
 }
 
@@ -330,7 +343,7 @@ fn main() {
 	let program_size = program.len();
 	let mut program_counter = 0;
 	let mut buffer: Vec<Instruction> = Vec::new();
-	let mut all_operands: Vec<Operand> = Vec::new();
+	let mut all_operands: Vec<Operand> = vec![];
 	let mut jump_flag = false;
 	for _index in 0..6 {
 		buffer.push(
@@ -340,6 +353,7 @@ fn main() {
 				op_code: -1,
 				operand: "".to_string()});
 	}
+	buffer[0].program_counter = program_counter;
 	println!("FI\tDI\tCO\tFO\tEI\tWO");
 	loop {
 		buffer[0].program_counter = program_counter;
@@ -370,7 +384,7 @@ fn main() {
 		}
 		if buffer[3].program_counter != -1 {
 			match buffer[3].buffer.parse::<u32>() {
-				Ok(value) => { 
+				Ok(value) => {
 							//Cadastra possíveis operandos novos
 							if value >= 1 {
 								operand_check(&program, value, buffer[3].program_counter as u32, &mut all_operands);
@@ -405,7 +419,7 @@ fn main() {
 					value.program_counter
 				}
 				Err(_) => panic!("Falha na execucao do programa")
-			}
+			};
 		//Incremento do program counter
 		} else {
 			if program_counter != -1 {
@@ -413,16 +427,19 @@ fn main() {
 				program_counter = program_counter + 1;
 			}
 		}
-		if buffer[5].program_counter != -1 {
+		/*if buffer[5].program_counter != -1 {
 			//Escreve os operandos (WO)
 			write_operand(buffer[5].buffer.to_string(), &mut all_operands);
-		}
+		}*/
 		if program_counter >= program_size as i32 {
 			program_counter = -1;
 		}
 		//Printa o pipeline
 		for i in &buffer {
 			print_pipe(i.program_counter);
+		}
+		for i in &all_operands {
+			print!("{}: {}\t",i.name,i.value);
 		}
 		println!();
 		//Atualiza os buffers
