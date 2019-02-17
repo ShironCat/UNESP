@@ -100,8 +100,8 @@ fn operand_calculation(decoded_instruction: u32) -> u32 {
 
 //Checa se o operando já foi adicionado a lista de todos os operandos, 
 fn operand_check(program: &Vec<Vec<String>>, operand_number: u32, program_counter: u32, all_operands: &mut Vec<Operand>) {
-	let rng: i32 = thread_rng().gen_range(0, 10);
-	let mut count = 0;
+	let mut rng: i32 = thread_rng().gen_range(0, 10);
+	let mut count: i32 = -1;
 	let mut flag = true;
 	//Verifica se o operando já está "cadastrado"
 	for i in all_operands.iter() {
@@ -114,7 +114,7 @@ fn operand_check(program: &Vec<Vec<String>>, operand_number: u32, program_counte
 		if i.name == aux {
 			flag = false;
 		}
-		count = i.position;
+		count = i.position as i32;
 	}
 	if flag {
 		//Tira a virgula
@@ -122,11 +122,15 @@ fn operand_check(program: &Vec<Vec<String>>, operand_number: u32, program_counte
 		if operand.chars().last().unwrap() == ",".chars().next().unwrap() {
 			operand.pop();
 		}
+		rng = match operand.parse::<i32>() {
+			Ok(value) => value,
+			Err(_)    => rng
+		};
 		all_operands.push( 
 				Operand {
 					name: operand,
 					value: rng,
-					position: count+1
+					position: (count+1) as u32
 			});
 	}
 }
@@ -136,22 +140,24 @@ fn operand_fetch(program: &Vec<Vec<String>>, operand_number: u32, program_counte
 	let mut count1 = 0;
 	let mut count2 = 0;
 	if operand_number > 0 {
-		for i in all_operands {
-			if i.name == program[program_counter as usize][operand_number as usize] {
+		for i in all_operands.iter() {
+			let mut aux = program[program_counter as usize][1].to_string();
+			if aux.chars().last().unwrap() == ",".chars().next().unwrap() {
+				aux.pop();
+			}
+			if i.name.to_string() == aux {
 				count1 = i.position;
-				break;
+			}
+			if operand_number == 2 {
+				if i.name.to_string() == program[program_counter as usize][2] {
+					count2 = i.position;
+				}
 			}
 		}
 		if operand_number == 1 {
-			return format!("{} {}",1,count1);
+			return format!("1 {}",count1);
 		} else if operand_number == 2 {
-			for i in all_operands {
-				if i.name == program[program_counter as usize][operand_number as usize] {
-					count2 = i.position;
-					break;
-				}
-			}
-			return format!("{} {} {}", 2, count1, count2);
+			return format!("2 {} {}", count1, count2);
 		}
 	}
 	return "0".to_string();
@@ -164,7 +170,6 @@ fn jump(program: &Vec<Vec<String>>, jump_label: String, flag: u32, program_count
 		for i in program {
 			let mut aux = i[0].to_string();
 			aux.pop();
-			index = index + 1;
 			//Quando a label para a qual se deve pular for igual a label do programa
 			if jump_label == aux {
 			//Retorna a diferença ( novo número da linha )
@@ -174,6 +179,7 @@ fn jump(program: &Vec<Vec<String>>, jump_label: String, flag: u32, program_count
 					result: "0 0".to_string(),
 				});
 			}
+			index = index + 1;
 		}
 		//return Err(index);
 	}
@@ -219,7 +225,7 @@ fn execute_instruction( program: &Vec<Vec<String>>, operands: String, op_code: u
 		3  => Ok(Jmp {
 					is_jump: false,
 					program_counter: program_counter as i32 + 1,
-					result: format!("{} 0",all_operands[operand1].value - all_operands[operand2].value)
+					result: format!("{} 0",all_operands[operand2].value - all_operands[operand1].value)
 				}),
 		//imull
 		4  => Ok(Jmp {
@@ -289,7 +295,7 @@ fn write_operand( result: String, all_operands: &mut Vec<Operand> ) {
 	let result_arg_num: u32 = result_aux[1].parse().unwrap();
 	if result_arg_num == 1 {
 		let position: usize = result_aux[3].parse().unwrap();
-		all_operands[position-1].value = result_aux[2].parse().unwrap();
+		all_operands[position].value = result_aux[2].parse().unwrap();
 	}
 }
 
@@ -415,8 +421,12 @@ fn main() {
 						jump_flag = false;
 					}
 					buffer[4].buffer = value.result;
+					let mut counter_aux = program_counter;
 					//atualiza o program counter
-					value.program_counter
+					if program_counter != -1 || jump_flag {
+						counter_aux = value.program_counter;
+					}
+					counter_aux
 				}
 				Err(_) => panic!("Falha na execucao do programa")
 			};
@@ -427,10 +437,10 @@ fn main() {
 				program_counter = program_counter + 1;
 			}
 		}
-		/*if buffer[5].program_counter != -1 {
+		if buffer[5].program_counter != -1 {
 			//Escreve os operandos (WO)
 			write_operand(buffer[5].buffer.to_string(), &mut all_operands);
-		}*/
+		}
 		if program_counter >= program_size as i32 {
 			program_counter = -1;
 		}
@@ -438,9 +448,9 @@ fn main() {
 		for i in &buffer {
 			print_pipe(i.program_counter);
 		}
-		for i in &all_operands {
+		/*for i in &all_operands {
 			print!("{}: {}\t",i.name,i.value);
-		}
+		}*/
 		println!();
 		//Atualiza os buffers
 		for index in 0..5 {
