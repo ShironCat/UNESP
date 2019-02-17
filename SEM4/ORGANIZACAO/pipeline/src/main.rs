@@ -42,7 +42,7 @@ struct Instruction {
 struct Jmp {
 	is_jump: bool,
 	program_counter: i32,
-	result: String//"flag se_tem_resultado  valor  posição_op"
+	result: String//"flag     se_tem_resultado    valor    posição_op"
 }
 
 //Fetch instruction --> pega a próxima instrução
@@ -273,10 +273,10 @@ fn execute_instruction( program: &Vec<Vec<String>>, operands: String, op_code: u
 //Write Operand --> grava o resultado
 fn write_operand( result: String, all_operands: &mut Vec<Operand> ) {
 	let result_aux = result.split_whitespace().collect::<Vec<&str>>();
-	let result_arg_num: u32 = result_aux[0].parse().unwrap();
+	let result_arg_num: u32 = result_aux[1].parse().unwrap();
 	if result_arg_num == 1 {
-		let position: usize = result_aux[2].parse().unwrap();
-		all_operands[position].value = result_aux[1].parse().unwrap();
+		let position: usize = result_aux[3].parse().unwrap();
+		all_operands[position].value = result_aux[2].parse().unwrap();
 	}
 }
 
