@@ -16,16 +16,15 @@ counter		equ	H'23'
 input		equ	H'24'
 convert_temp	equ	H'25'
 convert_result	equ	H'26'
-multi10_temp1	equ	H'27'
-multi10_temp2	equ	H'28'
 decoded_input	equ	H'29'
 output		equ	H'2A'
-BCDvalH		equ	H'2B'
-BCDvalM		equ	H'2C'
-BCDvalL		equ	H'2D'
-MCount		equ	H'2E'
-Num		equ	H'2F'
-Temp		equ	H'30'
+hundreds	equ	H'2B'
+bin		equ	H'2C'
+tens_and_ones	equ	H'2D'
+A0		equ	H'2E'
+B0		equ	H'2F'
+C0		equ	H'30'
+C1		equ	H'31'
 
 		org	H'000'
 		nop
@@ -98,80 +97,76 @@ table		addwf	PCL, 1
 		retlw	D'1'
 
 setup		bsf	status, RP0
-		movlw	B'11111111'
+		movlw	H'FF'
 		movwf	trisa
-		movlw	B'11110000'
+		movlw	H'F0'
 		movwf	trisb
 		bcf	status, RP0
 		return
 
-multi10		movlw	D'10'
-		movwf	multi10_temp1
-		movf	input, 0
-		movwf	multi10_temp2
-		movlw	B'0'
-booth_loop_m	rrf	multi10_temp1, 1
-		btfsc	status, C
-		addwf	multi10_temp2, 0
-		movf	multi10_temp1, 1
+multi		clrf	C0
+		clrf	C1
+		movf	A0, 0
+		movwf	C0
+loop_multi	decf	B0, 1
 		btfsc	status, Z
-		retfie
-		rlf	multi10_temp2, 1
-		goto	booth_loop_m
+		return
+		movf	A0, 0
+		addwf	C0, 1
+		btfsc	status, C
+		incf	C1, 1
+		goto	loop_multi
 
 convert_d	movf	counter, 0
 		movwf	convert_temp
-		incf	convert_temp, 1
-		movlw	B'0'
-		movwf	convert_result
-multi_loop	decfsz	convert_temp, 1
-		call	multi10
+		clrf	convert_result
+multi_loop	incf	convert_temp, 1
+		decfsz	convert_temp, 1
+		movf	input, 0
+		movwf	B0
+		movlw	D'10'
+		movwf	A0
+		call	multi
+		movf	C0, 0
+		movwf	input
 		addwf	convert_result,	1
-		movf	convert_temp, 1
+		decf	convert_temp, 1
 		btfsc	status, Z
-		retfie
+		return
 		goto	multi_loop
 
-HexBCD		movlw	d'8'
-		movwf	MCount
-		clrf	BCDvalH
-		clrf	BCDvalM
-		clrf	BCDvalL
-		bcf	STATUS, C
-
-loop8		rlf	Num, F
-		rlf	BCDvalL, F
-		rlf	BCDvalM, F
-		rlf	BCDvalH, F
-		decf	MCount, F
-		btfsc	STATUS, Z
-		return
-
-adjDEC		movlw	BCDvalL
-		movwf	FSR
-		call	adjBCD
-		movlw	BCDvalM
-		movwf	FSR
-		call	adjBCD
-		movlw	BCDvalH
-		movwf	FSR
-		call	adjBCD
-		goto	loop8
-
-adjBCD		movlw	d'3'
-		addwf	INDF,W
-		movwf	Temp
-		btfsc	Temp,3
-		movwf	INDF
-		movlw	30h
-		addwf	INDF,W
-		movwf	Temp
-		btfsc	Temp,7
-		movwf	INDF
+convert_e	clrf	hundreds
+		swapf	bin, 0
+		addwf	bin, 0
+		andlw	B'00001111'
+		btfsc	status, DC
+		addlw	H'16'
+		btfsc	status, DC
+		addlw	H'06'
+		addlw	H'06'
+		btfss	status, DC
+		sublw	H'06'
+		btfsc	bin, 4
+		addlw	H'21'
+		btfss	status, DC
+		sublw	H'06'
+		btfsc	bin, 5
+		addlw	H'30'
+		btfsc	bin, 6
+		addlw	H'60'
+		btfsc	bin, 7
+		addlw	H'20'
+		addlw	H'60'
+		rlf	hundreds, 1
+		btfss	hundreds, 0
+		sublw	H'60'
+		movwf	tens_and_ones
+		btfsc	bin, 7
+		incf	hundreds, 1
 		return
 
 main		call	setup
-		movlw	D'2'
+		movlw	D'3'
 		movwf	counter
 		movlw	H'00'
 		movwf	decoded_input
@@ -182,24 +177,28 @@ read_loop	movf	porta, 0
 		movf	convert_result, 0
 		addwf	decoded_input, 1
 		movf	counter, 1
-		btfsc	status, Z
+		btfss	status, Z
 		goto	read_loop
-		movlw	D'0'
+		movlw	H'FF'
 		movwf	counter
-compare		incf	counter, 1
+compare		incf	counter, 0
+		movwf	counter
 		call	table
 		movwf	output
 		movf	decoded_input, 0
+		bcf	status, C
 		subwf	output, 0
 		btfsc	status, C
 		goto	compare
 		movf	output, 0
-		movwf	Num
-		call	HexBCD
-		movf	BCDvalH, 0
+		movwf	bin
+		call	convert_e
+		movf	hundreds, 0
 		movwf	portb
-		movf	BCDvalM, 0
+		movlw	H'F0'
+		andwf	tens_and_ones, 0
 		movwf	portb
-		movf	BCDvalL, 0
+		movlw	H'0F'
+		andwf	tens_and_ones, 0
 		movwf	portb
 		end
