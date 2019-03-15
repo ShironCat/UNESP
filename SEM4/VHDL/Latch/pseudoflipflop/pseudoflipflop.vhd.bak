@@ -1,0 +1,25 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+ENTITY pseudoflipflop IS
+PORT(
+	iSW : IN STD_LOGIC_VECTOR(2 downto 0);
+	oLEDR : OUT STD_LOGIC_VECTOR(1 downto 0)
+);
+END pseudoflipflop;
+
+ARCHITECTURE pseudoflipflopbehaviour OF pseudoflipflop IS
+COMPONENT latchsr IS
+	PORT(
+	iSW : IN STD_LOGIC_VECTOR(1 downto 0);
+	oLEDR : OUT STD_LOGIC_VECTOR(1 downto 0)
+);
+END COMPONENT;
+SIGNAL E : STD_LOGIC_VECTOR(1 DOWNTO 0);
+BEGIN
+	E(0) <= iSW(2);
+	E(1) <= iSW(2);
+	LED1 : latchsr port map(iSW(1 DOWNTO 0) AND NOT E, oLEDR(1 downto 0));
+END pseudoflipflopbehaviour;
+
+	

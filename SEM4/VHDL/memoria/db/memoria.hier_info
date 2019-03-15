@@ -1,0 +1,606 @@
+|memoria
+iSW[0] => e1.DATAB
+iSW[0] => e2.DATAB
+iSW[0] => e3.DATAB
+iSW[0] => e4.DATAB
+iSW[1] => e1.DATAB
+iSW[1] => e2.DATAB
+iSW[1] => e3.DATAB
+iSW[1] => e4.DATAB
+iSW[2] => e1.DATAB
+iSW[2] => e2.DATAB
+iSW[2] => e3.DATAB
+iSW[2] => e4.DATAB
+iSW[3] => e1.DATAB
+iSW[3] => e2.DATAB
+iSW[3] => e3.DATAB
+iSW[3] => e4.DATAB
+iSW[4] => e1.DATAB
+iSW[4] => e2.DATAB
+iSW[4] => e3.DATAB
+iSW[4] => e4.DATAB
+iSW[5] => e1.DATAB
+iSW[5] => e2.DATAB
+iSW[5] => e3.DATAB
+iSW[5] => e4.DATAB
+iSW[6] => e1.DATAB
+iSW[6] => e2.DATAB
+iSW[6] => e3.DATAB
+iSW[6] => e4.DATAB
+iSW[7] => e1.DATAB
+iSW[7] => e2.DATAB
+iSW[7] => e3.DATAB
+iSW[7] => e4.DATAB
+iSW[8] => process_0.IN0
+iSW[8] => process_0.IN0
+iSW[8] => process_0.IN0
+iSW[8] => process_0.IN0
+iSW[9] => process_0.IN1
+iSW[9] => process_0.IN1
+iSW[9] => process_0.IN1
+iSW[9] => process_0.IN1
+iSW[10] => e[2].ENA
+iSW[10] => e[1].ENA
+iSW[10] => e[0].ENA
+iSW[10] => e[3].ENA
+iSW[10] => e[4].ENA
+iSW[10] => e[5].ENA
+iSW[10] => e[6].ENA
+iSW[10] => e[7].ENA
+iSW[10] => e4[0].ENA
+iSW[10] => e4[1].ENA
+iSW[10] => e4[2].ENA
+iSW[10] => e4[3].ENA
+iSW[10] => e4[4].ENA
+iSW[10] => e4[5].ENA
+iSW[10] => e4[6].ENA
+iSW[10] => e4[7].ENA
+iSW[10] => e3[0].ENA
+iSW[10] => e3[1].ENA
+iSW[10] => e3[2].ENA
+iSW[10] => e3[3].ENA
+iSW[10] => e3[4].ENA
+iSW[10] => e3[5].ENA
+iSW[10] => e3[6].ENA
+iSW[10] => e3[7].ENA
+iSW[10] => e2[0].ENA
+iSW[10] => e2[1].ENA
+iSW[10] => e2[2].ENA
+iSW[10] => e2[3].ENA
+iSW[10] => e2[4].ENA
+iSW[10] => e2[5].ENA
+iSW[10] => e2[6].ENA
+iSW[10] => e2[7].ENA
+iSW[10] => e1[0].ENA
+iSW[10] => e1[1].ENA
+iSW[10] => e1[2].ENA
+iSW[10] => e1[3].ENA
+iSW[10] => e1[4].ENA
+iSW[10] => e1[5].ENA
+iSW[10] => e1[6].ENA
+iSW[10] => e1[7].ENA
+iKEY[0] => registrador:registrador1.iKEY[0]
+iKEY[0] => e[0].CLK
+iKEY[0] => e[1].CLK
+iKEY[0] => e[2].CLK
+iKEY[0] => e[3].CLK
+iKEY[0] => e[4].CLK
+iKEY[0] => e[5].CLK
+iKEY[0] => e[6].CLK
+iKEY[0] => e[7].CLK
+iKEY[0] => e4[0].CLK
+iKEY[0] => e4[1].CLK
+iKEY[0] => e4[2].CLK
+iKEY[0] => e4[3].CLK
+iKEY[0] => e4[4].CLK
+iKEY[0] => e4[5].CLK
+iKEY[0] => e4[6].CLK
+iKEY[0] => e4[7].CLK
+iKEY[0] => e3[0].CLK
+iKEY[0] => e3[1].CLK
+iKEY[0] => e3[2].CLK
+iKEY[0] => e3[3].CLK
+iKEY[0] => e3[4].CLK
+iKEY[0] => e3[5].CLK
+iKEY[0] => e3[6].CLK
+iKEY[0] => e3[7].CLK
+iKEY[0] => e2[0].CLK
+iKEY[0] => e2[1].CLK
+iKEY[0] => e2[2].CLK
+iKEY[0] => e2[3].CLK
+iKEY[0] => e2[4].CLK
+iKEY[0] => e2[5].CLK
+iKEY[0] => e2[6].CLK
+iKEY[0] => e2[7].CLK
+iKEY[0] => e1[0].CLK
+iKEY[0] => e1[1].CLK
+iKEY[0] => e1[2].CLK
+iKEY[0] => e1[3].CLK
+iKEY[0] => e1[4].CLK
+iKEY[0] => e1[5].CLK
+iKEY[0] => e1[6].CLK
+iKEY[0] => e1[7].CLK
+iKEY[0] => registrador:registrador2.iKEY[0]
+iKEY[0] => registrador:registrador3.iKEY[0]
+iKEY[0] => registrador:registrador4.iKEY[0]
+oHEX0_D[0] <= BinToHex8:display.oHEX0_D[0]
+oHEX0_D[1] <= BinToHex8:display.oHEX0_D[1]
+oHEX0_D[2] <= BinToHex8:display.oHEX0_D[2]
+oHEX0_D[3] <= BinToHex8:display.oHEX0_D[3]
+oHEX0_D[4] <= BinToHex8:display.oHEX0_D[4]
+oHEX0_D[5] <= BinToHex8:display.oHEX0_D[5]
+oHEX0_D[6] <= BinToHex8:display.oHEX0_D[6]
+oHEX0_DP <= BinToHex8:display.oHEX0_DP
+oHEX1_D[0] <= BinToHex8:display.oHEX1_D[0]
+oHEX1_D[1] <= BinToHex8:display.oHEX1_D[1]
+oHEX1_D[2] <= BinToHex8:display.oHEX1_D[2]
+oHEX1_D[3] <= BinToHex8:display.oHEX1_D[3]
+oHEX1_D[4] <= BinToHex8:display.oHEX1_D[4]
+oHEX1_D[5] <= BinToHex8:display.oHEX1_D[5]
+oHEX1_D[6] <= BinToHex8:display.oHEX1_D[6]
+oHEX1_DP <= BinToHex8:display.oHEX1_DP
+
+
+|memoria|registrador:registrador1
+iSW[0] => flipflopT:bit0.iSW[0]
+iSW[1] => flipflopT:bit1.iSW[0]
+iSW[2] => flipflopT:bit2.iSW[0]
+iSW[3] => flipflopT:bit3.iSW[0]
+iSW[4] => flipflopT:bit4.iSW[0]
+iSW[5] => flipflopT:bit5.iSW[0]
+iSW[6] => flipflopT:bit6.iSW[0]
+iSW[7] => flipflopT:bit7.iSW[0]
+iKEY[0] => flipflopT:bit0.iKEY[0]
+iKEY[0] => flipflopT:bit1.iKEY[0]
+iKEY[0] => flipflopT:bit2.iKEY[0]
+iKEY[0] => flipflopT:bit3.iKEY[0]
+iKEY[0] => flipflopT:bit4.iKEY[0]
+iKEY[0] => flipflopT:bit5.iKEY[0]
+iKEY[0] => flipflopT:bit6.iKEY[0]
+iKEY[0] => flipflopT:bit7.iKEY[0]
+oSW[0] <= flipflopT:bit0.oLEDR[0]
+oSW[1] <= flipflopT:bit1.oLEDR[0]
+oSW[2] <= flipflopT:bit2.oLEDR[0]
+oSW[3] <= flipflopT:bit3.oLEDR[0]
+oSW[4] <= flipflopT:bit4.oLEDR[0]
+oSW[5] <= flipflopT:bit5.oLEDR[0]
+oSW[6] <= flipflopT:bit6.oLEDR[0]
+oSW[7] <= flipflopT:bit7.oLEDR[0]
+
+
+|memoria|registrador:registrador1|flipflopT:bit0
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador1|flipflopT:bit1
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador1|flipflopT:bit2
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador1|flipflopT:bit3
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador1|flipflopT:bit4
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador1|flipflopT:bit5
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador1|flipflopT:bit6
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador1|flipflopT:bit7
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador2
+iSW[0] => flipflopT:bit0.iSW[0]
+iSW[1] => flipflopT:bit1.iSW[0]
+iSW[2] => flipflopT:bit2.iSW[0]
+iSW[3] => flipflopT:bit3.iSW[0]
+iSW[4] => flipflopT:bit4.iSW[0]
+iSW[5] => flipflopT:bit5.iSW[0]
+iSW[6] => flipflopT:bit6.iSW[0]
+iSW[7] => flipflopT:bit7.iSW[0]
+iKEY[0] => flipflopT:bit0.iKEY[0]
+iKEY[0] => flipflopT:bit1.iKEY[0]
+iKEY[0] => flipflopT:bit2.iKEY[0]
+iKEY[0] => flipflopT:bit3.iKEY[0]
+iKEY[0] => flipflopT:bit4.iKEY[0]
+iKEY[0] => flipflopT:bit5.iKEY[0]
+iKEY[0] => flipflopT:bit6.iKEY[0]
+iKEY[0] => flipflopT:bit7.iKEY[0]
+oSW[0] <= flipflopT:bit0.oLEDR[0]
+oSW[1] <= flipflopT:bit1.oLEDR[0]
+oSW[2] <= flipflopT:bit2.oLEDR[0]
+oSW[3] <= flipflopT:bit3.oLEDR[0]
+oSW[4] <= flipflopT:bit4.oLEDR[0]
+oSW[5] <= flipflopT:bit5.oLEDR[0]
+oSW[6] <= flipflopT:bit6.oLEDR[0]
+oSW[7] <= flipflopT:bit7.oLEDR[0]
+
+
+|memoria|registrador:registrador2|flipflopT:bit0
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador2|flipflopT:bit1
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador2|flipflopT:bit2
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador2|flipflopT:bit3
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador2|flipflopT:bit4
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador2|flipflopT:bit5
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador2|flipflopT:bit6
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador2|flipflopT:bit7
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador3
+iSW[0] => flipflopT:bit0.iSW[0]
+iSW[1] => flipflopT:bit1.iSW[0]
+iSW[2] => flipflopT:bit2.iSW[0]
+iSW[3] => flipflopT:bit3.iSW[0]
+iSW[4] => flipflopT:bit4.iSW[0]
+iSW[5] => flipflopT:bit5.iSW[0]
+iSW[6] => flipflopT:bit6.iSW[0]
+iSW[7] => flipflopT:bit7.iSW[0]
+iKEY[0] => flipflopT:bit0.iKEY[0]
+iKEY[0] => flipflopT:bit1.iKEY[0]
+iKEY[0] => flipflopT:bit2.iKEY[0]
+iKEY[0] => flipflopT:bit3.iKEY[0]
+iKEY[0] => flipflopT:bit4.iKEY[0]
+iKEY[0] => flipflopT:bit5.iKEY[0]
+iKEY[0] => flipflopT:bit6.iKEY[0]
+iKEY[0] => flipflopT:bit7.iKEY[0]
+oSW[0] <= flipflopT:bit0.oLEDR[0]
+oSW[1] <= flipflopT:bit1.oLEDR[0]
+oSW[2] <= flipflopT:bit2.oLEDR[0]
+oSW[3] <= flipflopT:bit3.oLEDR[0]
+oSW[4] <= flipflopT:bit4.oLEDR[0]
+oSW[5] <= flipflopT:bit5.oLEDR[0]
+oSW[6] <= flipflopT:bit6.oLEDR[0]
+oSW[7] <= flipflopT:bit7.oLEDR[0]
+
+
+|memoria|registrador:registrador3|flipflopT:bit0
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador3|flipflopT:bit1
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador3|flipflopT:bit2
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador3|flipflopT:bit3
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador3|flipflopT:bit4
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador3|flipflopT:bit5
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador3|flipflopT:bit6
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador3|flipflopT:bit7
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador4
+iSW[0] => flipflopT:bit0.iSW[0]
+iSW[1] => flipflopT:bit1.iSW[0]
+iSW[2] => flipflopT:bit2.iSW[0]
+iSW[3] => flipflopT:bit3.iSW[0]
+iSW[4] => flipflopT:bit4.iSW[0]
+iSW[5] => flipflopT:bit5.iSW[0]
+iSW[6] => flipflopT:bit6.iSW[0]
+iSW[7] => flipflopT:bit7.iSW[0]
+iKEY[0] => flipflopT:bit0.iKEY[0]
+iKEY[0] => flipflopT:bit1.iKEY[0]
+iKEY[0] => flipflopT:bit2.iKEY[0]
+iKEY[0] => flipflopT:bit3.iKEY[0]
+iKEY[0] => flipflopT:bit4.iKEY[0]
+iKEY[0] => flipflopT:bit5.iKEY[0]
+iKEY[0] => flipflopT:bit6.iKEY[0]
+iKEY[0] => flipflopT:bit7.iKEY[0]
+oSW[0] <= flipflopT:bit0.oLEDR[0]
+oSW[1] <= flipflopT:bit1.oLEDR[0]
+oSW[2] <= flipflopT:bit2.oLEDR[0]
+oSW[3] <= flipflopT:bit3.oLEDR[0]
+oSW[4] <= flipflopT:bit4.oLEDR[0]
+oSW[5] <= flipflopT:bit5.oLEDR[0]
+oSW[6] <= flipflopT:bit6.oLEDR[0]
+oSW[7] <= flipflopT:bit7.oLEDR[0]
+
+
+|memoria|registrador:registrador4|flipflopT:bit0
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador4|flipflopT:bit1
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador4|flipflopT:bit2
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador4|flipflopT:bit3
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador4|flipflopT:bit4
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador4|flipflopT:bit5
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador4|flipflopT:bit6
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|registrador:registrador4|flipflopT:bit7
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria|BinToHex8:display
+iSW[0] => BinToHex4:display1.iSW[0]
+iSW[1] => BinToHex4:display1.iSW[1]
+iSW[2] => BinToHex4:display1.iSW[2]
+iSW[3] => BinToHex4:display1.iSW[3]
+iSW[4] => BinToHex4:display2.iSW[0]
+iSW[5] => BinToHex4:display2.iSW[1]
+iSW[6] => BinToHex4:display2.iSW[2]
+iSW[7] => BinToHex4:display2.iSW[3]
+oHEX0_D[0] <= BinToHex4:display1.oHEX0_D[0]
+oHEX0_D[1] <= BinToHex4:display1.oHEX0_D[1]
+oHEX0_D[2] <= BinToHex4:display1.oHEX0_D[2]
+oHEX0_D[3] <= BinToHex4:display1.oHEX0_D[3]
+oHEX0_D[4] <= BinToHex4:display1.oHEX0_D[4]
+oHEX0_D[5] <= BinToHex4:display1.oHEX0_D[5]
+oHEX0_D[6] <= BinToHex4:display1.oHEX0_D[6]
+oHEX1_D[0] <= BinToHex4:display2.oHEX0_D[0]
+oHEX1_D[1] <= BinToHex4:display2.oHEX0_D[1]
+oHEX1_D[2] <= BinToHex4:display2.oHEX0_D[2]
+oHEX1_D[3] <= BinToHex4:display2.oHEX0_D[3]
+oHEX1_D[4] <= BinToHex4:display2.oHEX0_D[4]
+oHEX1_D[5] <= BinToHex4:display2.oHEX0_D[5]
+oHEX1_D[6] <= BinToHex4:display2.oHEX0_D[6]
+oHEX0_DP <= BinToHex4:display1.oHEX0_DP
+oHEX1_DP <= BinToHex4:display2.oHEX0_DP
+
+
+|memoria|BinToHex8:display|BinToHex4:display1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN0
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN0
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+oHEX0_D[0] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[1] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[2] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[3] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[4] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[5] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[6] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_DP <= <VCC>
+
+
+|memoria|BinToHex8:display|BinToHex4:display2
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN0
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN0
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+oHEX0_D[0] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[1] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[2] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[3] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[4] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[5] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[6] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_DP <= <VCC>
+
+

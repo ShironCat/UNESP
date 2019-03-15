@@ -1,0 +1,7 @@
+|latchsr
+iSW[0] => SS.IN1
+iSW[1] => SR.IN0
+oLEDR[0] <= oLEDR[0].DB_MAX_OUTPUT_PORT_TYPE
+oLEDR[1] <= SR.DB_MAX_OUTPUT_PORT_TYPE
+
+

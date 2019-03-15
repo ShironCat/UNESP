@@ -1,0 +1,66 @@
+--------------------------------------------------------------------------------------
+Timing Analyzer Summary
+--------------------------------------------------------------------------------------
+
+Type           : Worst-case tsu
+Slack          : N/A
+Required Time  : None
+Actual Time    : 3.154 ns
+From           : iSW[1]
+To             : RAM1Port:RAM|altsyncram:altsyncram_component|altsyncram_alc1:auto_generated|ram_block1a0~porta_address_reg1
+From Clock     : --
+To Clock       : iKEY[0]
+Failed Paths   : 0
+
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 16.313 ns
+From           : RAM1Port:RAM|altsyncram:altsyncram_component|altsyncram_alc1:auto_generated|ram_block1a0~porta_address_reg3
+To             : oHEX2_D[3]
+From Clock     : iKEY[0]
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case tpd
+Slack          : N/A
+Required Time  : None
+Actual Time    : 12.602 ns
+From           : iSW[0]
+To             : oHEX0_D[0]
+From Clock     : --
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case th
+Slack          : N/A
+Required Time  : None
+Actual Time    : -2.189 ns
+From           : iSW[4]
+To             : RAM1Port:RAM|altsyncram:altsyncram_component|altsyncram_alc1:auto_generated|ram_block1a0~porta_datain_reg0
+From Clock     : --
+To Clock       : iKEY[0]
+Failed Paths   : 0
+
+Type           : Clock Setup: 'iKEY[0]'
+Slack          : N/A
+Required Time  : None
+Actual Time    : Restricted to 200.00 MHz ( period = 5.000 ns )
+From           : RAM1Port:RAM|altsyncram:altsyncram_component|altsyncram_alc1:auto_generated|ram_block1a0~porta_datain_reg3
+To             : RAM1Port:RAM|altsyncram:altsyncram_component|altsyncram_alc1:auto_generated|ram_block1a3~porta_memory_reg0
+From Clock     : iKEY[0]
+To Clock       : iKEY[0]
+Failed Paths   : 0
+
+Type           : Total number of failed paths
+Slack          : 
+Required Time  : 
+Actual Time    : 
+From           : 
+To             : 
+From Clock     : 
+To Clock       : 
+Failed Paths   : 0
+
+--------------------------------------------------------------------------------------
+

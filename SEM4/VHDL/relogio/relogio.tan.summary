@@ -1,0 +1,46 @@
+--------------------------------------------------------------------------------------
+Timing Analyzer Summary
+--------------------------------------------------------------------------------------
+
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 16.203 ns
+From           : controlador:relogio|contador:cont3|flipflopT:cont3|QB
+To             : oHEX2_D[4]
+From Clock     : iCLK_28
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Clock Setup: 'iCLK_28'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 133.05 MHz ( period = 7.516 ns )
+From           : controlador:relogio|segundoD[21]
+To             : controlador:relogio|resto[4]
+From Clock     : iCLK_28
+To Clock       : iCLK_28
+Failed Paths   : 0
+
+Type           : Clock Hold: 'iCLK_28'
+Slack          : Not operational: Clock Skew > Data Delay
+Required Time  : None
+Actual Time    : N/A
+From           : controlador:relogio|resto[4]
+To             : controlador:relogio|contador:cont6|flipflopT:cont1|QB
+From Clock     : iCLK_28
+To Clock       : iCLK_28
+Failed Paths   : 25
+
+Type           : Total number of failed paths
+Slack          : 
+Required Time  : 
+Actual Time    : 
+From           : 
+To             : 
+From Clock     : 
+To Clock       : 
+Failed Paths   : 25
+
+--------------------------------------------------------------------------------------
+

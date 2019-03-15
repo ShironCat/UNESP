@@ -1,0 +1,222 @@
+|registrador
+iSW[0] => flipflopT:bit0.iSW[0]
+iSW[1] => flipflopT:bit1.iSW[0]
+iSW[2] => flipflopT:bit2.iSW[0]
+iSW[3] => flipflopT:bit3.iSW[0]
+iSW[4] => flipflopT:bit4.iSW[0]
+iSW[5] => flipflopT:bit5.iSW[0]
+iSW[6] => flipflopT:bit6.iSW[0]
+iSW[7] => flipflopT:bit7.iSW[0]
+iKEY[0] => flipflopT:bit0.iKEY[0]
+iKEY[0] => flipflopT:bit1.iKEY[0]
+iKEY[0] => flipflopT:bit2.iKEY[0]
+iKEY[0] => flipflopT:bit3.iKEY[0]
+iKEY[0] => flipflopT:bit4.iKEY[0]
+iKEY[0] => flipflopT:bit5.iKEY[0]
+iKEY[0] => flipflopT:bit6.iKEY[0]
+iKEY[0] => flipflopT:bit7.iKEY[0]
+oHEX0_D[0] <= BinToHex8:display.oHEX0_D[0]
+oHEX0_D[1] <= BinToHex8:display.oHEX0_D[1]
+oHEX0_D[2] <= BinToHex8:display.oHEX0_D[2]
+oHEX0_D[3] <= BinToHex8:display.oHEX0_D[3]
+oHEX0_D[4] <= BinToHex8:display.oHEX0_D[4]
+oHEX0_D[5] <= BinToHex8:display.oHEX0_D[5]
+oHEX0_D[6] <= BinToHex8:display.oHEX0_D[6]
+oHEX0_DP <= BinToHex8:display.oHEX0_DP
+oHEX1_D[0] <= BinToHex8:display.oHEX1_D[0]
+oHEX1_D[1] <= BinToHex8:display.oHEX1_D[1]
+oHEX1_D[2] <= BinToHex8:display.oHEX1_D[2]
+oHEX1_D[3] <= BinToHex8:display.oHEX1_D[3]
+oHEX1_D[4] <= BinToHex8:display.oHEX1_D[4]
+oHEX1_D[5] <= BinToHex8:display.oHEX1_D[5]
+oHEX1_D[6] <= BinToHex8:display.oHEX1_D[6]
+oHEX1_DP <= BinToHex8:display.oHEX1_DP
+
+
+|registrador|flipflopT:bit0
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|registrador|flipflopT:bit1
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|registrador|flipflopT:bit2
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|registrador|flipflopT:bit3
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|registrador|flipflopT:bit4
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|registrador|flipflopT:bit5
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|registrador|flipflopT:bit6
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|registrador|flipflopT:bit7
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|registrador|BinToHex8:display
+iSW[0] => BinToHex4:display1.iSW[0]
+iSW[1] => BinToHex4:display1.iSW[1]
+iSW[2] => BinToHex4:display1.iSW[2]
+iSW[3] => BinToHex4:display1.iSW[3]
+iSW[4] => BinToHex4:display2.iSW[0]
+iSW[5] => BinToHex4:display2.iSW[1]
+iSW[6] => BinToHex4:display2.iSW[2]
+iSW[7] => BinToHex4:display2.iSW[3]
+oHEX0_D[0] <= BinToHex4:display1.oHEX0_D[0]
+oHEX0_D[1] <= BinToHex4:display1.oHEX0_D[1]
+oHEX0_D[2] <= BinToHex4:display1.oHEX0_D[2]
+oHEX0_D[3] <= BinToHex4:display1.oHEX0_D[3]
+oHEX0_D[4] <= BinToHex4:display1.oHEX0_D[4]
+oHEX0_D[5] <= BinToHex4:display1.oHEX0_D[5]
+oHEX0_D[6] <= BinToHex4:display1.oHEX0_D[6]
+oHEX1_D[0] <= BinToHex4:display2.oHEX0_D[0]
+oHEX1_D[1] <= BinToHex4:display2.oHEX0_D[1]
+oHEX1_D[2] <= BinToHex4:display2.oHEX0_D[2]
+oHEX1_D[3] <= BinToHex4:display2.oHEX0_D[3]
+oHEX1_D[4] <= BinToHex4:display2.oHEX0_D[4]
+oHEX1_D[5] <= BinToHex4:display2.oHEX0_D[5]
+oHEX1_D[6] <= BinToHex4:display2.oHEX0_D[6]
+oHEX0_DP <= BinToHex4:display1.oHEX0_DP
+oHEX1_DP <= BinToHex4:display2.oHEX0_DP
+
+
+|registrador|BinToHex8:display|BinToHex4:display1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN0
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN0
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+oHEX0_D[0] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[1] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[2] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[3] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[4] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[5] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[6] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_DP <= <VCC>
+
+
+|registrador|BinToHex8:display|BinToHex4:display2
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN0
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN0
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+oHEX0_D[0] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[1] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[2] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[3] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[4] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[5] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[6] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_DP <= <VCC>
+
+

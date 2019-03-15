@@ -1,0 +1,319 @@
+Quartus II
+Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+11
+1040
+OFF
+OFF
+OFF
+ON
+ON
+ON
+FV_OFF
+Level2
+0
+0
+VRSM_ON
+VHSM_ON
+0
+-- Start Library Paths --
+-- End Library Paths --
+-- Start VHDL Libraries --
+-- End VHDL Libraries --
+# entity
+flipflopD
+# storage
+db|memoria.(2).cnf
+db|memoria.(2).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+|altera|luizagianshiro|flip-flop|flipflopd|flipflopd.vhd
+356c2209d6ce534c167187123aecd
+5
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# user_parameter {
+ constraint(isw)
+0 downto 0
+PARAMETER_STRING
+USR
+ constraint(ikey)
+0 downto 0
+PARAMETER_STRING
+USR
+ constraint(oledr)
+0 downto 0
+PARAMETER_STRING
+USR
+}
+# lmf
+|altera|91sp2|quartus|lmf|maxplus2.lmf
+a36c8ec425c8a2589af98b2d4daabc3
+# macro_sequence
+
+# end
+# entity
+BinToHex8
+# storage
+db|memoria.(3).cnf
+db|memoria.(3).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+|altera|luizagianshiro|bintohex8|bintohex8.vhd
+2a8675fa468dcdb545c9b063828615d8
+5
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# user_parameter {
+ constraint(isw)
+7 downto 0
+PARAMETER_STRING
+USR
+ constraint(ohex0_d)
+6 downto 0
+PARAMETER_STRING
+USR
+ constraint(ohex1_d)
+6 downto 0
+PARAMETER_STRING
+USR
+}
+# hierarchies {
+BinToHex8:display
+}
+# lmf
+|altera|91sp2|quartus|lmf|maxplus2.lmf
+a36c8ec425c8a2589af98b2d4daabc3
+# macro_sequence
+
+# end
+# entity
+BinToHex4
+# storage
+db|memoria.(4).cnf
+db|memoria.(4).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+|altera|luizagianshiro|bintohex8|bintohex4.vhd
+6e5b99d16780fd5834122a9e31d283
+5
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# user_parameter {
+ constraint(isw)
+3 downto 0
+PARAMETER_STRING
+USR
+ constraint(ohex0_d)
+6 downto 0
+PARAMETER_STRING
+USR
+}
+# hierarchies {
+BinToHex8:display|BinToHex4:display1
+BinToHex8:display|BinToHex4:display2
+}
+# lmf
+|altera|91sp2|quartus|lmf|maxplus2.lmf
+a36c8ec425c8a2589af98b2d4daabc3
+# macro_sequence
+
+# end
+# entity
+flipflopT
+# storage
+db|memoria.(5).cnf
+db|memoria.(5).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+|altera|luizagianshiro|registrador|flipflopt.vhd
+d885bff7a945b6184aaa39ab5c9a80
+5
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# user_parameter {
+ constraint(isw)
+0 downto 0
+PARAMETER_STRING
+USR
+ constraint(ikey)
+0 downto 0
+PARAMETER_STRING
+USR
+ constraint(oledr)
+0 downto 0
+PARAMETER_STRING
+USR
+}
+# hierarchies {
+registrador:registrador1|flipflopT:bit0
+registrador:registrador1|flipflopT:bit1
+registrador:registrador1|flipflopT:bit2
+registrador:registrador1|flipflopT:bit3
+registrador:registrador1|flipflopT:bit4
+registrador:registrador1|flipflopT:bit5
+registrador:registrador1|flipflopT:bit6
+registrador:registrador1|flipflopT:bit7
+registrador:registrador2|flipflopT:bit0
+registrador:registrador2|flipflopT:bit1
+registrador:registrador2|flipflopT:bit2
+registrador:registrador2|flipflopT:bit3
+registrador:registrador2|flipflopT:bit4
+registrador:registrador2|flipflopT:bit5
+registrador:registrador2|flipflopT:bit6
+registrador:registrador2|flipflopT:bit7
+registrador:registrador3|flipflopT:bit0
+registrador:registrador3|flipflopT:bit1
+registrador:registrador3|flipflopT:bit2
+registrador:registrador3|flipflopT:bit3
+registrador:registrador3|flipflopT:bit4
+registrador:registrador3|flipflopT:bit5
+registrador:registrador3|flipflopT:bit6
+registrador:registrador3|flipflopT:bit7
+registrador:registrador4|flipflopT:bit0
+registrador:registrador4|flipflopT:bit1
+registrador:registrador4|flipflopT:bit2
+registrador:registrador4|flipflopT:bit3
+registrador:registrador4|flipflopT:bit4
+registrador:registrador4|flipflopT:bit5
+registrador:registrador4|flipflopT:bit6
+registrador:registrador4|flipflopT:bit7
+}
+# lmf
+|altera|91sp2|quartus|lmf|maxplus2.lmf
+a36c8ec425c8a2589af98b2d4daabc3
+# macro_sequence
+
+# end
+# entity
+memoria
+# storage
+db|memoria.(0).cnf
+db|memoria.(0).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+memoria.vhd
+eb49913013685a166973c6522cdfd15
+5
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# hierarchies {
+|
+}
+# lmf
+|altera|91sp2|quartus|lmf|maxplus2.lmf
+a36c8ec425c8a2589af98b2d4daabc3
+# macro_sequence
+
+# end
+# entity
+registrador
+# storage
+db|memoria.(1).cnf
+db|memoria.(1).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+|altera|luizagianshiro|registrador|registrador.vhd
+cb9b76dd568e9952bc3aa9f2eb12f3a6
+5
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# user_parameter {
+ constraint(isw)
+7 downto 0
+PARAMETER_STRING
+USR
+ constraint(ikey)
+0 downto 0
+PARAMETER_STRING
+USR
+ constraint(osw)
+7 downto 0
+PARAMETER_STRING
+USR
+}
+# hierarchies {
+registrador:registrador1
+registrador:registrador2
+registrador:registrador3
+registrador:registrador4
+}
+# lmf
+|altera|91sp2|quartus|lmf|maxplus2.lmf
+a36c8ec425c8a2589af98b2d4daabc3
+# macro_sequence
+
+# end
+# complete
+

@@ -1,0 +1,22 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+ENTITY latchsr IS
+PORT(
+	iSW : IN STD_LOGIC_VECTOR(1 downto 0);
+	oLEDR : OUT STD_LOGIC_VECTOR(1 downto 0)
+);
+END latchsr;
+
+ARCHITECTURE latchsrbehaviour OF latchsr IS
+SIGNAL SS: STD_LOGIC;
+SIGNAL SR: STD_LOGIC;
+BEGIN
+	
+	SS <= iSW(0) NAND SR;
+	SR <= iSW(1) NAND SS;
+	
+	oLEDR(0) <= SS;
+	oLEDR(1) <= SR;
+
+END latchsrbehaviour;

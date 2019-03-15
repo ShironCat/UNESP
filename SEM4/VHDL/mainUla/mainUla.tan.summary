@@ -1,0 +1,56 @@
+--------------------------------------------------------------------------------------
+Timing Analyzer Summary
+--------------------------------------------------------------------------------------
+
+Type           : Worst-case tsu
+Slack          : N/A
+Required Time  : None
+Actual Time    : 5.925 ns
+From           : iSW[5]
+To             : registrador:reg3|flipflop:bit2|Q
+From Clock     : --
+To Clock       : iKEY[0]
+Failed Paths   : 0
+
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 12.334 ns
+From           : registrador:reg1|flipflop:bit2|Q
+To             : oHEX0_D[0]
+From Clock     : iKEY[0]
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case th
+Slack          : N/A
+Required Time  : None
+Actual Time    : -1.394 ns
+From           : iSW[0]
+To             : entrada1[0]
+From Clock     : --
+To Clock       : iSW[4]
+Failed Paths   : 0
+
+Type           : Clock Setup: 'iKEY[0]'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 261.92 MHz ( period = 3.818 ns )
+From           : registrador:reg2|flipflop:bit2|Q
+To             : registrador:reg3|flipflop:bit3|Q
+From Clock     : iKEY[0]
+To Clock       : iKEY[0]
+Failed Paths   : 0
+
+Type           : Total number of failed paths
+Slack          : 
+Required Time  : 
+Actual Time    : 
+From           : 
+To             : 
+From Clock     : 
+To Clock       : 
+Failed Paths   : 0
+
+--------------------------------------------------------------------------------------
+

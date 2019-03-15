@@ -1,0 +1,614 @@
+Classic Timing Analyzer report for relogio
+Thu Dec 06 11:52:59 2018
+Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Timing Analyzer Summary
+  3. Timing Analyzer Settings
+  4. Clock Settings Summary
+  5. Parallel Compilation
+  6. Clock Setup: 'iCLK_28'
+  7. Clock Hold: 'iCLK_28'
+  8. tco
+  9. Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2010 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Summary                                                                                                                                                                                                                                                           ;
++------------------------------+------------------------------------------+---------------+----------------------------------+-------------------------------------------------------+-------------------------------------------------------+------------+----------+--------------+
+; Type                         ; Slack                                    ; Required Time ; Actual Time                      ; From                                                  ; To                                                    ; From Clock ; To Clock ; Failed Paths ;
++------------------------------+------------------------------------------+---------------+----------------------------------+-------------------------------------------------------+-------------------------------------------------------+------------+----------+--------------+
+; Worst-case tco               ; N/A                                      ; None          ; 16.203 ns                        ; controlador:relogio|contador:cont3|flipflopT:cont3|QB ; oHEX2_D[4]                                            ; iCLK_28    ; --       ; 0            ;
+; Clock Setup: 'iCLK_28'       ; N/A                                      ; None          ; 133.05 MHz ( period = 7.516 ns ) ; controlador:relogio|segundoD[21]                      ; controlador:relogio|resto[4]                          ; iCLK_28    ; iCLK_28  ; 0            ;
+; Clock Hold: 'iCLK_28'        ; Not operational: Clock Skew > Data Delay ; None          ; N/A                              ; controlador:relogio|resto[4]                          ; controlador:relogio|contador:cont6|flipflopT:cont1|QB ; iCLK_28    ; iCLK_28  ; 25           ;
+; Total number of failed paths ;                                          ;               ;                                  ;                                                       ;                                                       ;            ;          ; 25           ;
++------------------------------+------------------------------------------+---------------+----------------------------------+-------------------------------------------------------+-------------------------------------------------------+------------+----------+--------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Settings                                                                                                                            ;
++------------------------------------------------------------------------------------------------------+--------------------+------+----+-------------+
+; Option                                                                                               ; Setting            ; From ; To ; Entity Name ;
++------------------------------------------------------------------------------------------------------+--------------------+------+----+-------------+
+; Device Name                                                                                          ; EP2C70F896C6       ;      ;    ;             ;
+; Timing Models                                                                                        ; Final              ;      ;    ;             ;
+; Default hold multicycle                                                                              ; Same as Multicycle ;      ;    ;             ;
+; Cut paths between unrelated clock domains                                                            ; On                 ;      ;    ;             ;
+; Cut off read during write signal paths                                                               ; On                 ;      ;    ;             ;
+; Cut off feedback from I/O pins                                                                       ; On                 ;      ;    ;             ;
+; Report Combined Fast/Slow Timing                                                                     ; Off                ;      ;    ;             ;
+; Ignore Clock Settings                                                                                ; Off                ;      ;    ;             ;
+; Analyze latches as synchronous elements                                                              ; On                 ;      ;    ;             ;
+; Enable Recovery/Removal analysis                                                                     ; Off                ;      ;    ;             ;
+; Enable Clock Latency                                                                                 ; Off                ;      ;    ;             ;
+; Use TimeQuest Timing Analyzer                                                                        ; Off                ;      ;    ;             ;
+; Minimum Core Junction Temperature                                                                    ; 0                  ;      ;    ;             ;
+; Maximum Core Junction Temperature                                                                    ; 85                 ;      ;    ;             ;
+; Number of source nodes to report per destination node                                                ; 10                 ;      ;    ;             ;
+; Number of destination nodes to report                                                                ; 10                 ;      ;    ;             ;
+; Number of paths to report                                                                            ; 200                ;      ;    ;             ;
+; Report Minimum Timing Checks                                                                         ; Off                ;      ;    ;             ;
+; Use Fast Timing Models                                                                               ; Off                ;      ;    ;             ;
+; Report IO Paths Separately                                                                           ; Off                ;      ;    ;             ;
+; Perform Multicorner Analysis                                                                         ; On                 ;      ;    ;             ;
+; Reports the worst-case path for each clock domain and analysis                                       ; Off                ;      ;    ;             ;
+; Reports worst-case timing paths for each clock domain and analysis                                   ; On                 ;      ;    ;             ;
+; Specifies the maximum number of worst-case timing paths to report for each clock domain and analysis ; 100                ;      ;    ;             ;
+; Removes common clock path pessimism (CCPP) during slack computation                                  ; Off                ;      ;    ;             ;
+; Output I/O Timing Endpoint                                                                           ; Near End           ;      ;    ;             ;
++------------------------------------------------------------------------------------------------------+--------------------+------+----+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Settings Summary                                                                                                                                                             ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; Clock Node Name ; Clock Setting Name ; Type     ; Fmax Requirement ; Early Latency ; Late Latency ; Based on ; Multiply Base Fmax by ; Divide Base Fmax by ; Offset ; Phase offset ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; iCLK_28         ;                    ; User Pin ; None             ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A    ;              ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 4      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Setup: 'iCLK_28'                                                                                                                                                                                                                                                      ;
++-----------------------------------------+-----------------------------------------------------+----------------------------------+------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; Slack                                   ; Actual fmax (period)                                ; From                             ; To                           ; From Clock ; To Clock ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
++-----------------------------------------+-----------------------------------------------------+----------------------------------+------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; N/A                                     ; 133.05 MHz ( period = 7.516 ns )                    ; controlador:relogio|segundoD[21] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.312 ns                ;
+; N/A                                     ; 133.23 MHz ( period = 7.506 ns )                    ; controlador:relogio|segundoD[21] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.301 ns                ;
+; N/A                                     ; 134.12 MHz ( period = 7.456 ns )                    ; controlador:relogio|segundoU[21] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.234 ns                ;
+; N/A                                     ; 134.19 MHz ( period = 7.452 ns )                    ; controlador:relogio|minutoU[13]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.265 ns                ;
+; N/A                                     ; 134.26 MHz ( period = 7.448 ns )                    ; controlador:relogio|segundoD[13] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.246 ns                ;
+; N/A                                     ; 134.30 MHz ( period = 7.446 ns )                    ; controlador:relogio|segundoU[21] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.223 ns                ;
+; N/A                                     ; 134.39 MHz ( period = 7.441 ns )                    ; controlador:relogio|segundoU[21] ; controlador:relogio|resto[1] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.514 ns                ;
+; N/A                                     ; 134.44 MHz ( period = 7.438 ns )                    ; controlador:relogio|segundoD[13] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.235 ns                ;
+; N/A                                     ; 134.48 MHz ( period = 7.436 ns )                    ; controlador:relogio|segundoU[4]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.219 ns                ;
+; N/A                                     ; 134.63 MHz ( period = 7.428 ns )                    ; controlador:relogio|segundoU[4]  ; controlador:relogio|resto[1] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.506 ns                ;
+; N/A                                     ; 134.66 MHz ( period = 7.426 ns )                    ; controlador:relogio|segundoU[4]  ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.208 ns                ;
+; N/A                                     ; 135.01 MHz ( period = 7.407 ns )                    ; controlador:relogio|segundoU[5]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.190 ns                ;
+; N/A                                     ; 135.03 MHz ( period = 7.406 ns )                    ; controlador:relogio|segundoD[14] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.204 ns                ;
+; N/A                                     ; 135.04 MHz ( period = 7.405 ns )                    ; controlador:relogio|segundoU[19] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.183 ns                ;
+; N/A                                     ; 135.15 MHz ( period = 7.399 ns )                    ; controlador:relogio|segundoU[5]  ; controlador:relogio|resto[1] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.477 ns                ;
+; N/A                                     ; 135.19 MHz ( period = 7.397 ns )                    ; controlador:relogio|segundoU[5]  ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.179 ns                ;
+; N/A                                     ; 135.21 MHz ( period = 7.396 ns )                    ; controlador:relogio|segundoD[14] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.193 ns                ;
+; N/A                                     ; 135.23 MHz ( period = 7.395 ns )                    ; controlador:relogio|segundoU[19] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.172 ns                ;
+; N/A                                     ; 135.32 MHz ( period = 7.390 ns )                    ; controlador:relogio|segundoU[19] ; controlador:relogio|resto[1] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.463 ns                ;
+; N/A                                     ; 135.37 MHz ( period = 7.387 ns )                    ; controlador:relogio|segundoU[6]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.170 ns                ;
+; N/A                                     ; 135.41 MHz ( period = 7.385 ns )                    ; controlador:relogio|segundoD[11] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.183 ns                ;
+; N/A                                     ; 135.52 MHz ( period = 7.379 ns )                    ; controlador:relogio|segundoU[6]  ; controlador:relogio|resto[1] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.457 ns                ;
+; N/A                                     ; 135.56 MHz ( period = 7.377 ns )                    ; controlador:relogio|segundoU[6]  ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.159 ns                ;
+; N/A                                     ; 135.59 MHz ( period = 7.375 ns )                    ; controlador:relogio|segundoD[11] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.172 ns                ;
+; N/A                                     ; 135.74 MHz ( period = 7.367 ns )                    ; controlador:relogio|minutoU[8]   ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.180 ns                ;
+; N/A                                     ; 135.81 MHz ( period = 7.363 ns )                    ; controlador:relogio|minutoU[10]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.176 ns                ;
+; N/A                                     ; 135.85 MHz ( period = 7.361 ns )                    ; controlador:relogio|minutoU[2]   ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.174 ns                ;
+; N/A                                     ; 136.09 MHz ( period = 7.348 ns )                    ; controlador:relogio|segundoD[23] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.144 ns                ;
+; N/A                                     ; 136.13 MHz ( period = 7.346 ns )                    ; controlador:relogio|segundoD[30] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.142 ns                ;
+; N/A                                     ; 136.18 MHz ( period = 7.343 ns )                    ; controlador:relogio|segundoD[19] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.139 ns                ;
+; N/A                                     ; 136.20 MHz ( period = 7.342 ns )                    ; controlador:relogio|segundoD[21] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.120 ns                ;
+; N/A                                     ; 136.28 MHz ( period = 7.338 ns )                    ; controlador:relogio|segundoD[23] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.133 ns                ;
+; N/A                                     ; 136.31 MHz ( period = 7.336 ns )                    ; controlador:relogio|segundoD[30] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.131 ns                ;
+; N/A                                     ; 136.37 MHz ( period = 7.333 ns )                    ; controlador:relogio|segundoD[19] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.128 ns                ;
+; N/A                                     ; 136.37 MHz ( period = 7.333 ns )                    ; controlador:relogio|segundoD[27] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.129 ns                ;
+; N/A                                     ; 136.52 MHz ( period = 7.325 ns )                    ; controlador:relogio|segundoD[12] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.123 ns                ;
+; N/A                                     ; 136.56 MHz ( period = 7.323 ns )                    ; controlador:relogio|segundoD[27] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.118 ns                ;
+; N/A                                     ; 136.57 MHz ( period = 7.322 ns )                    ; controlador:relogio|segundoD[6]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.120 ns                ;
+; N/A                                     ; 136.71 MHz ( period = 7.315 ns )                    ; controlador:relogio|segundoD[12] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.112 ns                ;
+; N/A                                     ; 136.76 MHz ( period = 7.312 ns )                    ; controlador:relogio|segundoD[6]  ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.109 ns                ;
+; N/A                                     ; 136.78 MHz ( period = 7.311 ns )                    ; controlador:relogio|minutoU[21]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.119 ns                ;
+; N/A                                     ; 137.02 MHz ( period = 7.298 ns )                    ; controlador:relogio|segundoD[17] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.094 ns                ;
+; N/A                                     ; 137.21 MHz ( period = 7.288 ns )                    ; controlador:relogio|segundoD[17] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.083 ns                ;
+; N/A                                     ; 137.23 MHz ( period = 7.287 ns )                    ; controlador:relogio|segundoU[7]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.070 ns                ;
+; N/A                                     ; 137.29 MHz ( period = 7.284 ns )                    ; controlador:relogio|segundoD[10] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.082 ns                ;
+; N/A                                     ; 137.31 MHz ( period = 7.283 ns )                    ; controlador:relogio|minutoU[1]   ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.095 ns                ;
+; N/A                                     ; 137.32 MHz ( period = 7.282 ns )                    ; controlador:relogio|segundoU[21] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.042 ns                ;
+; N/A                                     ; 137.38 MHz ( period = 7.279 ns )                    ; controlador:relogio|segundoU[7]  ; controlador:relogio|resto[1] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.357 ns                ;
+; N/A                                     ; 137.38 MHz ( period = 7.279 ns )                    ; controlador:relogio|segundoD[20] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.075 ns                ;
+; N/A                                     ; 137.42 MHz ( period = 7.277 ns )                    ; controlador:relogio|segundoU[7]  ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.059 ns                ;
+; N/A                                     ; 137.48 MHz ( period = 7.274 ns )                    ; controlador:relogio|segundoD[13] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.054 ns                ;
+; N/A                                     ; 137.48 MHz ( period = 7.274 ns )                    ; controlador:relogio|segundoD[10] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.071 ns                ;
+; N/A                                     ; 137.57 MHz ( period = 7.269 ns )                    ; controlador:relogio|segundoD[20] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.064 ns                ;
+; N/A                                     ; 137.67 MHz ( period = 7.264 ns )                    ; controlador:relogio|segundoD[29] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.060 ns                ;
+; N/A                                     ; 137.70 MHz ( period = 7.262 ns )                    ; controlador:relogio|segundoU[4]  ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.027 ns                ;
+; N/A                                     ; 137.85 MHz ( period = 7.254 ns )                    ; controlador:relogio|segundoD[29] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.049 ns                ;
+; N/A                                     ; 138.05 MHz ( period = 7.244 ns )                    ; controlador:relogio|segundoD[9]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.042 ns                ;
+; N/A                                     ; 138.08 MHz ( period = 7.242 ns )                    ; controlador:relogio|minutoU[9]   ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.055 ns                ;
+; N/A                                     ; 138.24 MHz ( period = 7.234 ns )                    ; controlador:relogio|segundoD[9]  ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.031 ns                ;
+; N/A                                     ; 138.26 MHz ( period = 7.233 ns )                    ; controlador:relogio|segundoU[5]  ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.998 ns                ;
+; N/A                                     ; 138.26 MHz ( period = 7.233 ns )                    ; controlador:relogio|segundoU[16] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.011 ns                ;
+; N/A                                     ; 138.27 MHz ( period = 7.232 ns )                    ; controlador:relogio|segundoD[14] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.012 ns                ;
+; N/A                                     ; 138.29 MHz ( period = 7.231 ns )                    ; controlador:relogio|segundoU[19] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.991 ns                ;
+; N/A                                     ; 138.29 MHz ( period = 7.231 ns )                    ; controlador:relogio|segundoD[26] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.027 ns                ;
+; N/A                                     ; 138.45 MHz ( period = 7.223 ns )                    ; controlador:relogio|segundoU[16] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.000 ns                ;
+; N/A                                     ; 138.48 MHz ( period = 7.221 ns )                    ; controlador:relogio|segundoD[26] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.016 ns                ;
+; N/A                                     ; 138.54 MHz ( period = 7.218 ns )                    ; controlador:relogio|segundoU[16] ; controlador:relogio|resto[1] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.291 ns                ;
+; N/A                                     ; 138.54 MHz ( period = 7.218 ns )                    ; controlador:relogio|segundoD[16] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.014 ns                ;
+; N/A                                     ; 138.56 MHz ( period = 7.217 ns )                    ; controlador:relogio|minutoD[16]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.020 ns                ;
+; N/A                                     ; 138.64 MHz ( period = 7.213 ns )                    ; controlador:relogio|segundoU[6]  ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.978 ns                ;
+; N/A                                     ; 138.66 MHz ( period = 7.212 ns )                    ; controlador:relogio|minutoU[19]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.020 ns                ;
+; N/A                                     ; 138.68 MHz ( period = 7.211 ns )                    ; controlador:relogio|segundoD[11] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.991 ns                ;
+; N/A                                     ; 138.73 MHz ( period = 7.208 ns )                    ; controlador:relogio|segundoD[16] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.003 ns                ;
+; N/A                                     ; 139.02 MHz ( period = 7.193 ns )                    ; controlador:relogio|minutoD[21]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.996 ns                ;
+; N/A                                     ; 139.04 MHz ( period = 7.192 ns )                    ; controlador:relogio|segundoD[3]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.990 ns                ;
+; N/A                                     ; 139.04 MHz ( period = 7.192 ns )                    ; controlador:relogio|minutoU[15]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.005 ns                ;
+; N/A                                     ; 139.04 MHz ( period = 7.192 ns )                    ; controlador:relogio|minutoU[6]   ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.005 ns                ;
+; N/A                                     ; 139.06 MHz ( period = 7.191 ns )                    ; controlador:relogio|segundoD[15] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.989 ns                ;
+; N/A                                     ; 139.08 MHz ( period = 7.190 ns )                    ; controlador:relogio|segundoU[2]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.973 ns                ;
+; N/A                                     ; 139.08 MHz ( period = 7.190 ns )                    ; controlador:relogio|segundoU[22] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.968 ns                ;
+; N/A                                     ; 139.08 MHz ( period = 7.190 ns )                    ; controlador:relogio|segundoD[31] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.986 ns                ;
+; N/A                                     ; 139.08 MHz ( period = 7.190 ns )                    ; controlador:relogio|segundoD[24] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.986 ns                ;
+; N/A                                     ; 139.16 MHz ( period = 7.186 ns )                    ; controlador:relogio|segundoD[22] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.982 ns                ;
+; N/A                                     ; 139.24 MHz ( period = 7.182 ns )                    ; controlador:relogio|segundoU[2]  ; controlador:relogio|resto[1] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.260 ns                ;
+; N/A                                     ; 139.24 MHz ( period = 7.182 ns )                    ; controlador:relogio|segundoD[3]  ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.979 ns                ;
+; N/A                                     ; 139.26 MHz ( period = 7.181 ns )                    ; controlador:relogio|segundoD[15] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.978 ns                ;
+; N/A                                     ; 139.28 MHz ( period = 7.180 ns )                    ; controlador:relogio|segundoU[2]  ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.962 ns                ;
+; N/A                                     ; 139.28 MHz ( period = 7.180 ns )                    ; controlador:relogio|segundoU[22] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.957 ns                ;
+; N/A                                     ; 139.28 MHz ( period = 7.180 ns )                    ; controlador:relogio|segundoD[31] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.975 ns                ;
+; N/A                                     ; 139.28 MHz ( period = 7.180 ns )                    ; controlador:relogio|segundoD[24] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.975 ns                ;
+; N/A                                     ; 139.31 MHz ( period = 7.178 ns )                    ; controlador:relogio|minutoU[12]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.991 ns                ;
+; N/A                                     ; 139.33 MHz ( period = 7.177 ns )                    ; controlador:relogio|minutoD[17]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.980 ns                ;
+; N/A                                     ; 139.35 MHz ( period = 7.176 ns )                    ; controlador:relogio|segundoD[22] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.971 ns                ;
+; N/A                                     ; 139.37 MHz ( period = 7.175 ns )                    ; controlador:relogio|segundoU[22] ; controlador:relogio|resto[1] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.248 ns                ;
+; N/A                                     ; 139.39 MHz ( period = 7.174 ns )                    ; controlador:relogio|segundoD[23] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.952 ns                ;
+; N/A                                     ; 139.43 MHz ( period = 7.172 ns )                    ; controlador:relogio|segundoD[30] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.950 ns                ;
+; N/A                                     ; 139.49 MHz ( period = 7.169 ns )                    ; controlador:relogio|segundoD[19] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.947 ns                ;
+; N/A                                     ; 139.55 MHz ( period = 7.166 ns )                    ; controlador:relogio|minutoU[13]  ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.978 ns                ;
+; N/A                                     ; 139.68 MHz ( period = 7.159 ns )                    ; controlador:relogio|segundoD[27] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.937 ns                ;
+; N/A                                     ; 139.68 MHz ( period = 7.159 ns )                    ; controlador:relogio|minutoU[3]   ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.971 ns                ;
+; N/A                                     ; 139.74 MHz ( period = 7.156 ns )                    ; controlador:relogio|segundoU[10] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.939 ns                ;
+; N/A                                     ; 139.74 MHz ( period = 7.156 ns )                    ; controlador:relogio|minutoU[11]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.969 ns                ;
+; N/A                                     ; 139.76 MHz ( period = 7.155 ns )                    ; controlador:relogio|segundoU[23] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.933 ns                ;
+; N/A                                     ; 139.84 MHz ( period = 7.151 ns )                    ; controlador:relogio|segundoD[12] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.931 ns                ;
+; N/A                                     ; 139.90 MHz ( period = 7.148 ns )                    ; controlador:relogio|segundoU[10] ; controlador:relogio|resto[1] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.226 ns                ;
+; N/A                                     ; 139.90 MHz ( period = 7.148 ns )                    ; controlador:relogio|segundoD[6]  ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.928 ns                ;
+; N/A                                     ; 139.94 MHz ( period = 7.146 ns )                    ; controlador:relogio|segundoU[10] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.928 ns                ;
+; N/A                                     ; 139.96 MHz ( period = 7.145 ns )                    ; controlador:relogio|segundoU[23] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.922 ns                ;
+; N/A                                     ; 140.06 MHz ( period = 7.140 ns )                    ; controlador:relogio|segundoU[23] ; controlador:relogio|resto[1] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.213 ns                ;
+; N/A                                     ; 140.17 MHz ( period = 7.134 ns )                    ; controlador:relogio|segundoU[17] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.912 ns                ;
+; N/A                                     ; 140.37 MHz ( period = 7.124 ns )                    ; controlador:relogio|segundoD[17] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.902 ns                ;
+; N/A                                     ; 140.37 MHz ( period = 7.124 ns )                    ; controlador:relogio|segundoU[17] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.901 ns                ;
+; N/A                                     ; 140.47 MHz ( period = 7.119 ns )                    ; controlador:relogio|segundoU[17] ; controlador:relogio|resto[1] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.192 ns                ;
+; N/A                                     ; 140.51 MHz ( period = 7.117 ns )                    ; controlador:relogio|minutoU[16]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.925 ns                ;
+; N/A                                     ; 140.57 MHz ( period = 7.114 ns )                    ; controlador:relogio|segundoU[18] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.892 ns                ;
+; N/A                                     ; 140.59 MHz ( period = 7.113 ns )                    ; controlador:relogio|segundoU[7]  ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.878 ns                ;
+; N/A                                     ; 140.65 MHz ( period = 7.110 ns )                    ; controlador:relogio|segundoD[10] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.890 ns                ;
+; N/A                                     ; 140.75 MHz ( period = 7.105 ns )                    ; controlador:relogio|segundoD[20] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.883 ns                ;
+; N/A                                     ; 140.77 MHz ( period = 7.104 ns )                    ; controlador:relogio|segundoU[18] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.881 ns                ;
+; N/A                                     ; 140.85 MHz ( period = 7.100 ns )                    ; controlador:relogio|minutoD[28]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.903 ns                ;
+; N/A                                     ; 140.86 MHz ( period = 7.099 ns )                    ; controlador:relogio|segundoU[18] ; controlador:relogio|resto[1] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.172 ns                ;
+; N/A                                     ; 140.98 MHz ( period = 7.093 ns )                    ; controlador:relogio|minutoD[8]   ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.898 ns                ;
+; N/A                                     ; 141.02 MHz ( period = 7.091 ns )                    ; controlador:relogio|segundoU[20] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.869 ns                ;
+; N/A                                     ; 141.04 MHz ( period = 7.090 ns )                    ; controlador:relogio|segundoD[29] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.868 ns                ;
+; N/A                                     ; 141.16 MHz ( period = 7.084 ns )                    ; controlador:relogio|segundoD[4]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.882 ns                ;
+; N/A                                     ; 141.16 MHz ( period = 7.084 ns )                    ; controlador:relogio|minutoD[26]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.887 ns                ;
+; N/A                                     ; 141.16 MHz ( period = 7.084 ns )                    ; controlador:relogio|minutoD[18]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.887 ns                ;
+; N/A                                     ; 141.18 MHz ( period = 7.083 ns )                    ; controlador:relogio|minutoU[14]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.896 ns                ;
+; N/A                                     ; 141.22 MHz ( period = 7.081 ns )                    ; controlador:relogio|segundoU[20] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.858 ns                ;
+; N/A                                     ; 141.22 MHz ( period = 7.081 ns )                    ; controlador:relogio|minutoU[8]   ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.893 ns                ;
+; N/A                                     ; 141.22 MHz ( period = 7.081 ns )                    ; controlador:relogio|segundoD[18] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.877 ns                ;
+; N/A                                     ; 141.28 MHz ( period = 7.078 ns )                    ; controlador:relogio|segundoD[1]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.884 ns                ;
+; N/A                                     ; 141.30 MHz ( period = 7.077 ns )                    ; controlador:relogio|minutoU[10]  ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.889 ns                ;
+; N/A                                     ; 141.32 MHz ( period = 7.076 ns )                    ; controlador:relogio|segundoU[20] ; controlador:relogio|resto[1] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.149 ns                ;
+; N/A                                     ; 141.34 MHz ( period = 7.075 ns )                    ; controlador:relogio|minutoU[2]   ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.887 ns                ;
+; N/A                                     ; 141.36 MHz ( period = 7.074 ns )                    ; controlador:relogio|segundoD[4]  ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.871 ns                ;
+; N/A                                     ; 141.42 MHz ( period = 7.071 ns )                    ; controlador:relogio|segundoD[18] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.866 ns                ;
+; N/A                                     ; 141.44 MHz ( period = 7.070 ns )                    ; controlador:relogio|segundoD[9]  ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.850 ns                ;
+; N/A                                     ; 141.48 MHz ( period = 7.068 ns )                    ; controlador:relogio|segundoD[1]  ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.873 ns                ;
+; N/A                                     ; 141.52 MHz ( period = 7.066 ns )                    ; controlador:relogio|segundoU[8]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.849 ns                ;
+; N/A                                     ; 141.66 MHz ( period = 7.059 ns )                    ; controlador:relogio|segundoU[16] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.819 ns                ;
+; N/A                                     ; 141.68 MHz ( period = 7.058 ns )                    ; controlador:relogio|segundoU[8]  ; controlador:relogio|resto[1] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.136 ns                ;
+; N/A                                     ; 141.70 MHz ( period = 7.057 ns )                    ; controlador:relogio|segundoD[26] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.835 ns                ;
+; N/A                                     ; 141.72 MHz ( period = 7.056 ns )                    ; controlador:relogio|segundoU[8]  ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.838 ns                ;
+; N/A                                     ; 141.82 MHz ( period = 7.051 ns )                    ; controlador:relogio|segundoD[7]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.849 ns                ;
+; N/A                                     ; 141.96 MHz ( period = 7.044 ns )                    ; controlador:relogio|segundoD[16] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.822 ns                ;
+; N/A                                     ; 141.96 MHz ( period = 7.044 ns )                    ; controlador:relogio|minutoU[22]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.852 ns                ;
+; N/A                                     ; 142.03 MHz ( period = 7.041 ns )                    ; controlador:relogio|segundoD[7]  ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.838 ns                ;
+; N/A                                     ; 142.03 MHz ( period = 7.041 ns )                    ; controlador:relogio|segundoU[30] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.819 ns                ;
+; N/A                                     ; 142.23 MHz ( period = 7.031 ns )                    ; controlador:relogio|segundoU[30] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.808 ns                ;
+; N/A                                     ; 142.25 MHz ( period = 7.030 ns )                    ; controlador:relogio|segundoU[11] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.813 ns                ;
+; N/A                                     ; 142.31 MHz ( period = 7.027 ns )                    ; controlador:relogio|minutoU[17]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.835 ns                ;
+; N/A                                     ; 142.33 MHz ( period = 7.026 ns )                    ; controlador:relogio|segundoU[30] ; controlador:relogio|resto[1] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.099 ns                ;
+; N/A                                     ; 142.41 MHz ( period = 7.022 ns )                    ; controlador:relogio|segundoU[11] ; controlador:relogio|resto[1] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.100 ns                ;
+; N/A                                     ; 142.45 MHz ( period = 7.020 ns )                    ; controlador:relogio|segundoU[11] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.802 ns                ;
+; N/A                                     ; 142.45 MHz ( period = 7.020 ns )                    ; controlador:relogio|minutoU[30]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.828 ns                ;
+; N/A                                     ; 142.47 MHz ( period = 7.019 ns )                    ; controlador:relogio|minutoD[22]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.822 ns                ;
+; N/A                                     ; 142.49 MHz ( period = 7.018 ns )                    ; controlador:relogio|segundoD[3]  ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.798 ns                ;
+; N/A                                     ; 142.51 MHz ( period = 7.017 ns )                    ; controlador:relogio|segundoD[15] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.797 ns                ;
+; N/A                                     ; 142.51 MHz ( period = 7.017 ns )                    ; controlador:relogio|segundoD[8]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.815 ns                ;
+; N/A                                     ; 142.51 MHz ( period = 7.017 ns )                    ; controlador:relogio|minutoD[7]   ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.822 ns                ;
+; N/A                                     ; 142.53 MHz ( period = 7.016 ns )                    ; controlador:relogio|segundoU[2]  ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.781 ns                ;
+; N/A                                     ; 142.53 MHz ( period = 7.016 ns )                    ; controlador:relogio|segundoU[22] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.776 ns                ;
+; N/A                                     ; 142.53 MHz ( period = 7.016 ns )                    ; controlador:relogio|segundoD[31] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.794 ns                ;
+; N/A                                     ; 142.53 MHz ( period = 7.016 ns )                    ; controlador:relogio|segundoD[24] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.794 ns                ;
+; N/A                                     ; 142.61 MHz ( period = 7.012 ns )                    ; controlador:relogio|segundoD[22] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.790 ns                ;
+; N/A                                     ; 142.65 MHz ( period = 7.010 ns )                    ; controlador:relogio|minutoU[21]  ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.817 ns                ;
+; N/A                                     ; 142.71 MHz ( period = 7.007 ns )                    ; controlador:relogio|segundoD[8]  ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.804 ns                ;
+; N/A                                     ; 142.82 MHz ( period = 7.002 ns )                    ; controlador:relogio|segundoD[0]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.808 ns                ;
+; N/A                                     ; 142.84 MHz ( period = 7.001 ns )                    ; controlador:relogio|segundoU[14] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.784 ns                ;
+; N/A                                     ; 142.92 MHz ( period = 6.997 ns )                    ; controlador:relogio|minutoU[1]   ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.808 ns                ;
+; N/A                                     ; 142.94 MHz ( period = 6.996 ns )                    ; controlador:relogio|segundoD[28] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.792 ns                ;
+; N/A                                     ; 143.00 MHz ( period = 6.993 ns )                    ; controlador:relogio|segundoU[14] ; controlador:relogio|resto[1] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 4.071 ns                ;
+; N/A                                     ; 143.02 MHz ( period = 6.992 ns )                    ; controlador:relogio|segundoD[0]  ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.797 ns                ;
+; N/A                                     ; 143.04 MHz ( period = 6.991 ns )                    ; controlador:relogio|segundoU[14] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.773 ns                ;
+; N/A                                     ; 143.04 MHz ( period = 6.991 ns )                    ; controlador:relogio|segundoD[5]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.789 ns                ;
+; N/A                                     ; 143.08 MHz ( period = 6.989 ns )                    ; controlador:relogio|minutoD[23]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.792 ns                ;
+; N/A                                     ; 143.10 MHz ( period = 6.988 ns )                    ; controlador:relogio|minutoD[27]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.791 ns                ;
+; N/A                                     ; 143.12 MHz ( period = 6.987 ns )                    ; controlador:relogio|minutoD[14]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.792 ns                ;
+; N/A                                     ; 143.14 MHz ( period = 6.986 ns )                    ; controlador:relogio|segundoD[28] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.781 ns                ;
+; N/A                                     ; 143.16 MHz ( period = 6.985 ns )                    ; controlador:relogio|minutoU[23]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.793 ns                ;
+; N/A                                     ; 143.20 MHz ( period = 6.983 ns )                    ; controlador:relogio|minutoD[25]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.786 ns                ;
+; N/A                                     ; 143.23 MHz ( period = 6.982 ns )                    ; controlador:relogio|segundoU[10] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.747 ns                ;
+; N/A                                     ; 143.25 MHz ( period = 6.981 ns )                    ; controlador:relogio|segundoU[23] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.741 ns                ;
+; N/A                                     ; 143.25 MHz ( period = 6.981 ns )                    ; controlador:relogio|segundoD[5]  ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.778 ns                ;
+; N/A                                     ; 143.58 MHz ( period = 6.965 ns )                    ; controlador:relogio|segundoD[25] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.761 ns                ;
+; N/A                                     ; 143.68 MHz ( period = 6.960 ns )                    ; controlador:relogio|segundoU[17] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.720 ns                ;
+; N/A                                     ; 143.76 MHz ( period = 6.956 ns )                    ; controlador:relogio|minutoU[9]   ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.768 ns                ;
+; N/A                                     ; 143.78 MHz ( period = 6.955 ns )                    ; controlador:relogio|segundoD[25] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.750 ns                ;
+; N/A                                     ; 143.82 MHz ( period = 6.953 ns )                    ; controlador:relogio|minutoD[11]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.758 ns                ;
+; N/A                                     ; 143.95 MHz ( period = 6.947 ns )                    ; controlador:relogio|minutoD[24]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.750 ns                ;
+; N/A                                     ; 144.09 MHz ( period = 6.940 ns )                    ; controlador:relogio|segundoU[18] ; controlador:relogio|resto[2] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.700 ns                ;
+; N/A                                     ; 144.18 MHz ( period = 6.936 ns )                    ; controlador:relogio|minutoU[20]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.744 ns                ;
+; N/A                                     ; 144.22 MHz ( period = 6.934 ns )                    ; controlador:relogio|minutoU[0]   ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.755 ns                ;
+; N/A                                     ; 144.26 MHz ( period = 6.932 ns )                    ; controlador:relogio|segundoU[27] ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.710 ns                ;
+; N/A                                     ; 144.36 MHz ( period = 6.927 ns )                    ; controlador:relogio|minutoD[19]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.730 ns                ;
+; N/A                                     ; 144.40 MHz ( period = 6.925 ns )                    ; controlador:relogio|minutoU[5]   ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.738 ns                ;
+; N/A                                     ; 144.47 MHz ( period = 6.922 ns )                    ; controlador:relogio|segundoU[27] ; controlador:relogio|resto[3] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.699 ns                ;
+; N/A                                     ; 144.49 MHz ( period = 6.921 ns )                    ; controlador:relogio|minutoU[29]  ; controlador:relogio|resto[4] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.729 ns                ;
+; N/A                                     ; 144.57 MHz ( period = 6.917 ns )                    ; controlador:relogio|segundoU[27] ; controlador:relogio|resto[1] ; iCLK_28    ; iCLK_28  ; None                        ; None                      ; 3.990 ns                ;
+; Timing analysis restricted to 200 rows. ; To change the limit use Settings (Assignments menu) ;                                  ;                              ;            ;          ;                             ;                           ;                         ;
++-----------------------------------------+-----------------------------------------------------+----------------------------------+------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Hold: 'iCLK_28'                                                                                                                                                                                                                        ;
++------------------------------------------+------------------------------+-------------------------------------------------------+------------+----------+----------------------------+----------------------------+--------------------------+
+; Minimum Slack                            ; From                         ; To                                                    ; From Clock ; To Clock ; Required Hold Relationship ; Required Shortest P2P Time ; Actual Shortest P2P Time ;
++------------------------------------------+------------------------------+-------------------------------------------------------+------------+----------+----------------------------+----------------------------+--------------------------+
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[4] ; controlador:relogio|contador:cont6|flipflopT:cont1|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 2.600 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[4] ; controlador:relogio|contador:cont5|flipflopT:cont4|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 2.721 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[4] ; controlador:relogio|contador:cont5|flipflopT:cont3|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 2.721 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[4] ; controlador:relogio|contador:cont5|flipflopT:cont2|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 2.721 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[4] ; controlador:relogio|contador:cont5|flipflopT:cont1|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 2.725 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[3] ; controlador:relogio|contador:cont5|flipflopT:cont1|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 3.013 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[1] ; controlador:relogio|contador:cont2|flipflopT:cont1|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 2.782 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[1] ; controlador:relogio|contador:cont2|flipflopT:cont2|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 2.782 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[1] ; controlador:relogio|contador:cont2|flipflopT:cont3|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 3.014 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[1] ; controlador:relogio|contador:cont2|flipflopT:cont4|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 3.015 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[3] ; controlador:relogio|contador:cont5|flipflopT:cont2|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 3.489 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[0] ; controlador:relogio|contador:cont2|flipflopT:cont1|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 3.194 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[0] ; controlador:relogio|contador:cont2|flipflopT:cont2|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 3.197 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[3] ; controlador:relogio|contador:cont4|flipflopT:cont4|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 3.504 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[3] ; controlador:relogio|contador:cont4|flipflopT:cont1|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 3.509 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[3] ; controlador:relogio|contador:cont4|flipflopT:cont3|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 3.509 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[3] ; controlador:relogio|contador:cont4|flipflopT:cont2|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 3.509 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[3] ; controlador:relogio|contador:cont5|flipflopT:cont4|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 3.715 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[3] ; controlador:relogio|contador:cont5|flipflopT:cont3|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 3.717 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[0] ; controlador:relogio|contador:cont2|flipflopT:cont3|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 3.601 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[0] ; controlador:relogio|contador:cont2|flipflopT:cont4|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 3.907 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[2] ; controlador:relogio|contador:cont3|flipflopT:cont1|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 4.512 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[2] ; controlador:relogio|contador:cont3|flipflopT:cont2|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 4.515 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[2] ; controlador:relogio|contador:cont3|flipflopT:cont4|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 4.742 ns                 ;
+; Not operational: Clock Skew > Data Delay ; controlador:relogio|resto[2] ; controlador:relogio|contador:cont3|flipflopT:cont3|QB ; iCLK_28    ; iCLK_28  ; None                       ; None                       ; 4.745 ns                 ;
++------------------------------------------+------------------------------+-------------------------------------------------------+------------+----------+----------------------------+----------------------------+--------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------+
+; tco                                                                                                                 ;
++-------+--------------+------------+-------------------------------------------------------+------------+------------+
+; Slack ; Required tco ; Actual tco ; From                                                  ; To         ; From Clock ;
++-------+--------------+------------+-------------------------------------------------------+------------+------------+
+; N/A   ; None         ; 16.203 ns  ; controlador:relogio|contador:cont3|flipflopT:cont3|QB ; oHEX2_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 16.131 ns  ; controlador:relogio|contador:cont3|flipflopT:cont4|QB ; oHEX2_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 16.010 ns  ; controlador:relogio|contador:cont3|flipflopT:cont1|QB ; oHEX2_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 15.890 ns  ; controlador:relogio|contador:cont3|flipflopT:cont2|QB ; oHEX2_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 15.727 ns  ; controlador:relogio|contador:cont3|flipflopT:cont3|QB ; oHEX2_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 15.652 ns  ; controlador:relogio|contador:cont3|flipflopT:cont4|QB ; oHEX2_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 15.522 ns  ; controlador:relogio|contador:cont3|flipflopT:cont1|QB ; oHEX2_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 15.515 ns  ; controlador:relogio|contador:cont3|flipflopT:cont3|QB ; oHEX2_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 15.442 ns  ; controlador:relogio|contador:cont3|flipflopT:cont4|QB ; oHEX2_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 15.424 ns  ; controlador:relogio|contador:cont3|flipflopT:cont2|QB ; oHEX2_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 15.311 ns  ; controlador:relogio|contador:cont3|flipflopT:cont1|QB ; oHEX2_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 15.250 ns  ; controlador:relogio|contador:cont3|flipflopT:cont3|QB ; oHEX2_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 15.213 ns  ; controlador:relogio|contador:cont3|flipflopT:cont2|QB ; oHEX2_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 15.210 ns  ; controlador:relogio|contador:cont3|flipflopT:cont3|QB ; oHEX2_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 15.153 ns  ; controlador:relogio|contador:cont3|flipflopT:cont4|QB ; oHEX2_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 15.142 ns  ; controlador:relogio|contador:cont3|flipflopT:cont4|QB ; oHEX2_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 15.054 ns  ; controlador:relogio|contador:cont3|flipflopT:cont1|QB ; oHEX2_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 15.017 ns  ; controlador:relogio|contador:cont3|flipflopT:cont1|QB ; oHEX2_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 15.010 ns  ; controlador:relogio|contador:cont3|flipflopT:cont3|QB ; oHEX2_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 14.946 ns  ; controlador:relogio|contador:cont3|flipflopT:cont2|QB ; oHEX2_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 14.945 ns  ; controlador:relogio|contador:cont3|flipflopT:cont4|QB ; oHEX2_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 14.901 ns  ; controlador:relogio|contador:cont3|flipflopT:cont2|QB ; oHEX2_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 14.879 ns  ; controlador:relogio|contador:cont3|flipflopT:cont3|QB ; oHEX2_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 14.820 ns  ; controlador:relogio|contador:cont3|flipflopT:cont1|QB ; oHEX2_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 14.812 ns  ; controlador:relogio|contador:cont3|flipflopT:cont4|QB ; oHEX2_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 14.699 ns  ; controlador:relogio|contador:cont3|flipflopT:cont2|QB ; oHEX2_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 14.686 ns  ; controlador:relogio|contador:cont3|flipflopT:cont1|QB ; oHEX2_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 14.566 ns  ; controlador:relogio|contador:cont3|flipflopT:cont2|QB ; oHEX2_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 14.354 ns  ; controlador:relogio|contador:cont2|flipflopT:cont3|QB ; oHEX1_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 14.341 ns  ; controlador:relogio|contador:cont2|flipflopT:cont3|QB ; oHEX1_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 14.297 ns  ; controlador:relogio|contador:cont2|flipflopT:cont4|QB ; oHEX1_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 14.294 ns  ; controlador:relogio|contador:cont2|flipflopT:cont4|QB ; oHEX1_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 14.185 ns  ; controlador:relogio|contador:cont2|flipflopT:cont1|QB ; oHEX1_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 14.181 ns  ; controlador:relogio|contador:cont6|flipflopT:cont3|QB ; oHEX5_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 14.179 ns  ; controlador:relogio|contador:cont4|flipflopT:cont4|QB ; oHEX3_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 14.176 ns  ; controlador:relogio|contador:cont2|flipflopT:cont1|QB ; oHEX1_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 14.154 ns  ; controlador:relogio|contador:cont4|flipflopT:cont4|QB ; oHEX3_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 14.108 ns  ; controlador:relogio|contador:cont2|flipflopT:cont3|QB ; oHEX1_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 14.106 ns  ; controlador:relogio|contador:cont2|flipflopT:cont3|QB ; oHEX1_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 14.063 ns  ; controlador:relogio|contador:cont2|flipflopT:cont4|QB ; oHEX1_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 14.059 ns  ; controlador:relogio|contador:cont2|flipflopT:cont4|QB ; oHEX1_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 14.036 ns  ; controlador:relogio|contador:cont2|flipflopT:cont2|QB ; oHEX1_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 14.027 ns  ; controlador:relogio|contador:cont2|flipflopT:cont2|QB ; oHEX1_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 13.977 ns  ; controlador:relogio|contador:cont6|flipflopT:cont2|QB ; oHEX5_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 13.962 ns  ; controlador:relogio|contador:cont4|flipflopT:cont3|QB ; oHEX3_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 13.933 ns  ; controlador:relogio|contador:cont2|flipflopT:cont1|QB ; oHEX1_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 13.931 ns  ; controlador:relogio|contador:cont2|flipflopT:cont1|QB ; oHEX1_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 13.926 ns  ; controlador:relogio|contador:cont4|flipflopT:cont3|QB ; oHEX3_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 13.897 ns  ; controlador:relogio|contador:cont2|flipflopT:cont3|QB ; oHEX1_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 13.891 ns  ; controlador:relogio|contador:cont2|flipflopT:cont3|QB ; oHEX1_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 13.884 ns  ; controlador:relogio|contador:cont4|flipflopT:cont4|QB ; oHEX3_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 13.882 ns  ; controlador:relogio|contador:cont6|flipflopT:cont3|QB ; oHEX5_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 13.869 ns  ; controlador:relogio|contador:cont4|flipflopT:cont4|QB ; oHEX3_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 13.867 ns  ; controlador:relogio|contador:cont6|flipflopT:cont3|QB ; oHEX5_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 13.867 ns  ; controlador:relogio|contador:cont4|flipflopT:cont4|QB ; oHEX3_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 13.858 ns  ; controlador:relogio|contador:cont4|flipflopT:cont4|QB ; oHEX3_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 13.855 ns  ; controlador:relogio|contador:cont2|flipflopT:cont4|QB ; oHEX1_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 13.822 ns  ; controlador:relogio|contador:cont4|flipflopT:cont1|QB ; oHEX3_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 13.820 ns  ; controlador:relogio|contador:cont2|flipflopT:cont4|QB ; oHEX1_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 13.819 ns  ; controlador:relogio|contador:cont6|flipflopT:cont1|QB ; oHEX5_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 13.788 ns  ; controlador:relogio|contador:cont2|flipflopT:cont2|QB ; oHEX1_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 13.787 ns  ; controlador:relogio|contador:cont2|flipflopT:cont2|QB ; oHEX1_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 13.786 ns  ; controlador:relogio|contador:cont4|flipflopT:cont1|QB ; oHEX3_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 13.762 ns  ; controlador:relogio|contador:cont5|flipflopT:cont4|QB ; oHEX4_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 13.757 ns  ; controlador:relogio|contador:cont5|flipflopT:cont4|QB ; oHEX4_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 13.755 ns  ; controlador:relogio|contador:cont6|flipflopT:cont3|QB ; oHEX5_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 13.754 ns  ; controlador:relogio|contador:cont5|flipflopT:cont4|QB ; oHEX4_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 13.751 ns  ; controlador:relogio|contador:cont5|flipflopT:cont3|QB ; oHEX4_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 13.750 ns  ; controlador:relogio|contador:cont5|flipflopT:cont4|QB ; oHEX4_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 13.741 ns  ; controlador:relogio|contador:cont6|flipflopT:cont3|QB ; oHEX5_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 13.741 ns  ; controlador:relogio|contador:cont5|flipflopT:cont3|QB ; oHEX4_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 13.738 ns  ; controlador:relogio|contador:cont5|flipflopT:cont3|QB ; oHEX4_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 13.724 ns  ; controlador:relogio|contador:cont5|flipflopT:cont3|QB ; oHEX4_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 13.723 ns  ; controlador:relogio|contador:cont5|flipflopT:cont3|QB ; oHEX4_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 13.721 ns  ; controlador:relogio|contador:cont5|flipflopT:cont4|QB ; oHEX4_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 13.718 ns  ; controlador:relogio|contador:cont5|flipflopT:cont2|QB ; oHEX4_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 13.717 ns  ; controlador:relogio|contador:cont5|flipflopT:cont2|QB ; oHEX4_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 13.717 ns  ; controlador:relogio|contador:cont2|flipflopT:cont1|QB ; oHEX1_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 13.714 ns  ; controlador:relogio|contador:cont2|flipflopT:cont1|QB ; oHEX1_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 13.698 ns  ; controlador:relogio|contador:cont6|flipflopT:cont4|QB ; oHEX5_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 13.685 ns  ; controlador:relogio|contador:cont5|flipflopT:cont2|QB ; oHEX4_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 13.681 ns  ; controlador:relogio|contador:cont5|flipflopT:cont2|QB ; oHEX4_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 13.680 ns  ; controlador:relogio|contador:cont4|flipflopT:cont2|QB ; oHEX3_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 13.679 ns  ; controlador:relogio|contador:cont6|flipflopT:cont2|QB ; oHEX5_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 13.677 ns  ; controlador:relogio|contador:cont5|flipflopT:cont2|QB ; oHEX4_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 13.667 ns  ; controlador:relogio|contador:cont4|flipflopT:cont3|QB ; oHEX3_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 13.661 ns  ; controlador:relogio|contador:cont6|flipflopT:cont2|QB ; oHEX5_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 13.652 ns  ; controlador:relogio|contador:cont4|flipflopT:cont3|QB ; oHEX3_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 13.649 ns  ; controlador:relogio|contador:cont4|flipflopT:cont3|QB ; oHEX3_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 13.644 ns  ; controlador:relogio|contador:cont4|flipflopT:cont2|QB ; oHEX3_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 13.641 ns  ; controlador:relogio|contador:cont2|flipflopT:cont3|QB ; oHEX1_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 13.630 ns  ; controlador:relogio|contador:cont4|flipflopT:cont3|QB ; oHEX3_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 13.597 ns  ; controlador:relogio|contador:cont2|flipflopT:cont4|QB ; oHEX1_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 13.587 ns  ; controlador:relogio|contador:cont6|flipflopT:cont3|QB ; oHEX5_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 13.579 ns  ; controlador:relogio|contador:cont2|flipflopT:cont2|QB ; oHEX1_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 13.571 ns  ; controlador:relogio|contador:cont2|flipflopT:cont2|QB ; oHEX1_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 13.550 ns  ; controlador:relogio|contador:cont6|flipflopT:cont2|QB ; oHEX5_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 13.545 ns  ; controlador:relogio|contador:cont6|flipflopT:cont3|QB ; oHEX5_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 13.529 ns  ; controlador:relogio|contador:cont4|flipflopT:cont4|QB ; oHEX3_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 13.525 ns  ; controlador:relogio|contador:cont4|flipflopT:cont1|QB ; oHEX3_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 13.521 ns  ; controlador:relogio|contador:cont6|flipflopT:cont1|QB ; oHEX5_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 13.508 ns  ; controlador:relogio|contador:cont4|flipflopT:cont1|QB ; oHEX3_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 13.507 ns  ; controlador:relogio|contador:cont4|flipflopT:cont1|QB ; oHEX3_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 13.503 ns  ; controlador:relogio|contador:cont6|flipflopT:cont1|QB ; oHEX5_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 13.500 ns  ; controlador:relogio|contador:cont6|flipflopT:cont2|QB ; oHEX5_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 13.487 ns  ; controlador:relogio|contador:cont4|flipflopT:cont1|QB ; oHEX3_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 13.465 ns  ; controlador:relogio|contador:cont5|flipflopT:cont4|QB ; oHEX4_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 13.459 ns  ; controlador:relogio|contador:cont5|flipflopT:cont3|QB ; oHEX4_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 13.459 ns  ; controlador:relogio|contador:cont2|flipflopT:cont1|QB ; oHEX1_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 13.458 ns  ; controlador:relogio|contador:cont5|flipflopT:cont1|QB ; oHEX4_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 13.455 ns  ; controlador:relogio|contador:cont5|flipflopT:cont4|QB ; oHEX4_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 13.453 ns  ; controlador:relogio|contador:cont5|flipflopT:cont3|QB ; oHEX4_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 13.444 ns  ; controlador:relogio|contador:cont5|flipflopT:cont1|QB ; oHEX4_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 13.440 ns  ; controlador:relogio|contador:cont5|flipflopT:cont1|QB ; oHEX4_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 13.439 ns  ; controlador:relogio|contador:cont5|flipflopT:cont1|QB ; oHEX4_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 13.426 ns  ; controlador:relogio|contador:cont5|flipflopT:cont1|QB ; oHEX4_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 13.420 ns  ; controlador:relogio|contador:cont5|flipflopT:cont2|QB ; oHEX4_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 13.395 ns  ; controlador:relogio|contador:cont6|flipflopT:cont4|QB ; oHEX5_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 13.391 ns  ; controlador:relogio|contador:cont6|flipflopT:cont1|QB ; oHEX5_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 13.391 ns  ; controlador:relogio|contador:cont5|flipflopT:cont2|QB ; oHEX4_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 13.382 ns  ; controlador:relogio|contador:cont4|flipflopT:cont2|QB ; oHEX3_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 13.376 ns  ; controlador:relogio|contador:cont6|flipflopT:cont2|QB ; oHEX5_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 13.373 ns  ; controlador:relogio|contador:cont6|flipflopT:cont4|QB ; oHEX5_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 13.373 ns  ; controlador:relogio|contador:cont6|flipflopT:cont1|QB ; oHEX5_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 13.366 ns  ; controlador:relogio|contador:cont4|flipflopT:cont2|QB ; oHEX3_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 13.364 ns  ; controlador:relogio|contador:cont4|flipflopT:cont2|QB ; oHEX3_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 13.359 ns  ; controlador:relogio|contador:cont6|flipflopT:cont2|QB ; oHEX5_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 13.345 ns  ; controlador:relogio|contador:cont4|flipflopT:cont2|QB ; oHEX3_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 13.337 ns  ; controlador:relogio|contador:cont4|flipflopT:cont3|QB ; oHEX3_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 13.321 ns  ; controlador:relogio|contador:cont2|flipflopT:cont2|QB ; oHEX1_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 13.277 ns  ; controlador:relogio|contador:cont1|flipflopT:cont4|QB ; oHEX0_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 13.270 ns  ; controlador:relogio|contador:cont1|flipflopT:cont3|QB ; oHEX0_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 13.264 ns  ; controlador:relogio|contador:cont6|flipflopT:cont4|QB ; oHEX5_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 13.256 ns  ; controlador:relogio|contador:cont6|flipflopT:cont4|QB ; oHEX5_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 13.219 ns  ; controlador:relogio|contador:cont6|flipflopT:cont1|QB ; oHEX5_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 13.206 ns  ; controlador:relogio|contador:cont6|flipflopT:cont1|QB ; oHEX5_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 13.200 ns  ; controlador:relogio|contador:cont1|flipflopT:cont2|QB ; oHEX0_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 13.197 ns  ; controlador:relogio|contador:cont4|flipflopT:cont1|QB ; oHEX3_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 13.163 ns  ; controlador:relogio|contador:cont5|flipflopT:cont1|QB ; oHEX4_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 13.151 ns  ; controlador:relogio|contador:cont5|flipflopT:cont1|QB ; oHEX4_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 13.110 ns  ; controlador:relogio|contador:cont6|flipflopT:cont4|QB ; oHEX5_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 13.097 ns  ; controlador:relogio|contador:cont6|flipflopT:cont4|QB ; oHEX5_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 13.055 ns  ; controlador:relogio|contador:cont4|flipflopT:cont2|QB ; oHEX3_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 12.970 ns  ; controlador:relogio|contador:cont1|flipflopT:cont1|QB ; oHEX0_D[0] ; iCLK_28    ;
+; N/A   ; None         ; 12.627 ns  ; controlador:relogio|contador:cont1|flipflopT:cont4|QB ; oHEX0_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 12.620 ns  ; controlador:relogio|contador:cont1|flipflopT:cont3|QB ; oHEX0_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 12.586 ns  ; controlador:relogio|contador:cont1|flipflopT:cont4|QB ; oHEX0_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 12.581 ns  ; controlador:relogio|contador:cont1|flipflopT:cont2|QB ; oHEX0_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 12.578 ns  ; controlador:relogio|contador:cont1|flipflopT:cont3|QB ; oHEX0_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 12.512 ns  ; controlador:relogio|contador:cont1|flipflopT:cont2|QB ; oHEX0_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 12.381 ns  ; controlador:relogio|contador:cont1|flipflopT:cont4|QB ; oHEX0_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 12.380 ns  ; controlador:relogio|contador:cont1|flipflopT:cont4|QB ; oHEX0_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 12.376 ns  ; controlador:relogio|contador:cont1|flipflopT:cont3|QB ; oHEX0_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 12.374 ns  ; controlador:relogio|contador:cont1|flipflopT:cont3|QB ; oHEX0_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 12.346 ns  ; controlador:relogio|contador:cont1|flipflopT:cont2|QB ; oHEX0_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 12.334 ns  ; controlador:relogio|contador:cont1|flipflopT:cont2|QB ; oHEX0_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 12.319 ns  ; controlador:relogio|contador:cont1|flipflopT:cont1|QB ; oHEX0_D[1] ; iCLK_28    ;
+; N/A   ; None         ; 12.279 ns  ; controlador:relogio|contador:cont1|flipflopT:cont1|QB ; oHEX0_D[6] ; iCLK_28    ;
+; N/A   ; None         ; 12.144 ns  ; controlador:relogio|contador:cont1|flipflopT:cont4|QB ; oHEX0_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 12.138 ns  ; controlador:relogio|contador:cont1|flipflopT:cont3|QB ; oHEX0_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 12.131 ns  ; controlador:relogio|contador:cont1|flipflopT:cont4|QB ; oHEX0_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 12.097 ns  ; controlador:relogio|contador:cont1|flipflopT:cont3|QB ; oHEX0_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 12.084 ns  ; controlador:relogio|contador:cont1|flipflopT:cont2|QB ; oHEX0_D[5] ; iCLK_28    ;
+; N/A   ; None         ; 12.081 ns  ; controlador:relogio|contador:cont1|flipflopT:cont2|QB ; oHEX0_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 12.073 ns  ; controlador:relogio|contador:cont1|flipflopT:cont1|QB ; oHEX0_D[2] ; iCLK_28    ;
+; N/A   ; None         ; 12.070 ns  ; controlador:relogio|contador:cont1|flipflopT:cont1|QB ; oHEX0_D[3] ; iCLK_28    ;
+; N/A   ; None         ; 11.836 ns  ; controlador:relogio|contador:cont1|flipflopT:cont1|QB ; oHEX0_D[4] ; iCLK_28    ;
+; N/A   ; None         ; 11.823 ns  ; controlador:relogio|contador:cont1|flipflopT:cont1|QB ; oHEX0_D[5] ; iCLK_28    ;
++-------+--------------+------------+-------------------------------------------------------+------------+------------+
+
+
++--------------------------+
+; Timing Analyzer Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Classic Timing Analyzer
+    Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+    Info: Processing started: Thu Dec 06 11:52:59 2018
+Info: Command: quartus_tan --read_settings_files=off --write_settings_files=off relogio -c relogio --timing_analysis_only
+Warning: Found pins functioning as undefined clocks and/or memory enables
+    Info: Assuming node "iCLK_28" is an undefined clock
+Warning: Found 6 node(s) in clock paths which may be acting as ripple and/or gated clocks -- node(s) analyzed as buffer(s) resulting in clock skew
+    Info: Detected ripple clock "controlador:relogio|resto[4]" as buffer
+    Info: Detected ripple clock "controlador:relogio|resto[3]" as buffer
+    Info: Detected ripple clock "controlador:relogio|resto[2]" as buffer
+    Info: Detected ripple clock "controlador:relogio|resto[1]" as buffer
+    Info: Detected ripple clock "controlador:relogio|resto[0]" as buffer
+    Info: Detected ripple clock "modularizador:modulacao|saida" as buffer
+Info: Clock "iCLK_28" has Internal fmax of 133.05 MHz between source register "controlador:relogio|segundoD[21]" and destination register "controlador:relogio|resto[4]" (period= 7.516 ns)
+    Info: + Longest register to register delay is 4.312 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X53_Y26_N11; Fanout = 3; REG Node = 'controlador:relogio|segundoD[21]'
+        Info: 2: + IC(1.024 ns) + CELL(0.371 ns) = 1.395 ns; Loc. = LCCOMB_X54_Y29_N8; Fanout = 1; COMB Node = 'controlador:relogio|Equal1~6'
+        Info: 3: + IC(0.906 ns) + CELL(0.275 ns) = 2.576 ns; Loc. = LCCOMB_X49_Y29_N28; Fanout = 5; COMB Node = 'controlador:relogio|Equal1~9'
+        Info: 4: + IC(0.265 ns) + CELL(0.150 ns) = 2.991 ns; Loc. = LCCOMB_X49_Y29_N26; Fanout = 35; COMB Node = 'controlador:relogio|minutoU[0]~0'
+        Info: 5: + IC(0.261 ns) + CELL(0.150 ns) = 3.402 ns; Loc. = LCCOMB_X49_Y29_N30; Fanout = 33; COMB Node = 'controlador:relogio|resto[4]~2'
+        Info: 6: + IC(0.250 ns) + CELL(0.660 ns) = 4.312 ns; Loc. = LCFF_X49_Y29_N1; Fanout = 6; REG Node = 'controlador:relogio|resto[4]'
+        Info: Total cell delay = 1.606 ns ( 37.24 % )
+        Info: Total interconnect delay = 2.706 ns ( 62.76 % )
+    Info: - Smallest clock skew is -2.990 ns
+        Info: + Shortest clock path from clock "iCLK_28" to destination register is 4.682 ns
+            Info: 1: + IC(0.000 ns) + CELL(0.979 ns) = 0.979 ns; Loc. = PIN_E16; Fanout = 2; CLK Node = 'iCLK_28'
+            Info: 2: + IC(1.645 ns) + CELL(0.787 ns) = 3.411 ns; Loc. = LCFF_X52_Y29_N17; Fanout = 9; REG Node = 'modularizador:modulacao|saida'
+            Info: 3: + IC(0.734 ns) + CELL(0.537 ns) = 4.682 ns; Loc. = LCFF_X49_Y29_N1; Fanout = 6; REG Node = 'controlador:relogio|resto[4]'
+            Info: Total cell delay = 2.303 ns ( 49.19 % )
+            Info: Total interconnect delay = 2.379 ns ( 50.81 % )
+        Info: - Longest clock path from clock "iCLK_28" to source register is 7.672 ns
+            Info: 1: + IC(0.000 ns) + CELL(0.979 ns) = 0.979 ns; Loc. = PIN_E16; Fanout = 2; CLK Node = 'iCLK_28'
+            Info: 2: + IC(1.645 ns) + CELL(0.787 ns) = 3.411 ns; Loc. = LCFF_X52_Y29_N17; Fanout = 9; REG Node = 'modularizador:modulacao|saida'
+            Info: 3: + IC(2.514 ns) + CELL(0.000 ns) = 5.925 ns; Loc. = CLKCTRL_G14; Fanout = 164; COMB Node = 'modularizador:modulacao|saida~clkctrl'
+            Info: 4: + IC(1.210 ns) + CELL(0.537 ns) = 7.672 ns; Loc. = LCFF_X53_Y26_N11; Fanout = 3; REG Node = 'controlador:relogio|segundoD[21]'
+            Info: Total cell delay = 2.303 ns ( 30.02 % )
+            Info: Total interconnect delay = 5.369 ns ( 69.98 % )
+    Info: + Micro clock to output delay of source is 0.250 ns
+    Info: + Micro setup delay of destination is -0.036 ns
+Warning: Circuit may not operate. Detected 25 non-operational path(s) clocked by clock "iCLK_28" with clock skew larger than data delay. See Compilation Report for details.
+Info: Found hold time violation between source  pin or register "controlador:relogio|resto[4]" and destination pin or register "controlador:relogio|contador:cont6|flipflopT:cont1|QB" for clock "iCLK_28" (Hold time is 1.942 ns)
+    Info: + Largest clock skew is 4.526 ns
+        Info: + Longest clock path from clock "iCLK_28" to destination register is 9.208 ns
+            Info: 1: + IC(0.000 ns) + CELL(0.979 ns) = 0.979 ns; Loc. = PIN_E16; Fanout = 2; CLK Node = 'iCLK_28'
+            Info: 2: + IC(1.645 ns) + CELL(0.787 ns) = 3.411 ns; Loc. = LCFF_X52_Y29_N17; Fanout = 9; REG Node = 'modularizador:modulacao|saida'
+            Info: 3: + IC(0.734 ns) + CELL(0.787 ns) = 4.932 ns; Loc. = LCFF_X49_Y29_N1; Fanout = 6; REG Node = 'controlador:relogio|resto[4]'
+            Info: 4: + IC(2.544 ns) + CELL(0.000 ns) = 7.476 ns; Loc. = CLKCTRL_G2; Fanout = 4; COMB Node = 'controlador:relogio|resto[4]~clkctrl'
+            Info: 5: + IC(1.195 ns) + CELL(0.537 ns) = 9.208 ns; Loc. = LCFF_X1_Y34_N25; Fanout = 11; REG Node = 'controlador:relogio|contador:cont6|flipflopT:cont1|QB'
+            Info: Total cell delay = 3.090 ns ( 33.56 % )
+            Info: Total interconnect delay = 6.118 ns ( 66.44 % )
+        Info: - Shortest clock path from clock "iCLK_28" to source register is 4.682 ns
+            Info: 1: + IC(0.000 ns) + CELL(0.979 ns) = 0.979 ns; Loc. = PIN_E16; Fanout = 2; CLK Node = 'iCLK_28'
+            Info: 2: + IC(1.645 ns) + CELL(0.787 ns) = 3.411 ns; Loc. = LCFF_X52_Y29_N17; Fanout = 9; REG Node = 'modularizador:modulacao|saida'
+            Info: 3: + IC(0.734 ns) + CELL(0.537 ns) = 4.682 ns; Loc. = LCFF_X49_Y29_N1; Fanout = 6; REG Node = 'controlador:relogio|resto[4]'
+            Info: Total cell delay = 2.303 ns ( 49.19 % )
+            Info: Total interconnect delay = 2.379 ns ( 50.81 % )
+    Info: - Micro clock to output delay of source is 0.250 ns
+    Info: - Shortest register to register delay is 2.600 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X49_Y29_N1; Fanout = 6; REG Node = 'controlador:relogio|resto[4]'
+        Info: 2: + IC(2.078 ns) + CELL(0.438 ns) = 2.516 ns; Loc. = LCCOMB_X1_Y34_N24; Fanout = 1; COMB Node = 'controlador:relogio|contador:cont6|flipflopT:cont1|QB~0'
+        Info: 3: + IC(0.000 ns) + CELL(0.084 ns) = 2.600 ns; Loc. = LCFF_X1_Y34_N25; Fanout = 11; REG Node = 'controlador:relogio|contador:cont6|flipflopT:cont1|QB'
+        Info: Total cell delay = 0.522 ns ( 20.08 % )
+        Info: Total interconnect delay = 2.078 ns ( 79.92 % )
+    Info: + Micro hold delay of destination is 0.266 ns
+Info: tco from clock "iCLK_28" to destination pin "oHEX2_D[4]" through register "controlador:relogio|contador:cont3|flipflopT:cont3|QB" is 16.203 ns
+    Info: + Longest clock path from clock "iCLK_28" to source register is 9.408 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.979 ns) = 0.979 ns; Loc. = PIN_E16; Fanout = 2; CLK Node = 'iCLK_28'
+        Info: 2: + IC(1.645 ns) + CELL(0.787 ns) = 3.411 ns; Loc. = LCFF_X52_Y29_N17; Fanout = 9; REG Node = 'modularizador:modulacao|saida'
+        Info: 3: + IC(1.029 ns) + CELL(0.787 ns) = 5.227 ns; Loc. = LCFF_X49_Y27_N5; Fanout = 8; REG Node = 'controlador:relogio|resto[1]'
+        Info: 4: + IC(2.369 ns) + CELL(0.000 ns) = 7.596 ns; Loc. = CLKCTRL_G12; Fanout = 4; COMB Node = 'controlador:relogio|resto[1]~clkctrl'
+        Info: 5: + IC(1.275 ns) + CELL(0.537 ns) = 9.408 ns; Loc. = LCFF_X24_Y1_N13; Fanout = 9; REG Node = 'controlador:relogio|contador:cont3|flipflopT:cont3|QB'
+        Info: Total cell delay = 3.090 ns ( 32.84 % )
+        Info: Total interconnect delay = 6.318 ns ( 67.16 % )
+    Info: + Micro clock to output delay of source is 0.250 ns
+    Info: + Longest register to pin delay is 6.545 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X24_Y1_N13; Fanout = 9; REG Node = 'controlador:relogio|contador:cont3|flipflopT:cont3|QB'
+        Info: 2: + IC(0.402 ns) + CELL(0.438 ns) = 0.840 ns; Loc. = LCCOMB_X24_Y1_N0; Fanout = 1; COMB Node = 'controlador:relogio|contador:cont3|BinToHex4:hex|oHEX0_D[4]~4'
+        Info: 3: + IC(2.937 ns) + CELL(2.768 ns) = 6.545 ns; Loc. = PIN_AB18; Fanout = 0; PIN Node = 'oHEX2_D[4]'
+        Info: Total cell delay = 3.206 ns ( 48.98 % )
+        Info: Total interconnect delay = 3.339 ns ( 51.02 % )
+Info: Quartus II Classic Timing Analyzer was successful. 0 errors, 3 warnings
+    Info: Peak virtual memory: 198 megabytes
+    Info: Processing ended: Thu Dec 06 11:52:59 2018
+    Info: Elapsed time: 00:00:00
+    Info: Total CPU time (on all processors): 00:00:01
+
+

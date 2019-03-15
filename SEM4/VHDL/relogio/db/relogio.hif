@@ -1,0 +1,304 @@
+Quartus II
+Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+11
+1040
+OFF
+OFF
+OFF
+ON
+ON
+ON
+FV_OFF
+Level2
+0
+0
+VRSM_ON
+VHSM_ON
+0
+-- Start Library Paths --
+-- End Library Paths --
+-- Start VHDL Libraries --
+-- End VHDL Libraries --
+# entity
+contador
+# storage
+db|relogio.(3).cnf
+db|relogio.(3).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+|altera|luizagianshiro|contador|contador.vhd
+cc0e9ee886649a5c67eba9486e33a
+5
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# user_parameter {
+ constraint(isw)
+1 downto 0
+PARAMETER_STRING
+USR
+ constraint(ikey)
+0 downto 0
+PARAMETER_STRING
+USR
+ constraint(ohex0_d)
+6 downto 0
+PARAMETER_STRING
+USR
+}
+# hierarchies {
+controlador:relogio|contador:cont1
+controlador:relogio|contador:cont2
+controlador:relogio|contador:cont3
+controlador:relogio|contador:cont4
+controlador:relogio|contador:cont5
+controlador:relogio|contador:cont6
+}
+# lmf
+|altera|91sp2|quartus|lmf|maxplus2.lmf
+a36c8ec425c8a2589af98b2d4daabc3
+# macro_sequence
+
+# end
+# entity
+flipflopT
+# storage
+db|relogio.(4).cnf
+db|relogio.(4).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+|altera|luizagianshiro|registrador|flipflopt.vhd
+b8824c9dc8ff2ce3bb29a7293a33b2f
+5
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# hierarchies {
+controlador:relogio|contador:cont1|flipflopT:cont1
+controlador:relogio|contador:cont1|flipflopT:cont2
+controlador:relogio|contador:cont1|flipflopT:cont3
+controlador:relogio|contador:cont1|flipflopT:cont4
+controlador:relogio|contador:cont2|flipflopT:cont1
+controlador:relogio|contador:cont2|flipflopT:cont2
+controlador:relogio|contador:cont2|flipflopT:cont3
+controlador:relogio|contador:cont2|flipflopT:cont4
+controlador:relogio|contador:cont3|flipflopT:cont1
+controlador:relogio|contador:cont3|flipflopT:cont2
+controlador:relogio|contador:cont3|flipflopT:cont3
+controlador:relogio|contador:cont3|flipflopT:cont4
+controlador:relogio|contador:cont4|flipflopT:cont1
+controlador:relogio|contador:cont4|flipflopT:cont2
+controlador:relogio|contador:cont4|flipflopT:cont3
+controlador:relogio|contador:cont4|flipflopT:cont4
+controlador:relogio|contador:cont5|flipflopT:cont1
+controlador:relogio|contador:cont5|flipflopT:cont2
+controlador:relogio|contador:cont5|flipflopT:cont3
+controlador:relogio|contador:cont5|flipflopT:cont4
+controlador:relogio|contador:cont6|flipflopT:cont1
+controlador:relogio|contador:cont6|flipflopT:cont2
+controlador:relogio|contador:cont6|flipflopT:cont3
+controlador:relogio|contador:cont6|flipflopT:cont4
+}
+# lmf
+|altera|91sp2|quartus|lmf|maxplus2.lmf
+a36c8ec425c8a2589af98b2d4daabc3
+# macro_sequence
+
+# end
+# entity
+BinToHex4
+# storage
+db|relogio.(5).cnf
+db|relogio.(5).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+|altera|luizagianshiro|bintohex8|bintohex4.vhd
+6e5b99d16780fd5834122a9e31d283
+5
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# user_parameter {
+ constraint(isw)
+3 downto 0
+PARAMETER_STRING
+USR
+ constraint(ohex0_d)
+6 downto 0
+PARAMETER_STRING
+USR
+}
+# hierarchies {
+controlador:relogio|contador:cont1|BinToHex4:hex
+controlador:relogio|contador:cont2|BinToHex4:hex
+controlador:relogio|contador:cont3|BinToHex4:hex
+controlador:relogio|contador:cont4|BinToHex4:hex
+controlador:relogio|contador:cont5|BinToHex4:hex
+controlador:relogio|contador:cont6|BinToHex4:hex
+}
+# lmf
+|altera|91sp2|quartus|lmf|maxplus2.lmf
+a36c8ec425c8a2589af98b2d4daabc3
+# macro_sequence
+
+# end
+# entity
+relogio
+# storage
+db|relogio.(0).cnf
+db|relogio.(0).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+relogio.vhd
+5d2afe518de0eea59e56a562b51520
+5
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# hierarchies {
+|
+}
+# lmf
+|altera|91sp2|quartus|lmf|maxplus2.lmf
+a36c8ec425c8a2589af98b2d4daabc3
+# macro_sequence
+
+# end
+# entity
+controlador
+# storage
+db|relogio.(2).cnf
+db|relogio.(2).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+controlador.vhd
+add3984aee8e5c6f1db18ec8f91432
+5
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# user_parameter {
+ constraint(ohex2_d)
+6 downto 0
+PARAMETER_STRING
+USR
+ constraint(ohex3_d)
+6 downto 0
+PARAMETER_STRING
+USR
+ constraint(ohex4_d)
+6 downto 0
+PARAMETER_STRING
+USR
+ constraint(ohex5_d)
+6 downto 0
+PARAMETER_STRING
+USR
+ constraint(ohex6_d)
+6 downto 0
+PARAMETER_STRING
+USR
+ constraint(ohex7_d)
+6 downto 0
+PARAMETER_STRING
+USR
+}
+# hierarchies {
+controlador:relogio
+}
+# lmf
+|altera|91sp2|quartus|lmf|maxplus2.lmf
+a36c8ec425c8a2589af98b2d4daabc3
+# macro_sequence
+
+# end
+# entity
+modularizador
+# storage
+db|relogio.(1).cnf
+db|relogio.(1).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+|altera|luizagianshiro|modularizador|modularizador.vhd
+ac5e62af3f49d898fba2bece7dd48
+5
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# hierarchies {
+modularizador:modulacao
+}
+# lmf
+|altera|91sp2|quartus|lmf|maxplus2.lmf
+a36c8ec425c8a2589af98b2d4daabc3
+# macro_sequence
+
+# end
+# complete
+

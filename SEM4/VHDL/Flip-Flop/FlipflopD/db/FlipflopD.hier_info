@@ -1,0 +1,7 @@
+|FlipflopD
+iSW[0] => QB.OUTPUTSELECT
+iSW[0] => QB.ENA
+iKEY[0] => QB.CLK
+oLEDR[0] <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+

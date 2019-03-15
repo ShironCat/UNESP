@@ -1,0 +1,15 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+entity processador is 
+	port(
+		clk   : in  std_logic;
+		estado: in  std_logic;
+		ir    : in  std_logic_vector(7 downto 0);
+		reg	  : out std_logic_vector(3 downto 0);
+		mux	  : out std_logic_vector(3 downto 0);
+		ula   : out std_logic_vector(2 downto 0);
+		a	  : out std_logic;
+		ready : out std_logic
+	);
+end processador;

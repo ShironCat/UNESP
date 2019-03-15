@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pin_planner>
+	<pin_info>
+		<pin name="oHEX1_D[0]" source="Pin Planner" >
+		</pin>
+		<pin name="oHEX1_D[1]" source="Pin Planner" >
+		</pin>
+		<pin name="oHEX1_D[2]" source="Pin Planner" >
+		</pin>
+		<pin name="oHEX1_D[3]" source="Pin Planner" >
+		</pin>
+		<pin name="oHEX1_D[4]" source="Pin Planner" >
+		</pin>
+		<pin name="oHEX1_D[5]" source="Pin Planner" >
+		</pin>
+		<pin name="oHEX1_D[6]" source="Pin Planner" >
+		</pin>
+		<pin name="oHEX1_D[6..0]" direction="Unknown Group" source="Pin Planner" >
+		</pin>
+	</pin_info>
+	<buses>
+		<bus name="oHEX1_D[6..0]" direction="Unknown Group" >
+			<member name="oHEX1_D[6]" />
+			<member name="oHEX1_D[5]" />
+			<member name="oHEX1_D[4]" />
+			<member name="oHEX1_D[3]" />
+			<member name="oHEX1_D[2]" />
+			<member name="oHEX1_D[1]" />
+			<member name="oHEX1_D[0]" />
+		</bus>
+	</buses>
+	<group_file_association>
+	</group_file_association>
+	<pin_planner_file_specifies>
+	</pin_planner_file_specifies>
+</pin_planner>

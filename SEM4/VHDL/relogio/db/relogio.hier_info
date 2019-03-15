@@ -1,0 +1,994 @@
+|relogio
+iCLK_28 => modularizador:modulacao.iCLK_28
+oHEX0_D[0] <= controlador:relogio.oHEX2_D[0]
+oHEX0_D[1] <= controlador:relogio.oHEX2_D[1]
+oHEX0_D[2] <= controlador:relogio.oHEX2_D[2]
+oHEX0_D[3] <= controlador:relogio.oHEX2_D[3]
+oHEX0_D[4] <= controlador:relogio.oHEX2_D[4]
+oHEX0_D[5] <= controlador:relogio.oHEX2_D[5]
+oHEX0_D[6] <= controlador:relogio.oHEX2_D[6]
+oHEX0_DP <= controlador:relogio.oHEX2_DP
+oHEX1_D[0] <= controlador:relogio.oHEX3_D[0]
+oHEX1_D[1] <= controlador:relogio.oHEX3_D[1]
+oHEX1_D[2] <= controlador:relogio.oHEX3_D[2]
+oHEX1_D[3] <= controlador:relogio.oHEX3_D[3]
+oHEX1_D[4] <= controlador:relogio.oHEX3_D[4]
+oHEX1_D[5] <= controlador:relogio.oHEX3_D[5]
+oHEX1_D[6] <= controlador:relogio.oHEX3_D[6]
+oHEX1_DP <= controlador:relogio.oHEX3_DP
+oHEX2_D[0] <= controlador:relogio.oHEX4_D[0]
+oHEX2_D[1] <= controlador:relogio.oHEX4_D[1]
+oHEX2_D[2] <= controlador:relogio.oHEX4_D[2]
+oHEX2_D[3] <= controlador:relogio.oHEX4_D[3]
+oHEX2_D[4] <= controlador:relogio.oHEX4_D[4]
+oHEX2_D[5] <= controlador:relogio.oHEX4_D[5]
+oHEX2_D[6] <= controlador:relogio.oHEX4_D[6]
+oHEX2_DP <= controlador:relogio.oHEX4_DP
+oHEX3_D[0] <= controlador:relogio.oHEX5_D[0]
+oHEX3_D[1] <= controlador:relogio.oHEX5_D[1]
+oHEX3_D[2] <= controlador:relogio.oHEX5_D[2]
+oHEX3_D[3] <= controlador:relogio.oHEX5_D[3]
+oHEX3_D[4] <= controlador:relogio.oHEX5_D[4]
+oHEX3_D[5] <= controlador:relogio.oHEX5_D[5]
+oHEX3_D[6] <= controlador:relogio.oHEX5_D[6]
+oHEX3_DP <= controlador:relogio.oHEX5_DP
+oHEX4_D[0] <= controlador:relogio.oHEX6_D[0]
+oHEX4_D[1] <= controlador:relogio.oHEX6_D[1]
+oHEX4_D[2] <= controlador:relogio.oHEX6_D[2]
+oHEX4_D[3] <= controlador:relogio.oHEX6_D[3]
+oHEX4_D[4] <= controlador:relogio.oHEX6_D[4]
+oHEX4_D[5] <= controlador:relogio.oHEX6_D[5]
+oHEX4_D[6] <= controlador:relogio.oHEX6_D[6]
+oHEX4_DP <= controlador:relogio.oHEX6_DP
+oHEX5_D[0] <= controlador:relogio.oHEX7_D[0]
+oHEX5_D[1] <= controlador:relogio.oHEX7_D[1]
+oHEX5_D[2] <= controlador:relogio.oHEX7_D[2]
+oHEX5_D[3] <= controlador:relogio.oHEX7_D[3]
+oHEX5_D[4] <= controlador:relogio.oHEX7_D[4]
+oHEX5_D[5] <= controlador:relogio.oHEX7_D[5]
+oHEX5_D[6] <= controlador:relogio.oHEX7_D[6]
+oHEX5_DP <= controlador:relogio.oHEX7_DP
+
+
+|relogio|modularizador:modulacao
+iCLK_28 => saida.CLK
+iCLK_28 => x[0].CLK
+iCLK_28 => x[1].CLK
+iCLK_28 => x[2].CLK
+iCLK_28 => x[3].CLK
+iCLK_28 => x[4].CLK
+iCLK_28 => x[5].CLK
+iCLK_28 => x[6].CLK
+iCLK_28 => x[7].CLK
+iCLK_28 => x[8].CLK
+iCLK_28 => x[9].CLK
+iCLK_28 => x[10].CLK
+iCLK_28 => x[11].CLK
+iCLK_28 => x[12].CLK
+iCLK_28 => x[13].CLK
+iCLK_28 => x[14].CLK
+iCLK_28 => x[15].CLK
+iCLK_28 => x[16].CLK
+iCLK_28 => x[17].CLK
+iCLK_28 => x[18].CLK
+iCLK_28 => x[19].CLK
+iCLK_28 => x[20].CLK
+iCLK_28 => x[21].CLK
+iCLK_28 => x[22].CLK
+iCLK_28 => x[23].CLK
+iCLK_28 => x[24].CLK
+iCLK_28 => x[25].CLK
+iCLK_28 => x[26].CLK
+iCLK_28 => x[27].CLK
+iCLK_28 => x[28].CLK
+iCLK_28 => x[29].CLK
+iCLK_28 => x[30].CLK
+iCLK_28 => x[31].CLK
+ss <= saida.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio
+iCLK => horaD[0].CLK
+iCLK => horaD[1].CLK
+iCLK => horaD[2].CLK
+iCLK => horaD[3].CLK
+iCLK => horaD[4].CLK
+iCLK => horaD[5].CLK
+iCLK => horaD[6].CLK
+iCLK => horaD[7].CLK
+iCLK => horaD[8].CLK
+iCLK => horaD[9].CLK
+iCLK => horaD[10].CLK
+iCLK => horaD[11].CLK
+iCLK => horaD[12].CLK
+iCLK => horaD[13].CLK
+iCLK => horaD[14].CLK
+iCLK => horaD[15].CLK
+iCLK => horaD[16].CLK
+iCLK => horaD[17].CLK
+iCLK => horaD[18].CLK
+iCLK => horaD[19].CLK
+iCLK => horaD[20].CLK
+iCLK => horaD[21].CLK
+iCLK => horaD[22].CLK
+iCLK => horaD[23].CLK
+iCLK => horaD[24].CLK
+iCLK => horaD[25].CLK
+iCLK => horaD[26].CLK
+iCLK => horaD[27].CLK
+iCLK => horaD[28].CLK
+iCLK => horaD[29].CLK
+iCLK => horaD[30].CLK
+iCLK => horaD[31].CLK
+iCLK => horaU[0].CLK
+iCLK => horaU[1].CLK
+iCLK => horaU[2].CLK
+iCLK => horaU[3].CLK
+iCLK => horaU[4].CLK
+iCLK => horaU[5].CLK
+iCLK => horaU[6].CLK
+iCLK => horaU[7].CLK
+iCLK => horaU[8].CLK
+iCLK => horaU[9].CLK
+iCLK => horaU[10].CLK
+iCLK => horaU[11].CLK
+iCLK => horaU[12].CLK
+iCLK => horaU[13].CLK
+iCLK => horaU[14].CLK
+iCLK => horaU[15].CLK
+iCLK => horaU[16].CLK
+iCLK => horaU[17].CLK
+iCLK => horaU[18].CLK
+iCLK => horaU[19].CLK
+iCLK => horaU[20].CLK
+iCLK => horaU[21].CLK
+iCLK => horaU[22].CLK
+iCLK => horaU[23].CLK
+iCLK => horaU[24].CLK
+iCLK => horaU[25].CLK
+iCLK => horaU[26].CLK
+iCLK => horaU[27].CLK
+iCLK => horaU[28].CLK
+iCLK => horaU[29].CLK
+iCLK => horaU[30].CLK
+iCLK => horaU[31].CLK
+iCLK => minutoD[0].CLK
+iCLK => minutoD[1].CLK
+iCLK => minutoD[2].CLK
+iCLK => minutoD[3].CLK
+iCLK => minutoD[4].CLK
+iCLK => minutoD[5].CLK
+iCLK => minutoD[6].CLK
+iCLK => minutoD[7].CLK
+iCLK => minutoD[8].CLK
+iCLK => minutoD[9].CLK
+iCLK => minutoD[10].CLK
+iCLK => minutoD[11].CLK
+iCLK => minutoD[12].CLK
+iCLK => minutoD[13].CLK
+iCLK => minutoD[14].CLK
+iCLK => minutoD[15].CLK
+iCLK => minutoD[16].CLK
+iCLK => minutoD[17].CLK
+iCLK => minutoD[18].CLK
+iCLK => minutoD[19].CLK
+iCLK => minutoD[20].CLK
+iCLK => minutoD[21].CLK
+iCLK => minutoD[22].CLK
+iCLK => minutoD[23].CLK
+iCLK => minutoD[24].CLK
+iCLK => minutoD[25].CLK
+iCLK => minutoD[26].CLK
+iCLK => minutoD[27].CLK
+iCLK => minutoD[28].CLK
+iCLK => minutoD[29].CLK
+iCLK => minutoD[30].CLK
+iCLK => minutoD[31].CLK
+iCLK => minutoU[0].CLK
+iCLK => minutoU[1].CLK
+iCLK => minutoU[2].CLK
+iCLK => minutoU[3].CLK
+iCLK => minutoU[4].CLK
+iCLK => minutoU[5].CLK
+iCLK => minutoU[6].CLK
+iCLK => minutoU[7].CLK
+iCLK => minutoU[8].CLK
+iCLK => minutoU[9].CLK
+iCLK => minutoU[10].CLK
+iCLK => minutoU[11].CLK
+iCLK => minutoU[12].CLK
+iCLK => minutoU[13].CLK
+iCLK => minutoU[14].CLK
+iCLK => minutoU[15].CLK
+iCLK => minutoU[16].CLK
+iCLK => minutoU[17].CLK
+iCLK => minutoU[18].CLK
+iCLK => minutoU[19].CLK
+iCLK => minutoU[20].CLK
+iCLK => minutoU[21].CLK
+iCLK => minutoU[22].CLK
+iCLK => minutoU[23].CLK
+iCLK => minutoU[24].CLK
+iCLK => minutoU[25].CLK
+iCLK => minutoU[26].CLK
+iCLK => minutoU[27].CLK
+iCLK => minutoU[28].CLK
+iCLK => minutoU[29].CLK
+iCLK => minutoU[30].CLK
+iCLK => minutoU[31].CLK
+iCLK => segundoD[0].CLK
+iCLK => segundoD[1].CLK
+iCLK => segundoD[2].CLK
+iCLK => segundoD[3].CLK
+iCLK => segundoD[4].CLK
+iCLK => segundoD[5].CLK
+iCLK => segundoD[6].CLK
+iCLK => segundoD[7].CLK
+iCLK => segundoD[8].CLK
+iCLK => segundoD[9].CLK
+iCLK => segundoD[10].CLK
+iCLK => segundoD[11].CLK
+iCLK => segundoD[12].CLK
+iCLK => segundoD[13].CLK
+iCLK => segundoD[14].CLK
+iCLK => segundoD[15].CLK
+iCLK => segundoD[16].CLK
+iCLK => segundoD[17].CLK
+iCLK => segundoD[18].CLK
+iCLK => segundoD[19].CLK
+iCLK => segundoD[20].CLK
+iCLK => segundoD[21].CLK
+iCLK => segundoD[22].CLK
+iCLK => segundoD[23].CLK
+iCLK => segundoD[24].CLK
+iCLK => segundoD[25].CLK
+iCLK => segundoD[26].CLK
+iCLK => segundoD[27].CLK
+iCLK => segundoD[28].CLK
+iCLK => segundoD[29].CLK
+iCLK => segundoD[30].CLK
+iCLK => segundoD[31].CLK
+iCLK => resto[0].CLK
+iCLK => resto[1].CLK
+iCLK => resto[2].CLK
+iCLK => resto[3].CLK
+iCLK => resto[4].CLK
+iCLK => resto[5].CLK
+iCLK => segundoU[0].CLK
+iCLK => segundoU[1].CLK
+iCLK => segundoU[2].CLK
+iCLK => segundoU[3].CLK
+iCLK => segundoU[4].CLK
+iCLK => segundoU[5].CLK
+iCLK => segundoU[6].CLK
+iCLK => segundoU[7].CLK
+iCLK => segundoU[8].CLK
+iCLK => segundoU[9].CLK
+iCLK => segundoU[10].CLK
+iCLK => segundoU[11].CLK
+iCLK => segundoU[12].CLK
+iCLK => segundoU[13].CLK
+iCLK => segundoU[14].CLK
+iCLK => segundoU[15].CLK
+iCLK => segundoU[16].CLK
+iCLK => segundoU[17].CLK
+iCLK => segundoU[18].CLK
+iCLK => segundoU[19].CLK
+iCLK => segundoU[20].CLK
+iCLK => segundoU[21].CLK
+iCLK => segundoU[22].CLK
+iCLK => segundoU[23].CLK
+iCLK => segundoU[24].CLK
+iCLK => segundoU[25].CLK
+iCLK => segundoU[26].CLK
+iCLK => segundoU[27].CLK
+iCLK => segundoU[28].CLK
+iCLK => segundoU[29].CLK
+iCLK => segundoU[30].CLK
+iCLK => segundoU[31].CLK
+iCLK => contador:cont1.iSW[0]
+iCLK => contador:cont1.iKEY[0]
+oHEX2_D[0] <= contador:cont1.oHEX0_D[0]
+oHEX2_D[1] <= contador:cont1.oHEX0_D[1]
+oHEX2_D[2] <= contador:cont1.oHEX0_D[2]
+oHEX2_D[3] <= contador:cont1.oHEX0_D[3]
+oHEX2_D[4] <= contador:cont1.oHEX0_D[4]
+oHEX2_D[5] <= contador:cont1.oHEX0_D[5]
+oHEX2_D[6] <= contador:cont1.oHEX0_D[6]
+oHEX2_DP <= contador:cont1.oHEX0_DP
+oHEX3_D[0] <= contador:cont2.oHEX0_D[0]
+oHEX3_D[1] <= contador:cont2.oHEX0_D[1]
+oHEX3_D[2] <= contador:cont2.oHEX0_D[2]
+oHEX3_D[3] <= contador:cont2.oHEX0_D[3]
+oHEX3_D[4] <= contador:cont2.oHEX0_D[4]
+oHEX3_D[5] <= contador:cont2.oHEX0_D[5]
+oHEX3_D[6] <= contador:cont2.oHEX0_D[6]
+oHEX3_DP <= contador:cont2.oHEX0_DP
+oHEX4_D[0] <= contador:cont3.oHEX0_D[0]
+oHEX4_D[1] <= contador:cont3.oHEX0_D[1]
+oHEX4_D[2] <= contador:cont3.oHEX0_D[2]
+oHEX4_D[3] <= contador:cont3.oHEX0_D[3]
+oHEX4_D[4] <= contador:cont3.oHEX0_D[4]
+oHEX4_D[5] <= contador:cont3.oHEX0_D[5]
+oHEX4_D[6] <= contador:cont3.oHEX0_D[6]
+oHEX4_DP <= contador:cont3.oHEX0_DP
+oHEX5_D[0] <= contador:cont4.oHEX0_D[0]
+oHEX5_D[1] <= contador:cont4.oHEX0_D[1]
+oHEX5_D[2] <= contador:cont4.oHEX0_D[2]
+oHEX5_D[3] <= contador:cont4.oHEX0_D[3]
+oHEX5_D[4] <= contador:cont4.oHEX0_D[4]
+oHEX5_D[5] <= contador:cont4.oHEX0_D[5]
+oHEX5_D[6] <= contador:cont4.oHEX0_D[6]
+oHEX5_DP <= contador:cont4.oHEX0_DP
+oHEX6_D[0] <= contador:cont5.oHEX0_D[0]
+oHEX6_D[1] <= contador:cont5.oHEX0_D[1]
+oHEX6_D[2] <= contador:cont5.oHEX0_D[2]
+oHEX6_D[3] <= contador:cont5.oHEX0_D[3]
+oHEX6_D[4] <= contador:cont5.oHEX0_D[4]
+oHEX6_D[5] <= contador:cont5.oHEX0_D[5]
+oHEX6_D[6] <= contador:cont5.oHEX0_D[6]
+oHEX6_DP <= contador:cont5.oHEX0_DP
+oHEX7_D[0] <= contador:cont6.oHEX0_D[0]
+oHEX7_D[1] <= contador:cont6.oHEX0_D[1]
+oHEX7_D[2] <= contador:cont6.oHEX0_D[2]
+oHEX7_D[3] <= contador:cont6.oHEX0_D[3]
+oHEX7_D[4] <= contador:cont6.oHEX0_D[4]
+oHEX7_D[5] <= contador:cont6.oHEX0_D[5]
+oHEX7_D[6] <= contador:cont6.oHEX0_D[6]
+oHEX7_DP <= contador:cont6.oHEX0_DP
+
+
+|relogio|controlador:relogio|contador:cont1
+iSW[0] => e[0].IN1
+iSW[0] => FlipFlopT:cont1.iSW
+iSW[1] => FlipFlopT:cont1.iSW1
+iSW[1] => FlipFlopT:cont2.iSW1
+iSW[1] => FlipFlopT:cont3.iSW1
+iSW[1] => FlipFlopT:cont4.iSW1
+iKEY[0] => FlipFlopT:cont1.iKEY
+iKEY[0] => FlipFlopT:cont2.iKEY
+iKEY[0] => FlipFlopT:cont3.iKEY
+iKEY[0] => FlipFlopT:cont4.iKEY
+oHEX0_D[0] <= BinToHex4:hex.oHEX0_D[0]
+oHEX0_D[1] <= BinToHex4:hex.oHEX0_D[1]
+oHEX0_D[2] <= BinToHex4:hex.oHEX0_D[2]
+oHEX0_D[3] <= BinToHex4:hex.oHEX0_D[3]
+oHEX0_D[4] <= BinToHex4:hex.oHEX0_D[4]
+oHEX0_D[5] <= BinToHex4:hex.oHEX0_D[5]
+oHEX0_D[6] <= BinToHex4:hex.oHEX0_D[6]
+oHEX0_DP <= BinToHex4:hex.oHEX0_DP
+
+
+|relogio|controlador:relogio|contador:cont1|flipflopT:cont1
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont1|flipflopT:cont2
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont1|flipflopT:cont3
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont1|flipflopT:cont4
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont1|BinToHex4:hex
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN0
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN0
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+oHEX0_D[0] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[1] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[2] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[3] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[4] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[5] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[6] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_DP <= <VCC>
+
+
+|relogio|controlador:relogio|contador:cont2
+iSW[0] => e[0].IN1
+iSW[0] => FlipFlopT:cont1.iSW
+iSW[1] => FlipFlopT:cont1.iSW1
+iSW[1] => FlipFlopT:cont2.iSW1
+iSW[1] => FlipFlopT:cont3.iSW1
+iSW[1] => FlipFlopT:cont4.iSW1
+iKEY[0] => FlipFlopT:cont1.iKEY
+iKEY[0] => FlipFlopT:cont2.iKEY
+iKEY[0] => FlipFlopT:cont3.iKEY
+iKEY[0] => FlipFlopT:cont4.iKEY
+oHEX0_D[0] <= BinToHex4:hex.oHEX0_D[0]
+oHEX0_D[1] <= BinToHex4:hex.oHEX0_D[1]
+oHEX0_D[2] <= BinToHex4:hex.oHEX0_D[2]
+oHEX0_D[3] <= BinToHex4:hex.oHEX0_D[3]
+oHEX0_D[4] <= BinToHex4:hex.oHEX0_D[4]
+oHEX0_D[5] <= BinToHex4:hex.oHEX0_D[5]
+oHEX0_D[6] <= BinToHex4:hex.oHEX0_D[6]
+oHEX0_DP <= BinToHex4:hex.oHEX0_DP
+
+
+|relogio|controlador:relogio|contador:cont2|flipflopT:cont1
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont2|flipflopT:cont2
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont2|flipflopT:cont3
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont2|flipflopT:cont4
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont2|BinToHex4:hex
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN0
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN0
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+oHEX0_D[0] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[1] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[2] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[3] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[4] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[5] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[6] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_DP <= <VCC>
+
+
+|relogio|controlador:relogio|contador:cont3
+iSW[0] => e[0].IN1
+iSW[0] => FlipFlopT:cont1.iSW
+iSW[1] => FlipFlopT:cont1.iSW1
+iSW[1] => FlipFlopT:cont2.iSW1
+iSW[1] => FlipFlopT:cont3.iSW1
+iSW[1] => FlipFlopT:cont4.iSW1
+iKEY[0] => FlipFlopT:cont1.iKEY
+iKEY[0] => FlipFlopT:cont2.iKEY
+iKEY[0] => FlipFlopT:cont3.iKEY
+iKEY[0] => FlipFlopT:cont4.iKEY
+oHEX0_D[0] <= BinToHex4:hex.oHEX0_D[0]
+oHEX0_D[1] <= BinToHex4:hex.oHEX0_D[1]
+oHEX0_D[2] <= BinToHex4:hex.oHEX0_D[2]
+oHEX0_D[3] <= BinToHex4:hex.oHEX0_D[3]
+oHEX0_D[4] <= BinToHex4:hex.oHEX0_D[4]
+oHEX0_D[5] <= BinToHex4:hex.oHEX0_D[5]
+oHEX0_D[6] <= BinToHex4:hex.oHEX0_D[6]
+oHEX0_DP <= BinToHex4:hex.oHEX0_DP
+
+
+|relogio|controlador:relogio|contador:cont3|flipflopT:cont1
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont3|flipflopT:cont2
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont3|flipflopT:cont3
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont3|flipflopT:cont4
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont3|BinToHex4:hex
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN0
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN0
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+oHEX0_D[0] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[1] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[2] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[3] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[4] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[5] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[6] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_DP <= <VCC>
+
+
+|relogio|controlador:relogio|contador:cont4
+iSW[0] => e[0].IN1
+iSW[0] => FlipFlopT:cont1.iSW
+iSW[1] => FlipFlopT:cont1.iSW1
+iSW[1] => FlipFlopT:cont2.iSW1
+iSW[1] => FlipFlopT:cont3.iSW1
+iSW[1] => FlipFlopT:cont4.iSW1
+iKEY[0] => FlipFlopT:cont1.iKEY
+iKEY[0] => FlipFlopT:cont2.iKEY
+iKEY[0] => FlipFlopT:cont3.iKEY
+iKEY[0] => FlipFlopT:cont4.iKEY
+oHEX0_D[0] <= BinToHex4:hex.oHEX0_D[0]
+oHEX0_D[1] <= BinToHex4:hex.oHEX0_D[1]
+oHEX0_D[2] <= BinToHex4:hex.oHEX0_D[2]
+oHEX0_D[3] <= BinToHex4:hex.oHEX0_D[3]
+oHEX0_D[4] <= BinToHex4:hex.oHEX0_D[4]
+oHEX0_D[5] <= BinToHex4:hex.oHEX0_D[5]
+oHEX0_D[6] <= BinToHex4:hex.oHEX0_D[6]
+oHEX0_DP <= BinToHex4:hex.oHEX0_DP
+
+
+|relogio|controlador:relogio|contador:cont4|flipflopT:cont1
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont4|flipflopT:cont2
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont4|flipflopT:cont3
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont4|flipflopT:cont4
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont4|BinToHex4:hex
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN0
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN0
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+oHEX0_D[0] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[1] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[2] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[3] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[4] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[5] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[6] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_DP <= <VCC>
+
+
+|relogio|controlador:relogio|contador:cont5
+iSW[0] => e[0].IN1
+iSW[0] => FlipFlopT:cont1.iSW
+iSW[1] => FlipFlopT:cont1.iSW1
+iSW[1] => FlipFlopT:cont2.iSW1
+iSW[1] => FlipFlopT:cont3.iSW1
+iSW[1] => FlipFlopT:cont4.iSW1
+iKEY[0] => FlipFlopT:cont1.iKEY
+iKEY[0] => FlipFlopT:cont2.iKEY
+iKEY[0] => FlipFlopT:cont3.iKEY
+iKEY[0] => FlipFlopT:cont4.iKEY
+oHEX0_D[0] <= BinToHex4:hex.oHEX0_D[0]
+oHEX0_D[1] <= BinToHex4:hex.oHEX0_D[1]
+oHEX0_D[2] <= BinToHex4:hex.oHEX0_D[2]
+oHEX0_D[3] <= BinToHex4:hex.oHEX0_D[3]
+oHEX0_D[4] <= BinToHex4:hex.oHEX0_D[4]
+oHEX0_D[5] <= BinToHex4:hex.oHEX0_D[5]
+oHEX0_D[6] <= BinToHex4:hex.oHEX0_D[6]
+oHEX0_DP <= BinToHex4:hex.oHEX0_DP
+
+
+|relogio|controlador:relogio|contador:cont5|flipflopT:cont1
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont5|flipflopT:cont2
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont5|flipflopT:cont3
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont5|flipflopT:cont4
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont5|BinToHex4:hex
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN0
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN0
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+oHEX0_D[0] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[1] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[2] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[3] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[4] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[5] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[6] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_DP <= <VCC>
+
+
+|relogio|controlador:relogio|contador:cont6
+iSW[0] => e[0].IN1
+iSW[0] => FlipFlopT:cont1.iSW
+iSW[1] => FlipFlopT:cont1.iSW1
+iSW[1] => FlipFlopT:cont2.iSW1
+iSW[1] => FlipFlopT:cont3.iSW1
+iSW[1] => FlipFlopT:cont4.iSW1
+iKEY[0] => FlipFlopT:cont1.iKEY
+iKEY[0] => FlipFlopT:cont2.iKEY
+iKEY[0] => FlipFlopT:cont3.iKEY
+iKEY[0] => FlipFlopT:cont4.iKEY
+oHEX0_D[0] <= BinToHex4:hex.oHEX0_D[0]
+oHEX0_D[1] <= BinToHex4:hex.oHEX0_D[1]
+oHEX0_D[2] <= BinToHex4:hex.oHEX0_D[2]
+oHEX0_D[3] <= BinToHex4:hex.oHEX0_D[3]
+oHEX0_D[4] <= BinToHex4:hex.oHEX0_D[4]
+oHEX0_D[5] <= BinToHex4:hex.oHEX0_D[5]
+oHEX0_D[6] <= BinToHex4:hex.oHEX0_D[6]
+oHEX0_DP <= BinToHex4:hex.oHEX0_DP
+
+
+|relogio|controlador:relogio|contador:cont6|flipflopT:cont1
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont6|flipflopT:cont2
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont6|flipflopT:cont3
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont6|flipflopT:cont4
+iSW => QB.OUTPUTSELECT
+iSW => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iSW1 => QB.OUTPUTSELECT
+iKEY[0] => QB.CLK
+oLEDR <= QB.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|controlador:relogio|contador:cont6|BinToHex4:hex
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN0
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[0] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN1
+iSW[1] => oHEX0_D.IN0
+iSW[1] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN0
+iSW[2] => oHEX0_D.IN1
+iSW[2] => oHEX0_D.IN0
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+iSW[3] => oHEX0_D.IN1
+oHEX0_D[0] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[1] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[2] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[3] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[4] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[5] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_D[6] <= oHEX0_D.DB_MAX_OUTPUT_PORT_TYPE
+oHEX0_DP <= <VCC>
+
+
