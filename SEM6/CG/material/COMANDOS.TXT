@@ -1,0 +1,25 @@
+glRotatef (ângulo, componente x, componente y, componente z): ângulo é o valor em graus que será rotacionado em torno de um eixo, definido por componente x, componente y e componente z.
+glRotatef (45, 1.0, 0.0, 0.0);
+
+glScalef (fator x, fator y, fator z): altera a escala dos eixos conforme o fator multiplicativo fornecido. Se o fator for 0, estaremos simplesmente eliminando essa coordenada.
+glScalef(1,5,0);
+
+glTranslatef (posição x, posição y, posição z): A origem do sistema será transladada para a posição fornecida como parâmetro.
+glTranslatef(0,5,0);
+
+glColor3ub(corR,corG,corB);
+
+
+   glColor3ub(0,0,0);  
+   glRotatef(35,1,1,0);
+   glTranslatef(0,0,10);
+   glutWireCube(5.7);
+
+   glColor3ub(0,0,0);   
+   glutWireSphere(5, 50, 50);	
+
+
+glPushMatrix();
+glPopMatrix();
+      
+
