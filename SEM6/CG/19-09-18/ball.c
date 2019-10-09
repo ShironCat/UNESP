@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
 #include <math.h>
+#include <stdbool.h>
 #include <GL/freeglut.h>
 
 #ifndef DEG_TO_RAD
 #define DEG_TO_RAD 0.017453292519943295769236907684886
 #endif
 
-#define WINDOW_TITLE_PREFIX "Braco mequanico"
+#define WINDOW_TITLE_PREFIX "Bola quicando"
 
 struct WindowStruct {
   int CurrentWidth;
@@ -29,27 +29,23 @@ struct CameraStruct {
   double upX;
   double upY;
   double upZ;
-  double inclination;
-  double azimuth;
-} Camera = {0.0, 10.0, 20.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 90.0, 0.0};
+} Camera = {20.0, 10.0, 20.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0};
 
-struct ArmStruct {
-  double AngleBottom;
-  double AngleMiddle;
-  double AngleTop;
-} Arm = {90.0, 135.0, 135.0};
+struct OptionStruct {
+  bool EnableMotion;
+  bool EnableShadow;
+} Option = {true, true};
 
-bool keyStates[256];
+double tick = 0;
 
 void Initialize(int, char*[]);
 void InitWindow(int, char*[]);
+void MenuOptions(int);
+void CreateMenu(void);
 void ResizeFunction(int, int);
 void RenderFunction(void);
 void TimerFunction(int);
 void IdleFunction(void);
-void KeyDownFunction(unsigned char, int, int);
-void KeyUpFunction(unsigned char, int, int);
-void KeyOperations(void);
 
 int main(int argc, char* argv[]) {
 
@@ -61,9 +57,6 @@ int main(int argc, char* argv[]) {
 }
 
 void Initialize(int argc, char* argv[]) {
-  for(int i = 0; i < 256; i++)
-    keyStates[i] = false;
-  
   InitWindow(argc, argv);
 
   fprintf(
@@ -101,14 +94,44 @@ void InitWindow(int argc, char* argv[]) {
     exit(EXIT_FAILURE);
   }
 
-  glEnable(GL_DEPTH_TEST);
+  CreateMenu();
 
   glutReshapeFunc(ResizeFunction);
   glutDisplayFunc(RenderFunction);
   glutIdleFunc(IdleFunction);
   glutTimerFunc(0, TimerFunction, 0);
-  glutKeyboardFunc(KeyDownFunction);
-  glutKeyboardUpFunc(KeyUpFunction);
+}
+
+void CreateMenu(void) {
+  glutCreateMenu(MenuOptions);
+  glutAddMenuEntry("Toggle motion", 0);
+  glutAddMenuEntry("Toggle shadow", 1);
+  glutAddMenuEntry("Toggle fullscreen", 2);
+  glutAddMenuEntry("Quit", 3);
+  glutAttachMenu(GLUT_RIGHT_BUTTON);
+}
+
+void MenuOptions(int option) {
+  switch(option) {
+    case 0:
+      Option.EnableMotion = !Option.EnableMotion;
+      (Option.EnableMotion) ? glutIdleFunc(IdleFunction) : glutIdleFunc(NULL);
+      break;
+    case 1:
+      Option.EnableShadow = !Option.EnableShadow;
+      break;
+    case 2:
+      glutFullScreenToggle();
+      break;
+    case 3:
+      exit(EXIT_SUCCESS);
+      break;
+    default:
+      fprintf(
+        stdout,
+        "ERROR: Invalid menu option.\n"
+      );
+  }
 }
 
 void ResizeFunction(int Width, int Height) {
@@ -123,8 +146,6 @@ void RenderFunction(void) {
   
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-  KeyOperations();
-
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   gluPerspective(
@@ -137,9 +158,9 @@ void RenderFunction(void) {
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   gluLookAt(
-    Camera.eyeX,
+    (cos(DEG_TO_RAD * tick) * Camera.eyeX),
     Camera.eyeY,
-    Camera.eyeZ,
+    (sin(DEG_TO_RAD * tick) * Camera.eyeZ),
     Camera.centerX,
     Camera.centerY,
     Camera.centerZ,
@@ -154,16 +175,20 @@ void RenderFunction(void) {
   glutSolidCube(50.0);
   glPopMatrix();
 
+  if(Option.EnableShadow) {
+    glPushMatrix();
+    glTranslatef(-(fabs(sin(DEG_TO_RAD * tick)) * 15), -5.0, -(fabs(sin(DEG_TO_RAD * tick)) * 15));
+    glRotatef(-45.0, 0.0, 1.0, 0.0);
+    glScalef((fabs(sin(DEG_TO_RAD * tick)) + 1), 0.0, 1.0);
+    glColor3ub(50, 50, 50);
+    glutSolidSphere(5.0, 20.0, 20.0);
+    glPopMatrix();
+  }
+  
   glPushMatrix();
-  glColor3ub(250, 50, 50);
-  glutSolidSphere(5.0, 20, 20);
-  glPopMatrix();
-
-  glPushMatrix();
-  glScalef(1.0, 10.0, 1.0);
-  glTranslatef(0.0, 0.0, 0.0);
-  glColor3ub(200, 75, 75);
-  glutSolidCube(5.0);
+  glTranslatef(0.0, (fabs(sin(DEG_TO_RAD * tick)) * 10), 0.0);
+  glColor3ub(100, 200, 0);
+  glutSolidSphere(5.0, 20.0, 20.0);
   glPopMatrix();
   
   glutSwapBuffers();
@@ -171,6 +196,12 @@ void RenderFunction(void) {
 }
 
 void IdleFunction(void) {
+  if(tick < 359) {
+    tick++;
+  } else {
+    tick = 0;
+  }
+
   glutPostRedisplay();
 }
 
@@ -193,29 +224,4 @@ void TimerFunction(int Value) {
 
   Window.FrameCount = 0;
   glutTimerFunc(250, TimerFunction, 1);
-}
-
-void KeyDownFunction(unsigned char Key, int X, int Y) {
-  keyStates[Key] = true;
-}
-
-void KeyUpFunction(unsigned char Key, int X, int Y) {
-  keyStates[Key] = false;
-}
-
-void KeyOperations(void) {
-  if(keyStates['w']) {
-    Camera.eyeX = Camera.centerX;
-    Camera.eyeY = Camera.centerY;
-    Camera.eyeZ = Camera.centerZ;
-    Camera.centerX =
-      sin(DEG_TO_RAD * Camera.inclination) * cos(DEG_TO_RAD * Camera.azimuth) + Camera.eyeX;
-    Camera.centerY =
-      sin(DEG_TO_RAD * Camera.inclination) * sin(DEG_TO_RAD * Camera.azimuth) + Camera.eyeY;
-    Camera.centerZ =
-      cos(DEG_TO_RAD * Camera.inclination) + Camera.eyeZ;
-  }
-  // if(keyStates['s']) {
-  //   Camera.eyeX = Camera.centerX - 2;
-  // }
 }
