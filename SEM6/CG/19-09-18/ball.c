@@ -1,3 +1,11 @@
+/*
+  Luiza Torello Vieira    - 171044266
+  Victor Azadinho Miranda - 171042191
+
+  Menu:
+    Clique com o botão direito do mouse para abrir o menu de debug.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
