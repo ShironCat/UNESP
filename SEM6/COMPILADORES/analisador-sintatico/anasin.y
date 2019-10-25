@@ -79,7 +79,7 @@ void yyerror(char const* s) {
   fprintf(stderr, "%s\n", s);
 }
 
-#include "lex.yy.c"
+#include "lex.yy.o"
 
 int main(int argc, char* argv[]) {
   argv++;
