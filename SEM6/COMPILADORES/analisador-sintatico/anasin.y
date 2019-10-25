@@ -20,34 +20,31 @@ function:
   ;
 
 parameter_1:
-  %empty
-  | TYPE VARIABLE paramenter_n
+  TYPE VARIABLE
+  | TYPE VARIABLE parameter_n
   ;
 
 parameter_n:
-  %empty
-  | COMMA TYPE VARIABLE paramenter_n
+  COMMA TYPE VARIABLE
+  | COMMA TYPE VARIABLE parameter_n
   ;
-
+  
 statement:
-  %empty
-  | declaration_1 SEMICOLON statement
+  declaration_1 SEMICOLON statement
   | atribution SEMICOLON statement
   | conditional statement
   ;
 
 declaration_1:
-  %empty
-  | TYPE VARIABLE atribution
+  TYPE VARIABLE atribution
   ;
 
 declaration_n:
-  %empty
-  | COMMA VARIABLE atribution
+  COMMA VARIABLE atribution
   ;
 
 atribution:
-  %empty declaration_n
+  declaration_n
   | ATRIBUTION a_expression declaration_n
   | ATRIBUTION l_expression declaration_n
   ;
@@ -57,12 +54,36 @@ conditional:
   ;
 
 l_expression:
-  l_id L_OPERATOR l_id
-  | L_PARENTHESES l_id
+  L_PARENTHESES l_id R_PARENTHESES
+  | l_id L_OPERATOR l_id
+  | l_id
+  ;
+
+l_id:
+  VARIABLE
+  | BOOL
+  | l_expression
+  ;
+
+a_expression:
+  L_PARENTHESES a_expression R_PARENTHESES
+  | VARIABLE A_OPERATOR a_expression
+  | NUMBER A_OPERATOR a_expression
+  | VARIABLE
+  | NUMBER
   ;
 
 %%
 
 void yyerror(char const* s) {
   fprintf(stderr, "%s\n", s);
+}
+
+#include "lex.yy.c"
+
+int main(int argc, char* argv[]) {
+  argv++;
+  argc--;
+  yyin = fopen(*argv, "r");
+  yyparse();
 }

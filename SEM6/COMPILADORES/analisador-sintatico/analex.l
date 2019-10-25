@@ -1,6 +1,6 @@
 %{
-  int yywrap() {}
-
+  #include "y.tab.h"
+  
   int
     row = 1,
     col = 1;
@@ -81,3 +81,5 @@ COMMENT       ("//".*)
                 }
 
 %%
+
+int yywrap() {}
