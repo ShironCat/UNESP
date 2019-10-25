@@ -1,9 +1,8 @@
 y.tab.c: lex.yy.o
-	gcc -W -g y.tab.c lex.yy.o -o lushi
+	gcc -W -g anasin.tab.c -o lushi
 
-lex.yy.o: y.tab.h
+lex.yy.c: y.tab.h
 	flex analex.l
-	gcc -c lex.yy.c
 
 y.tab.h: 
-	yacc -d anasin.y
+	bison -d anasin.y

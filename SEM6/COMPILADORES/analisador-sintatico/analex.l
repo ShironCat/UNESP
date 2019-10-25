@@ -1,5 +1,5 @@
 %{
-  #include "y.tab.h"
+  #include "anasin.tab.h"
   
   int
     row = 1,
