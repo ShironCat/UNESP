@@ -19,10 +19,10 @@
 #define SENSOR_R 9
 
 #define MINIMUM_SPEED_L 140
-#define MAXIMUM_SPEED_L 170
+#define MAXIMUM_SPEED_L 255
 
-#define MINIMUM_SPEED_R 120
-#define MAXIMUM_SPEED_R 170
+#define MINIMUM_SPEED_R 140
+#define MAXIMUM_SPEED_R 255
 
 #define TRIG_PIN 3
 #define ECHO_PIN 4
@@ -61,8 +61,6 @@ unsigned long mark;
 
 long delay_time;
 
-unsigned int message_length = 0;
-
 Ultrasonic ultrasonic(TRIG_PIN, ECHO_PIN);
 
 int distance;
@@ -88,6 +86,8 @@ void setup(void) {
     sensor_state_r = true;
   
   clearBuffer();
+
+  randomSeed(analogRead(0));
 }
 
 void loop(void) {
@@ -95,6 +95,9 @@ void loop(void) {
   if(ultrasonic.read() > 20) {
     driveMotor(MOTOR_L, FORWARD, speed_motor_l);
     driveMotor(MOTOR_R, FORWARD, speed_motor_r);
+    delay(50);
+    stopMotor(MOTOR_L);
+    stopMotor(MOTOR_R);
 
     if(turn >= 10) {
       if(sensor_counter_l > sensor_counter_r) {
@@ -136,24 +139,20 @@ void loop(void) {
 
     str_message.toCharArray(message, BUFFER_SIZE);
 
-    if((millis() - mark) > delay_time) {
-      for(int i = 0; i < BUFFER_SIZE; i++)
-        payload[i] = message[i];
-      
-      tx.setPayloadLength(sizeof(payload));
-      tx.setPayload(payload);
+    for(int i = 0; i < BUFFER_SIZE; i++)
+      payload[i] = message[i];
+    
+    tx.setPayloadLength(sizeof(payload));
+    tx.setPayload(payload);
 
-      xbee.send(tx);
-      delay_time=random(800, 1000);
-      mark=millis();
-      
-      clearBuffer();
-    }
-
+    xbee.send(tx);
+    delay_time=random(800, 1000);
+    mark=millis();
+    
     clearBuffer();
 
     sensor_counter_l = sensor_counter_r = 0;
-
+    
     sensor_state_l = sensor_state_r = false;
 
     if(digitalRead(SENSOR_L))
@@ -161,29 +160,31 @@ void loop(void) {
     if(digitalRead(SENSOR_R))
       sensor_state_r = true;
     
-    while(sensor_counter_l < 2 || sensor_counter_r < 2) {
-      if(sensor_counter_l < 2) {
-        driveMotor(MOTOR_L, FORWARD, speed_motor_l);
-      } else {
+    if(random(0, 2)) {
+      while(sensor_counter_l < 25) {
+        driveMotor(MOTOR_L, REVERSE, speed_motor_l);
+        delay(10);
         stopMotor(MOTOR_L);
+        if(digitalRead(SENSOR_L) != sensor_state_l) {
+          sensor_counter_l++;
+          sensor_state_l = !sensor_state_l;
+        }
       }
-      if(sensor_counter_r < 2) {
+    } else {
+      while(sensor_counter_r < 25) {
         driveMotor(MOTOR_R, REVERSE, speed_motor_r);
-      } else {
+        delay(10);
         stopMotor(MOTOR_R);
-      }
-
-      if(digitalRead(SENSOR_L) != sensor_state_l) {
-        sensor_counter_l++;
-        sensor_state_l = !sensor_state_l;
-      }
-      if(digitalRead(SENSOR_R) != sensor_state_r) {
-        sensor_counter_r++;
-        sensor_state_r = !sensor_state_r;
+        if(digitalRead(SENSOR_R) != sensor_state_r) {
+          sensor_counter_r++;
+          sensor_state_r = !sensor_state_r;
+        }
       }
     }
 
     sensor_counter_l = sensor_counter_r = 0;
+    
+    sensor_state_l = sensor_state_r = false;
 
     if(digitalRead(SENSOR_L))
       sensor_state_l = true;
