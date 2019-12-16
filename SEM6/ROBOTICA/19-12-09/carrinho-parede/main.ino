@@ -24,8 +24,10 @@
 #define MINIMUM_SPEED_R 140
 #define MAXIMUM_SPEED_R 255
 
-#define TRIG_PIN 3
-#define ECHO_PIN 4
+#define TRIG_PIN 12
+#define ECHO_PIN 13
+
+#define MSG_TEMPLATE "Obstaculo: "
 
 int turn = 0;
 
@@ -43,8 +45,6 @@ XBeeResponse response = XBeeResponse();
 
 Rx16Response rx16 = Rx16Response();
 
-const String msg_template = "OBSTACULO: ";
-
 String str_message;
 
 char message[BUFFER_SIZE];
@@ -54,12 +54,7 @@ uint8_t payload[BUFFER_SIZE];
 Tx16Request tx = Tx16Request(0x0, payload, sizeof(payload));
 SoftwareSerial sSerial = SoftwareSerial(2, 3);
 
-uint8_t *data;
-uint8_t length;
-
-unsigned long mark;
-
-long delay_time;
+unsigned int length;
 
 Ultrasonic ultrasonic(TRIG_PIN, ECHO_PIN);
 
@@ -72,6 +67,8 @@ void clearBuffer(void);
 
 void setup(void) {
   Serial.begin(9600);
+  sSerial.begin(9600);
+  xbee.setSerial(sSerial);
 
   setupMotor();
 
@@ -133,21 +130,28 @@ void loop(void) {
 
     distance = ultrasonic.read();
 
-    str_message = msg_template;
+    str_message = MSG_TEMPLATE;
 
     str_message.concat(distance);
 
+    str_message.concat("cm");
+
+    length = str_message.length();
+
     str_message.toCharArray(message, BUFFER_SIZE);
 
-    for(int i = 0; i < BUFFER_SIZE; i++)
-      payload[i] = message[i];
+    Serial.println(length);
+
+    for(int i = 0; i < length; i++) {
+      payload[i] = (uint8_t)message[i];
+      Serial.print((char)payload[i]);
+    }
+    Serial.println();
     
     tx.setPayloadLength(sizeof(payload));
     tx.setPayload(payload);
 
     xbee.send(tx);
-    delay_time=random(800, 1000);
-    mark=millis();
     
     clearBuffer();
 
@@ -227,9 +231,7 @@ void stopMotor(byte motor) {
 }
 
 void clearBuffer(void) {
-  for(int i = 0; i < BUFFER_SIZE; i++) {
-    payload[i] = 0;
-    message[i] = '\0';
-  }
+  memset(payload, 0x0, BUFFER_SIZE);
+  memset(message, 0x0, BUFFER_SIZE);
   str_message = "";
 }
