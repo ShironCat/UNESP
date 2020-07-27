@@ -1,0 +1,12 @@
+F = [c, e, f, a, b, d, e, f, a, g, d]
+H = [d, f, h, b, d, e, g, g, c, h, f]
+
+          a b c d e f g h
+Vertex = [1 1 1 1 1 1 1 1]
+
+          1 2 3 4 5 6 7 8 9 10 11
+Aresta = [1 1 1 1 1 1 1 0 0  0  0]
+
+cp = 1
+
+Na = 7
