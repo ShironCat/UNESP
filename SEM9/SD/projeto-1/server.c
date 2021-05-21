@@ -85,17 +85,21 @@ int main(int argc, const char **argv)
     // Sending work to clients
     for (int i = 0; i < number_clients; i++)
     {
-        char buffer[20];
+        char buffer[sizeof(double)];
+        memset(buffer, '\0', sizeof buffer);
         if (i % 2 == 0)
         {
-            snprintf(buffer, 20, "%f", floor(work));
-            write(client_socket[i], buffer, strlen(buffer));
+            snprintf(buffer, sizeof buffer, "%lf", floor(work));
         }
         else
         {
-            snprintf(buffer, 20, "%f", ceil(work));
-            write(client_socket[i], buffer, strlen(buffer));
+            snprintf(buffer, sizeof buffer, "%lf", ceil(work));
         }
+        ssize_t valsend;
+        do
+        {
+            valsend = send(client_socket[i], buffer, strlen(buffer), 0);
+        } while (valsend < 0);
     }
 
     int wg = number_clients;
@@ -104,12 +108,12 @@ int main(int argc, const char **argv)
     // Waiting for all clients to send their finished work
     do
     {
-        char buffer[20];
-        memset(buffer, '\0', 20);
+        char buffer[sizeof(double)];
+        memset(buffer, '\0', sizeof buffer);
         for (int i = 0; i < number_clients; i++)
         {
-            ssize_t valread = read(client_socket[i], buffer, 20);
-            if (valread > 0)
+            ssize_t valrecv = recv(client_socket[i], buffer, sizeof buffer, 0);
+            if (valrecv > 0)
             {
                 accumulator += atof(buffer);
                 wg--;
@@ -118,7 +122,7 @@ int main(int argc, const char **argv)
     } while (wg);
 
     // Calculate final approximation of PI
-    double pi = accumulator / number_clients;
+    double pi = accumulator / (double)number_clients;
 
     // End timestamp
     time_t end = time(NULL);
