@@ -74,6 +74,7 @@ int main(int argc, const char **argv)
 
     // Start timestamp
     time_t start = time(NULL);
+    struct timespec spec;
 
     // Calculating amount of work
     double work;
