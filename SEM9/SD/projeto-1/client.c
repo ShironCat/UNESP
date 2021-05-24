@@ -12,9 +12,17 @@
 
 int main(int argc, const char **argv)
 {
+    // Checking parameters are set
+    if (argc < 2)
+    {
+        fprintf(stderr, "Usage: %s <CLIENT ID>\n", argv[0]);
+        exit(EXIT_FAILURE);
+    }
+
     // Socket related variables
     int client_fd;
     struct sockaddr_in address;
+    char buffer[50];
 
     printf("Monte Carlo CLient\n");
 
@@ -50,7 +58,6 @@ int main(int argc, const char **argv)
     printf("OK\n");
 
     // Waiting for work
-    char buffer[sizeof(double)];
     memset(buffer, '\0', sizeof buffer);
     ssize_t valrecv;
     do
@@ -58,31 +65,28 @@ int main(int argc, const char **argv)
         valrecv = recv(client_fd, buffer, sizeof buffer, 0);
     } while (valrecv < 0);
 
-    long long int work = atoll(buffer);
+    double work = atof(buffer);
 
     // Executing "Monte Carlo" method
     long long int dots_inside_circle = 0;
-    srand((unsigned int)time(NULL));
-    for (long long int i = 0; i < work; i++)
+    srand(time(NULL) * atoi(argv[1]));
+    for (int i = 0; i < work; i++)
     {
-        double x = (double)rand() / RAND_MAX * 2 - 1, y = (double)rand() / RAND_MAX * 2 - 1;
+        float x = (double)rand() / RAND_MAX * 2 - 1, y = (double)rand() / RAND_MAX * 2 - 1;
         if (sqrt(pow(x, 2) + pow(y, 2)) <= 1)
             dots_inside_circle++;
     }
 
-    double pi = 4 * (dots_inside_circle / (double)work);
+    double pi = 4 * (dots_inside_circle / work);
 
     // Sending value of pi
+    memset(buffer, '\0', sizeof buffer);
+    snprintf(buffer, sizeof buffer, "%lf", pi);
+    ssize_t valsend;
+    do
     {
-        char buffer[sizeof(double)];
-        memset(buffer, '\0', sizeof buffer);
-        snprintf(buffer, sizeof buffer, "%lf", pi);
-        ssize_t valsend;
-        do
-        {
-            valsend = send(client_fd, buffer, sizeof buffer, 0) < 0;
-        } while (valsend < 0);
-    }
+        valsend = send(client_fd, buffer, sizeof buffer, 0) < 0;
+    } while (valsend < 0);
 
     printf("Value of PI: %lf\n", pi);
 

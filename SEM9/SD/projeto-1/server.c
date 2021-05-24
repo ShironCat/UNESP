@@ -22,6 +22,7 @@ int main(int argc, const char **argv)
     int number_clients = atoi(argv[1]), server_fd, client_socket[number_clients];
     struct sockaddr_in address;
     int addrlen = sizeof(address);
+    char buffer[50];
 
     printf("Monte Carlo Server\n");
 
@@ -73,8 +74,8 @@ int main(int argc, const char **argv)
     }
 
     // Start timestamp
-    time_t start = time(NULL);
-    struct timespec spec;
+    struct timespec start;
+    clock_gettime(CLOCK_REALTIME, &start);
 
     // Calculating amount of work
     double work;
@@ -86,7 +87,6 @@ int main(int argc, const char **argv)
     // Sending work to clients
     for (int i = 0; i < number_clients; i++)
     {
-        char buffer[sizeof(double)];
         memset(buffer, '\0', sizeof buffer);
         if (i % 2 == 0)
         {
@@ -109,7 +109,6 @@ int main(int argc, const char **argv)
     // Waiting for all clients to send their finished work
     do
     {
-        char buffer[sizeof(double)];
         memset(buffer, '\0', sizeof buffer);
         for (int i = 0; i < number_clients; i++)
         {
@@ -123,13 +122,15 @@ int main(int argc, const char **argv)
     } while (wg);
 
     // Calculate final approximation of PI
-    double pi = accumulator / (double)number_clients;
+    double pi = accumulator / number_clients;
 
     // End timestamp
-    time_t end = time(NULL);
+    struct timespec end;
+    clock_gettime(CLOCK_REALTIME, &end);
 
     printf("Value of PI: %lf\n", pi);
-    printf("Calculated in %d seconds\n", end - start);
+    printf("Calculated in %lf milliseconds\n",
+           (double)(end.tv_sec - start.tv_sec) * 1000.0 + (double)(end.tv_nsec - start.tv_nsec) * 0.000001);
 
     // Closing all sockets
     for (int i = 0; i < number_clients; i++)
