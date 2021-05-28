@@ -70,9 +70,9 @@ int main(int argc, const char **argv)
     // Executing "Monte Carlo" method
     long long int dots_inside_circle = 0;
     srand(time(NULL) * atoi(argv[1]));
-    for (int i = 0; i < work; i++)
+    for (long long int i = 0; i < work; i++)
     {
-        float x = (double)rand() / RAND_MAX * 2 - 1, y = (double)rand() / RAND_MAX * 2 - 1;
+        double x = (double)rand() / RAND_MAX * 2 - 1, y = (double)rand() / RAND_MAX * 2 - 1;
         if (sqrt(pow(x, 2) + pow(y, 2)) <= 1)
             dots_inside_circle++;
     }
