@@ -7,19 +7,18 @@
 #include <time.h>
 #include <unistd.h>
 
-#define PORT 8080
-
 int main(int argc, const char **argv)
 {
     // Checking parameters are set
-    if (argc < 2)
+    if (argc < 3)
     {
-        fprintf(stderr, "Usage: %s <NUMBER OF CLIENTS>\n", argv[0]);
+        fprintf(stderr, "Usage: %s <NUMBER OF CLIENTS> <PORT>\n", argv[0]);
         exit(EXIT_FAILURE);
     }
 
     // Socket related variables
     int number_clients = atoi(argv[1]), server_fd, client_socket[number_clients];
+    uint16_t port = atoi(argv[2]);
     struct sockaddr_in address;
     int addrlen = sizeof(address);
     char buffer[50];
@@ -38,12 +37,12 @@ int main(int argc, const char **argv)
     // Setting address struct
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
-    address.sin_port = htons(PORT);
+    address.sin_port = htons(port);
 
     memset(address.sin_zero, '\0', sizeof address.sin_zero);
 
     // Binding socket to address
-    printf("Binding socket to address... ");
+    printf("Binding socket to local address (port: %hu)... ", port);
     if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0)
     {
         perror("\nIn bind");
@@ -61,7 +60,7 @@ int main(int argc, const char **argv)
     printf("OK\n");
 
     // Waiting for clients connections
-    printf("Expeting %d clients\n", number_clients);
+    printf("Expecting %d clients\n", number_clients);
     for (int i = 0; i < number_clients; i++)
     {
         printf("Waiting for client[%d]... ", (i + 1));
@@ -73,63 +72,75 @@ int main(int argc, const char **argv)
         printf("OK\n");
     }
 
+    // Setting up accumulator for each run
+    double accumulator[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+
     // Start timestamp
     struct timespec start;
     clock_gettime(CLOCK_REALTIME, &start);
 
-    // Calculating amount of work
-    double work;
-    for (double i = 3; i <= 10; i++)
-        work = pow(10, i);
+    // Calculating PI with different number of dots
+    for (int i = 3; i <= 10; i++)
+    {
+        double work = pow(10, i) / number_clients;
 
-    work /= number_clients;
+        // Sending work to clients
+        for (int j = 0; j < number_clients; j++)
+        {
+            memset(buffer, '\0', sizeof buffer);
+            if (j % 2)
+                snprintf(buffer, sizeof buffer, "%lf", ceil(work));
+            else
+                snprintf(buffer, sizeof buffer, "%lf", floor(work));
+            ssize_t valsend;
+            do
+            {
+                valsend = send(client_socket[j], buffer, strlen(buffer), 0);
+            } while (valsend < 0);
+        }
 
-    // Sending work to clients
+        int wg = number_clients;
+
+        // Waiting for all clients to send their finished work
+        do
+        {
+            memset(buffer, '\0', sizeof buffer);
+            for (int j = 0; j < number_clients; j++)
+            {
+                ssize_t valrecv = recv(client_socket[j], buffer, sizeof buffer, 0);
+                if (valrecv > 0)
+                {
+                    accumulator[i - 3] += atof(buffer);
+                    wg--;
+                }
+            }
+        } while (wg);
+
+        accumulator[i - 3] /= number_clients;
+    }
+
+    // End timestamp
+    struct timespec end;
+    clock_gettime(CLOCK_REALTIME, &end);
+
+    printf("Values of PI:\n");
+
+    printf("Number of dots\tValue of PI\n");
+    for (int i = 3; i <= 10; i++)
+        printf("[%lf]\t%lf\n", pow(10, i), accumulator[i - 3]);
+
+    printf("Calculated in %ld.%ld seconds\n", end.tv_sec - start.tv_sec, end.tv_nsec - start.tv_nsec);
+
+    // Sending closing signal to clients
     for (int i = 0; i < number_clients; i++)
     {
         memset(buffer, '\0', sizeof buffer);
-        if (i % 2 == 0)
-        {
-            snprintf(buffer, sizeof buffer, "%lf", floor(work));
-        }
-        else
-        {
-            snprintf(buffer, sizeof buffer, "%lf", ceil(work));
-        }
         ssize_t valsend;
         do
         {
             valsend = send(client_socket[i], buffer, strlen(buffer), 0);
         } while (valsend < 0);
     }
-
-    int wg = number_clients;
-    double accumulator = 0;
-
-    // Waiting for all clients to send their finished work
-    do
-    {
-        memset(buffer, '\0', sizeof buffer);
-        for (int i = 0; i < number_clients; i++)
-        {
-            ssize_t valrecv = recv(client_socket[i], buffer, sizeof buffer, 0);
-            if (valrecv > 0)
-            {
-                accumulator += atof(buffer);
-                wg--;
-            }
-        }
-    } while (wg);
-
-    // Calculate final approximation of PI
-    double pi = accumulator / number_clients;
-
-    // End timestamp
-    struct timespec end;
-    clock_gettime(CLOCK_REALTIME, &end);
-
-    printf("Value of PI: %lf\n", pi);
-    printf("Calculated in %ld seconds\n", end.tv_sec - start.tv_sec);
 
     // Closing all sockets
     for (int i = 0; i < number_clients; i++)

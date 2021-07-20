@@ -8,19 +8,18 @@
 #include <time.h>
 #include <unistd.h>
 
-#define PORT 8080
-
 int main(int argc, const char **argv)
 {
     // Checking parameters are set
-    if (argc < 2)
+    if (argc < 3)
     {
-        fprintf(stderr, "Usage: %s <CLIENT ID>\n", argv[0]);
+        fprintf(stderr, "Usage: %s <CLIENT ID> <PORT>\n", argv[0]);
         exit(EXIT_FAILURE);
     }
 
     // Socket related variables
     int client_fd;
+    uint16_t port = atoi(argv[2]);
     struct sockaddr_in address;
     char buffer[50];
 
@@ -37,7 +36,7 @@ int main(int argc, const char **argv)
 
     // Setting address struct
     address.sin_family = AF_INET;
-    address.sin_port = htons(PORT);
+    address.sin_port = htons(port);
 
     memset(address.sin_zero, '\0', sizeof address.sin_zero);
 
@@ -49,46 +48,50 @@ int main(int argc, const char **argv)
     }
 
     // Connecting to server
-    printf("Connecting to server... ");
-    if (connect(client_fd, (struct sockaddr *)&address, sizeof(address)) < 0)
-    {
+    printf("Connecting to server (port: %hu)... ", port);
+    while (connect(client_fd, (struct sockaddr *)&address, sizeof(address)) < 0)
         perror("\nIn connect");
-        exit(EXIT_FAILURE);
-    }
     printf("OK\n");
 
-    // Waiting for work
-    memset(buffer, '\0', sizeof buffer);
-    ssize_t valrecv;
+    double work;
     do
     {
-        valrecv = recv(client_fd, buffer, sizeof buffer, 0);
-    } while (valrecv < 0);
+        // Waiting for work
+        memset(buffer, '\0', sizeof buffer);
+        ssize_t valrecv;
+        do
+        {
+            valrecv = recv(client_fd, buffer, sizeof buffer, 0);
+        } while (valrecv < 0);
 
-    double work = atof(buffer);
+        work = atof(buffer);
 
-    // Executing "Monte Carlo" method
-    long long int dots_inside_circle = 0;
-    srand(time(NULL) * atoi(argv[1]));
-    for (long long int i = 0; i < work; i++)
-    {
-        double x = (double)rand() / RAND_MAX * 2 - 1, y = (double)rand() / RAND_MAX * 2 - 1;
-        if (sqrt(pow(x, 2) + pow(y, 2)) <= 1)
-            dots_inside_circle++;
-    }
+        if (!work)
+            continue;
 
-    double pi = 4 * (dots_inside_circle / work);
+        // Executing "Monte Carlo" method
+        long long int dots_inside_circle = 0;
+        srand(time(NULL) * atoi(argv[1]));
+        for (long long int i = 0; i < work; i++)
+        {
+            double x = (double)rand() / RAND_MAX * 2 - 1, y = (double)rand() / RAND_MAX * 2 - 1;
+            if (x * x + y * y <= 1)
+                dots_inside_circle++;
+        }
 
-    // Sending value of pi
-    memset(buffer, '\0', sizeof buffer);
-    snprintf(buffer, sizeof buffer, "%lf", pi);
-    ssize_t valsend;
-    do
-    {
-        valsend = send(client_fd, buffer, sizeof buffer, 0) < 0;
-    } while (valsend < 0);
+        double pi = 4 * (dots_inside_circle / work);
 
-    printf("Value of PI: %lf\n", pi);
+        // Sending value of pi
+        memset(buffer, '\0', sizeof buffer);
+        snprintf(buffer, sizeof buffer, "%lf", pi);
+        ssize_t valsend;
+        do
+        {
+            valsend = send(client_fd, buffer, sizeof buffer, 0) < 0;
+        } while (valsend < 0);
+
+        printf("Value of PI: %lf\n", pi);
+    } while (work);
 
     // Closing socket
     close(client_fd);
